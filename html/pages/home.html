@@ -1,0 +1,39 @@
+<!--
+<div layout="column" style="height: 100vh" layout-align="center center">
+    <div layout="row">
+        <div class="triangle-up"></div>
+    </div>
+    <div layout="row" layout-align="center center">
+        <div class="triangle-left"></div>
+        <div class="center-icon"></div>
+        <div class="triangle-right"></div>
+    </div>
+    <div layout="row">
+        <div class="triangle-down"></div>
+    </div>
+</div>
+-->
+<div id="home-layout" layout="column" layout-align="center center">
+    <h1 id="title" class="md-display-2" layout="row" layout-align="center center">Sujay Garlanka</h1>
+    <div layout="row">
+        <div class="circle-container" layout="row" layout-align="center center">
+            <div ng-click="link('https://drive.google.com/file/d/0B9XAk1GqZKYRNks0NDUzY0VxVVE/view?usp=sharing')" class="circle red" layout="row" layout-align="center center"><i class="fa fa-bars fa-2x" aria-hidden="true"></i><h2>Resume</h2></div>
+        </div>
+    </div>
+    <div layout="row" layout-align="center center">
+        <div  class="circle-container" layout="row" layout-align="center center">
+            <div ng-click="$location.path('/projects')" class="circle yellow" layout="row" layout-align="center center"><i class="fa fa-cube fa-2x" aria-hidden="true"></i><h2>Projects</h2></div>
+        </div>
+        <div class="center-icon-container" layout="row" layout-align="center center">
+            <div ng-click="$location.path('/about-me')" class="small circle" layout="row" layout-align="center center"><i class="fa fa-user fa-2x"></i><h2>Me</h2></div>
+        </div>
+        <div class="circle-container" layout="row" layout-align="center center">
+            <div ng-click="link('https://github.com/sujaygarlanka')" class="circle green" layout="row" layout-align="center center"><i class="fa fa-github fa-2x" aria-hidden="true"></i><h2>GitHub</h2></div>
+        </div>
+    </div>
+    <div layout="row">
+        <div class="circle-container" layout="row" layout-align="center center">
+            <div ng-click="$location.path('/contact')" class="circle blue" layout="row" layout-align="center center"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i><h2>Contact</h2></div>
+        </div>
+    </div>
+</div>
