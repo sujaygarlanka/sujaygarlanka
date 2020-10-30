@@ -1,0 +1,83 @@
+:root {
+    --main-highlight: rgba(255, 0, 0, .5);
+    --subtext-color: #ADADAD;
+}
+
+body {
+    font-family: 'Major Mono Display', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-image: url('../images/dot-paper.jpg');
+    transform: rotate(30deg); */
+    /* background-size: cover; */
+}
+
+body::before {
+    content: "";
+    background-image: url('../images/dot-paper.jpg');
+    opacity: 0.15;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1; 
+    /* transform: rotate(30deg); */
+}
+
+.header h1 {
+    display: inline-block; 
+}
+
+.header h1:after {
+    content: "";
+    display: block;
+    width: 0%;
+    border-bottom: 10px solid var(--main-highlight);
+    transition: .5s;
+}
+
+.header h1:hover::after {
+    width: 100%;
+}
+
+.footer a{
+    font-size: 10px;
+    color: var(--subtext-color);
+    float: right;
+}
+
+a {
+    display: inline-block;
+    color: #000;
+    text-decoration: none;
+}
+
+a:after {
+    content: "";
+    display: block;
+    width: 0%;
+    border-bottom: 10px solid var(--main-highlight);
+    transition: .5s;
+}
+
+a:hover:after {
+    width: 100%;
+}
+
+.main-highlight-color {
+    color: var(--main-highlight);
+}
+
+.subtext-color {
+    color: var(--subtext-color);
+}
+
+.border {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 10px solid var(--main-highlight);
+}

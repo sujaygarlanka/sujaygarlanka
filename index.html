@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Sujay Garlanka</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .main {
+            flex: 1;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .navigation-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 17%;
+        }
+
+        .navigation-item:after {
+            content: "";
+            width: 0%;
+            padding-top: 20px;
+            border-bottom: 10px solid var(--main-highlight);
+            transition: .5s;
+        }
+
+        .navigation-item:hover:after {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Sujay Garlanka</h1>
+    </div>
+    <div class="main">
+        <div class="navigation-item">
+            <img src="icons/resume.svg" alt="resume" width="50%" />
+            <p>resume</p>
+        </div>
+        <div class="navigation-item">
+            <img src="icons/project.svg" alt="projects" width="50%" />
+            <p>projects</p>
+        </div>
+        <div class="navigation-item">
+            <img src="icons/code.svg" alt="code" width="50%" />
+            <p>github</p>
+        </div>
+    </div>
+    <div class="footer">
+        <a href="mailto:sujay.garlanka@gmail.com">sujay.garlanka@gmail.com</a>
+    </div>
+</body>
+
+</html>
