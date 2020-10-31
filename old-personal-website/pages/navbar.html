@@ -1,0 +1,19 @@
+<div ng-controller="navbar" layout="row" layout-align="center center">
+
+    <div class="circle-container" layout="row" layout-align="center center" flex>
+        <div ng-click="link('https://drive.google.com/file/d/0B9XAk1GqZKYRb05YbDI5TktWRjQ/view?usp=sharing')" class="circle red" layout="row" layout-align="center center"><i class="fa fa-bars fa-2x" aria-hidden="true"></i><h2>Resume</h2></div>
+    </div>
+    <div ng-click="$location.path('/projects')" class="circle-container" layout="row" layout-align="center center" flex>
+        <div class="circle yellow" layout="row" layout-align="center center" ng-class="{'yellow-fill': $location.path().includes('/projects')}"><i class="fa fa-cube fa-2x" aria-hidden="true"></i><h2>Projects</h2></div>
+    </div>
+    <div class="circle-container" layout="row" layout-align="center center" flex>
+        <div ng-click="$location.path('/about-me')" class="circle profile-grey" layout="row" layout-align="center center"><i class="fa fa-user fa-2x"></i><h2>Me</h2></div>
+    </div>
+    <div ng-click="link('https://github.com/sujaygarlanka')" class="circle-container" layout="row" layout-align="center center" flex>
+        <div class="circle green" layout="row" layout-align="center center" ><i class="fa fa-github fa-2x" aria-hidden="true"></i><h2>GitHub</h2></div>
+    </div>
+
+    <div class="circle-container" layout="row" layout-align="center center" flex>
+        <div ng-click="$location.path('/contact')" class="circle blue" layout="row" layout-align="center center" ng-class="{'blue-fill': $location.path().includes('/contact')}"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i><h2>Contact</h2></div>
+    </div>
+</div>
