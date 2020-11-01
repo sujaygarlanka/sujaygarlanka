@@ -22,6 +22,7 @@
             justify-content: center;
             align-items: center;
             width: 17%;
+            cursor: pointer;
         }
 
         .navigation-item:after {
@@ -40,26 +41,26 @@
 
 <body>
     <div id="particles-js"></div>
-    <div class="header">
+    <div class="header" onclick='navigate("index.html")'>
         <h1>Sujay Garlanka</h1>
     </div>
     <div class="main">
-        <div class="navigation-item">
+        <div class="navigation-item" onclick='navigate("https://app.box.com/s/m237sy3kmrisr2k1zajuvmw7t8yqcuf8")'>
             <img src="icons/resume.svg" alt="resume" width="50%" />
             <p>resume</p>
         </div>
         <div class="navigation-item">
-            <img src="icons/project.svg" alt="projects" width="50%" />
+            <img src="icons/project.svg" alt="projects" width="50%" onclick='navigate("projects.html")'/>
             <p>projects</p>
         </div>
         <div class="navigation-item">
-            <img src="icons/code.svg" alt="code" width="50%" />
+            <img src="icons/code.svg" alt="code" width="50%" onclick='navigate("https://github.com/sujaygarlanka")'/>
             <p>github</p>
         </div>
     </div>
     <div class="footer">
         <a href="mailto:sujay.garlanka@gmail.com">sujay.garlanka@gmail.com</a>
     </div>
-    <script src="js/particles.js"></script>
+    <script src="js/website.js"></script>
 </body>
 </html>

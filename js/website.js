@@ -1,3 +1,7 @@
+function navigate(destination) {
+    window.location.href = destination;
+}
+
 particlesJS("particles-js", {
   particles: {
     number: {
