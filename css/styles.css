@@ -160,7 +160,7 @@ li::marker {
     background-color: #000000;
     border-radius: 10px 10px 0 0;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     -webkit-box-shadow: 0 0 20px 5px var(--subtext-color);
     -moz-box-shadow: 0 0 20px 5px var(--subtext-color);
     box-shadow: 0 0 20px 5px var(--subtext-color);
