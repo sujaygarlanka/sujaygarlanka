@@ -9,6 +9,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
     /* background-image: url('../images/dot-paper.jpg'); */
     /* transform: rotate(30deg); */
     /* background-size: cover; */
@@ -23,13 +25,31 @@ a {
 a:after {
     content: "";
     display: block;
-    width: 0%;
-    border-bottom: 10px solid var(--main-highlight);
+    width: 100%;
+    margin: auto;
+    border-bottom: 1px solid var(--main-highlight);
     transition: .5s;
 }
 
 a:hover:after {
+    width: 0%;
+}
+
+.no-border:after {
+    content: "";
+    display: block;
+    width: 0%;
+    margin: auto;
+    border-bottom: 10px solid var(--main-highlight);
+    transition: .5s;
+}
+
+.no-border:hover:after {
     width: 100%;
+}
+
+ul {
+    margin-top: 0px;
 }
 
 li::marker {
@@ -116,12 +136,14 @@ li::marker {
 .header h1 {
     display: inline-block; 
     cursor: pointer;
+
 }
 
 .header h1:after {
     content: "";
     display: block;
     width: 0%;
+    margin: auto;
     border-bottom: 10px solid var(--main-highlight);
     transition: .5s;
 }
@@ -134,6 +156,10 @@ li::marker {
     font-size: 10px;
     color: var(--subtext-color);
     float: right;
+}
+
+.indent {
+    margin-left: 5%;
 }
 
 .main-highlight-color {
@@ -151,10 +177,19 @@ li::marker {
     border-bottom: 10px solid var(--main-highlight);
 }
 
+.video {
+    -webkit-box-shadow: 0 0 20px 5px var(--subtext-color);
+    -moz-box-shadow: 0 0 20px 5px var(--subtext-color);
+    box-shadow: 0 20px 20px 5px var(--subtext-color);
+    border-radius: 0 0 10px 10px;
+    width: 57%; 
+    height: 300px;
+}
+
 .title-bar {
     display: flex;
     height: 15px;
-    width: 56%;
+    width: 57%;
     /* background-color: #233659; */
     /* z-index: 10; */
     background-color: #000000;
@@ -164,12 +199,6 @@ li::marker {
     -webkit-box-shadow: 0 0 20px 5px var(--subtext-color);
     -moz-box-shadow: 0 0 20px 5px var(--subtext-color);
     box-shadow: 0 0 20px 5px var(--subtext-color);
-}
-
-.title-bar-text {
-    color: #fff;
-    font-weight: 20px;
-    font-size: 12px;
 }
 
 .dot {
@@ -193,4 +222,17 @@ li::marker {
 
 .dot-expand {
     background-color: #29BD36;
+}
+
+.project-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-item {
+    margin-top: 20px;
+}
+
+.project-text {
+    font-family: 'Kanit', sans-serif;
 }

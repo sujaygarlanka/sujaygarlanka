@@ -26,46 +26,31 @@
             color: var(--main-highlight);
         }
 
-        .indent {
-            margin-left: 5%;
-        }
-
-        .video {
-            -webkit-box-shadow: 0 0 20px 5px var(--subtext-color);
-            -moz-box-shadow: 0 0 20px 5px var(--subtext-color);
-            box-shadow: 0 20px 20px 5px var(--subtext-color);
-            border-radius: 0 0 10px 10px;
-        }
-
-        .project-item {
-            margin-top: 20px;
-        }
-
-        .project-text {
-            font-family: 'Kanit', sans-serif;
-        }
     </style>
 </head>
 
 <body>
     <div id="particles-js"></div>
     <div class="header" onclick='navigate("index.html")'>
-        <h1>Sujay Garlanka</h1>
+        <h1>sujay garlanka</h1>
     </div>
     <div class="main">
         <h2 class="indent">Projects</h2>
         <div class="navigation">
-            <a>drink machine</a> | <a href="#swift-book-exchange">swift book exchange</a> | <a href="#midas">midas</a>
+            <a class="no-border">drink machine</a> | <a class="no-border" href="#swift-book-exchange">swift book exchange</a> | <a class="no-border" href="#midas">midas</a>
         </div>
         <div id="swift-book-exchange" class="project-item indent">
-            <h3><span class="main-highlight-color">></span> swift (duke) book exchange</h3>
+            <div style="display: flex;">
+                <h3 class="main-highlight-color">></h3>&nbsp;<h3>swift book exchange</h3>&nbsp;<h5
+                    class="main-highlight-color">(Aug 2016 - jan 2018)</h5>
+            </div>
             <div class="project-text indent">
                 <div class="title-bar">
                     <span class="dot dot-close"></span>
                     <span class="dot dot-minimize"></span>
                     <span class="dot dot-expand"></span>
                 </div>
-                <iframe class="video" margin="0" padding="0" border="none" width="56%" height="300" frameBorder="0"
+                <iframe class="video" margin="0" padding="0" border="none" frameBorder="0"
                     src="https://www.youtube.com/embed/qWIU2gYCGr8?modestbranding=1">
                 </iframe>
                 <p>A friend and I built a website for Duke students to buy and sell books. Previously, students were
@@ -91,23 +76,26 @@
                 <p><b class="main-highlight-color">Technologies:</b> HTML/CSS/Javascript,
                     jQuery/AJAX, PHP, MySQL, OAuth 2.0 </p>
                 <span>
-                    <i class="fa fa-link main-highlight-color" aria-hidden="true"></i> <a
+                    <i class="fa fa-link main-highlight-color" aria-hidden="true"></i> <a class="no-border"
                         href="http://swiftbookexchange.com">Website</a>
                     &nbsp;
-                    <i class="fa fa-code main-highlight-color" aria-hidden="true"></i> <a
+                    <i class="fa fa-code main-highlight-color" aria-hidden="true"></i> <a class="no-border"
                         href="https://github.com/sujaygarlanka/swift_book_exchange">Code</a>
                 </span>
             </div>
         </div>
         <div id="midas" class="project-item indent">
-            <h3><span class="main-highlight-color">></span> midas</h3>
+            <div style="display: flex;">
+                <h3 class="main-highlight-color">></h3>&nbsp;<h3>midas</h3>&nbsp;<h5
+                    class="main-highlight-color">(may 2016 - Aug 2016)</h5>
+            </div>
             <div class="project-text indent">
                 <div class="title-bar">
                     <span class="dot dot-close"></span>
                     <span class="dot dot-minimize"></span>
                     <span class="dot dot-expand"></span>
                 </div>
-                <iframe class="video" margin="0" padding="0" border="none" width="56%" height="300" frameBorder="0"
+                <iframe class="video" margin="0" padding="0" border="none" frameBorder="0"
                     src="https://www.youtube.com/embed/qonTct_nAA4?modestbranding=1">
                 </iframe>
                 <p>Midas is a money management tool I built that catalogs and analyzes e-receipts from users' Gmail in a
@@ -130,17 +118,17 @@
                     and
                     Sign In Libraries</p>
                 <span>
-                    <i class="fa fa-link main-highlight-color" aria-hidden="true"></i> <a href="https://159.203.182.82">
+                    <i class="fa fa-link main-highlight-color" aria-hidden="true"></i> <a class="no-border" href="https://159.203.182.82">
                         Website</a>
                     &nbsp;
                     <i class="fa fa-code main-highlight-color" aria-hidden="true"></i> <a
-                        href="https://github.com/sujaygarlanka/receipt_database">Code</a>
+                    class="no-border" href="https://github.com/sujaygarlanka/receipt_database">Code</a>
                 </span>
             </div>
         </div>
     </div>
     <div class="footer">
-        <a href="mailto:sujay.garlanka@gmail.com">sujay.garlanka@gmail.com</a>
+        <a class="no-border" href="mailto:sujay.garlanka@gmail.com">sujay.garlanka@gmail.com</a>
     </div>
     <script src="js/website.js"></script>
 </body>
