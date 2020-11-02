@@ -39,6 +39,15 @@ li::marker {
     font-size: 20px;
 }
 
+/* li .no-bullet::marker {
+    content: "test ";
+} */
+
+.gist-data{
+    height:250px;
+    overflow-y: visible;
+}
+
   /* #particles-js {
     position: absolute;
     width: 100%;
@@ -140,4 +149,48 @@ li::marker {
     border-left: none;
     border-right: none;
     border-bottom: 10px solid var(--main-highlight);
+}
+
+.title-bar {
+    display: flex;
+    height: 15px;
+    width: 56%;
+    /* background-color: #233659; */
+    /* z-index: 10; */
+    background-color: #000000;
+    border-radius: 10px 10px 0 0;
+    align-items: center;
+    justify-content: space-between;
+    -webkit-box-shadow: 0 0 20px 5px var(--subtext-color);
+    -moz-box-shadow: 0 0 20px 5px var(--subtext-color);
+    box-shadow: 0 0 20px 5px var(--subtext-color);
+}
+
+.title-bar-text {
+    color: #fff;
+    font-weight: 20px;
+    font-size: 12px;
+}
+
+.dot {
+    height: 7px;
+    width: 7px;
+    background-color: #bbb;
+    border-radius: 50%;
+    margin-left: 5px;
+    position: relative;
+    z-index: 10;
+    /* display: inline-block; */
+}
+
+.dot-close {
+    background-color: #FE554F;
+}
+
+.dot-minimize {
+    background-color: #FEB728;
+}
+
+.dot-expand {
+    background-color: #29BD36;
 }
