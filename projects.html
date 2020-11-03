@@ -10,6 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
         .main {
@@ -26,6 +32,26 @@
             color: var(--main-highlight);
         }
 
+        .mobile-view {
+            width: 200px;
+            height: 320px;
+            margin-left: auto;
+            margin-right: auto;
+            -webkit-box-shadow: 0 0 20px 5px var(--subtext-color);
+            -moz-box-shadow: 0 0 20px 5px var(--subtext-color);
+            box-shadow: 0 20px 20px 5px var(--subtext-color);
+            border: 10px solid #000;
+            border-radius: 10px;
+            background: #000;
+        }
+
+        .mobile-view img {
+            width: 200px;
+            height: 320px;
+            border-radius: calc(10px - 7px);
+            background: #fff;
+            margin: 0;
+        }
     </style>
 </head>
 
@@ -35,97 +61,142 @@
         <h1>sujay garlanka</h1>
     </div>
     <div class="main">
-        <h2 class="indent">Projects</h2>
+        <h2 class="indent">projects</h2>
         <div class="navigation">
-            <a class="no-border">drink machine</a> | <a class="no-border" href="#swift-book-exchange">swift book exchange</a> | <a class="no-border" href="#midas">midas</a>
+            <a class="no-border">drink machine</a> | <a class="no-border" href="#swift-book-exchange">swift book
+                exchange</a> | <a class="no-border" href="#midas">midas</a>
         </div>
-        <div id="swift-book-exchange" class="project-item indent">
+
+        <div id="drink-machine" class="project-item indent">
             <div style="display: flex;">
-                <h3 class="main-highlight-color">></h3>&nbsp;<h3>swift book exchange</h3>&nbsp;<h5
-                    class="main-highlight-color">(Aug 2016 - jan 2018)</h5>
+                <h3 class="main-highlight-color">></h3>&nbsp;<h3>drink machine</h3>&nbsp;<h5
+                    class="subtext-color">(april 2020 - july 2020)</h5>
             </div>
             <div class="project-text indent">
-                <div class="title-bar">
-                    <span class="dot dot-close"></span>
-                    <span class="dot dot-minimize"></span>
-                    <span class="dot dot-expand"></span>
+                <div class="horizontal-flex" >
+                    <div class="vertical-flex" style="width: 57%">
+                        <div class=" title-bar" style="width: 100%">
+                            <span class="dot dot-close"></span>
+                            <span class="dot dot-minimize"></span>
+                            <span class="dot dot-expand"></span>
+                        </div>
+                        <video class="video" style="width: 100%" controls>
+                            <source src="./media/swift_book_exchange/Swift Book Exchange Quick Demo.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="mobile-view">
+                        <img src="./media/DrinkMixr/DrinkMixr App Demo.gif" />
+                    </div>
                 </div>
-                <video class="video" controls>
-                    <source src="./media/Swift Book Exchange Quick Demo.mp4" type="video/mp4">
-                </video>
-                <p>A friend and I built a website for Duke students to buy and sell books. Previously, students were
-                    using a Facebook group to buy and sell books among students, which was cumbersome and inefficient.
-                    My friend and I decided to build a book exchange to make this transaction among students easier. A
-                    few features we included are:
-                </p>
+                <p>A friend and I built a machine that can dispense drinks with half an
+                    ounce accuracy.</p>
                 <ul>
                     <li>Using Google Book API to get book information like ISBN, authors, cover picture, etc by simply
                         typing in the title</li>
                     <li>Preloaded Duke classes so people can easily fill in the course information for a book</li>
                     <li>A dashboard to track a user's transaction history </li>
-                    <li>Facebook integration to allow users to share on Facebook the books that they are currently
-                        selling on the exchange
-                    </li>
-                    <li>Duke login so only Duke students can login, preventing anyone from buying and selling books on
-                        the site</li>
-                    <li>Detailed email notifications when a user buys or sells
-                    </li>
                 </ul>
-                You need a Duke login to fully explore the site, but you can still search for books without one.
-                <br />
-                <p><b class="main-highlight-color">Technologies:</b> HTML/CSS/Javascript,
-                    jQuery/AJAX, PHP, MySQL, OAuth 2.0 </p>
+                <p><b class="main-highlight-color">Technologies:</b> React Native and Python</p>
                 <span>
-                    <i class="fa fa-link main-highlight-color" aria-hidden="true"></i> <a class="no-border"
-                        href="http://swiftbookexchange.com">Website</a>
+                    <i class="fa fa-mobile main-highlight-color" aria-hidden="true"></i> <a class="no-border"
+                        href="https://github.com/sujaygarlanka/DrinkMixr/tree/master/mobile_app">App Code</a>
                     &nbsp;
                     <i class="fa fa-code main-highlight-color" aria-hidden="true"></i> <a class="no-border"
-                        href="https://github.com/sujaygarlanka/swift_book_exchange">Code</a>
+                        href="https://github.com/sujaygarlanka/DrinkMixr-Raspberry-Pi">Embedded Code</a>
                 </span>
             </div>
         </div>
-        <div id="midas" class="project-item indent">
-            <div style="display: flex;">
-                <h3 class="main-highlight-color">></h3>&nbsp;<h3>midas</h3>&nbsp;<h5
-                    class="main-highlight-color">(may 2016 - Aug 2016)</h5>
-            </div>
-            <div class="project-text indent">
-                <div class="title-bar">
-                    <span class="dot dot-close"></span>
-                    <span class="dot dot-minimize"></span>
-                    <span class="dot dot-expand"></span>
-                </div>
-                <video class="video" controls>
-                    <source src="./media/Midas Quick Demo.mp4" type="video/mp4">
-                </video>
-                <p>Midas is a money management tool I built that catalogs and analyzes e-receipts from users' Gmail in a
-                    user-friendly dashboard. Its features are:
-                </p>
-                <ul>
-                    <li>Uses Google sign and OAuth 2.0 authorization for signing in and gaining permission to access a
-                        user's email</li>
-                    <li>Finds and extracts e-receipts to display them in a sortable table.</li>
-                    <li>Extracts data from the e-receipts and graphs the expenditures by days, weeks or months.</li>
-                    <li>Allows users to set budgets</li>
-                </ul>
-                You can visit the website and try it out yourself. I won't have access to your email, google
-                credentials, etc. because Midas uses Google sign which only provides temporary access tokens. I won't
-                get your
-                username and password to your google account.
-                <br />
-                <p><b class="main-highlight-color">Technologies:</b> HTML/CSS/Javascript,
-                    jQuery/AJAX, PHP, MySQL, Google Scripts, Google OAuth 2.0
-                    and
-                    Sign In Libraries</p>
-                <span>
-                    <i class="fa fa-link main-highlight-color" aria-hidden="true"></i> <a class="no-border" href="https://159.203.182.82">
-                        Website</a>
-                    &nbsp;
-                    <i class="fa fa-code main-highlight-color" aria-hidden="true"></i> <a
-                    class="no-border" href="https://github.com/sujaygarlanka/receipt_database">Code</a>
-                </span>
-            </div>
+    </div>
+
+    <div id="swift-book-exchange" class="project-item indent">
+        <div style="display: flex;">
+            <h3 class="main-highlight-color">></h3>&nbsp;<h3>swift book exchange</h3>&nbsp;<h5
+                class="subtext-color">(Aug 2016 - jan 2018)</h5>
         </div>
+        <div class="project-text indent">
+            <div class="title-bar">
+                <span class="dot dot-close"></span>
+                <span class="dot dot-minimize"></span>
+                <span class="dot dot-expand"></span>
+            </div>
+            <video class="video" controls>
+                <source src="./media/swift_book_exchange/Swift Book Exchange Quick Demo.mp4" type="video/mp4">
+            </video>
+            <p>A friend and I built a website for Duke students to buy and sell books. Previously, students were
+                using a Facebook group to buy and sell books among students, which was cumbersome and inefficient.
+                My friend and I decided to build a book exchange to make this transaction among students easier. A
+                few features we included are:
+            </p>
+            <ul>
+                <li>Using Google Book API to get book information like ISBN, authors, cover picture, etc by simply
+                    typing in the title</li>
+                <li>Preloaded Duke classes so people can easily fill in the course information for a book</li>
+                <li>A dashboard to track a user's transaction history </li>
+                <li>Facebook integration to allow users to share on Facebook the books that they are currently
+                    selling on the exchange
+                </li>
+                <li>Duke login so only Duke students can login, preventing anyone from buying and selling books on
+                    the site</li>
+                <li>Detailed email notifications when a user buys or sells
+                </li>
+            </ul>
+            You need a Duke login to fully explore the site, but you can still search for books without one.
+            <br />
+            <p><b class="main-highlight-color">Technologies:</b> HTML/CSS/Javascript,
+                jQuery/AJAX, PHP, MySQL, OAuth 2.0 </p>
+            <span>
+                <i class="fa fa-link main-highlight-color" aria-hidden="true"></i> <a class="no-border"
+                    href="http://swiftbookexchange.com">Website</a>
+                &nbsp;
+                <i class="fa fa-code main-highlight-color" aria-hidden="true"></i> <a class="no-border"
+                    href="https://github.com/sujaygarlanka/swift_book_exchange">Code</a>
+            </span>
+        </div>
+    </div>
+
+    <div id="midas" class="project-item indent">
+        <div style="display: flex;">
+            <h3 class="subtext-color">></h3>&nbsp;<h3>midas</h3>&nbsp;<h5 class="main-highlight-color">(may
+                2016 - Aug 2016)</h5>
+        </div>
+        <div class="project-text indent">
+            <div class="title-bar">
+                <span class="dot dot-close"></span>
+                <span class="dot dot-minimize"></span>
+                <span class="dot dot-expand"></span>
+            </div>
+            <video class="video" controls>
+                <source src="./media/midas/Midas Quick Demo.mp4" type="video/mp4">
+            </video>
+            <p>Midas is a money management tool I built that catalogs and analyzes e-receipts from users' Gmail in a
+                user-friendly dashboard. Its features are:
+            </p>
+            <ul>
+                <li>Uses Google sign and OAuth 2.0 authorization for signing in and gaining permission to access a
+                    user's email</li>
+                <li>Finds and extracts e-receipts to display them in a sortable table.</li>
+                <li>Extracts data from the e-receipts and graphs the expenditures by days, weeks or months.</li>
+                <li>Allows users to set budgets</li>
+            </ul>
+            You can visit the website and try it out yourself. I won't have access to your email, google
+            credentials, etc. because Midas uses Google sign which only provides temporary access tokens. I won't
+            get your
+            username and password to your google account.
+            <br />
+            <p><b class="main-highlight-color">Technologies:</b> HTML/CSS/Javascript,
+                jQuery/AJAX, PHP, MySQL, Google Scripts, Google OAuth 2.0
+                and
+                Sign In Libraries</p>
+            <span>
+                <i class="fa fa-link main-highlight-color" aria-hidden="true"></i> <a class="no-border"
+                    href="https://159.203.182.82">
+                    Website</a>
+                &nbsp;
+                <i class="fa fa-code main-highlight-color" aria-hidden="true"></i> <a class="no-border"
+                    href="https://github.com/sujaygarlanka/receipt_database">Code</a>
+            </span>
+        </div>
+    </div>
     </div>
     <div class="footer">
         <a class="no-border" href="mailto:sujay.garlanka@gmail.com">sujay.garlanka@gmail.com</a>

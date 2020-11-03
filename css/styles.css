@@ -59,6 +59,15 @@ li::marker {
     font-size: 20px;
 }
 
+.horizontal-flex {
+    display: flex;
+}
+
+.vertical-flex {
+    display: flex;
+    flex-direction: column;
+}
+
 /* li .no-bullet::marker {
     content: "test ";
 } */
