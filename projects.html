@@ -10,12 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-        crossorigin="anonymous"></script>
+    <script src="js/website.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
         .main {
@@ -34,9 +29,10 @@
 
         .mobile-view {
             width: 200px;
-            height: 320px;
-            margin-left: auto;
-            margin-right: auto;
+            min-width: 100px;
+            height: auto;
+            margin-left: 10%;
+            background-color: blue;
             -webkit-box-shadow: var(--mobile-shadow);
             -moz-box-shadow: var(--mobile-shadow);
             box-shadow: var(--mobile-shadow);
@@ -46,8 +42,8 @@
         }
 
         .mobile-view img {
-            width: 200px;
-            height: 320px;
+            width: 100%;
+            height: 100%;
             border-radius: calc(10px - 7px);
             background: #fff;
             margin: 0;
@@ -57,31 +53,34 @@
 
 <body>
     <div id="particles-js"></div>
-    <div class="header" onclick='navigate("index.html")'>
-        <h1>sujay garlanka</h1>
+    <div class="header">
+        <h1 onclick='navigate("index.html")'>sujay garlanka</h1>
+        <i id="dark-mode-icon" class="fa fa-moon-o" onclick='toggleMode()' aria-hidden="true"></i>
     </div>
     <div class="main">
         <h2 class="indent">projects</h2>
         <div class="navigation">
-            <a class="no-border" href="#drink-machine">drink machine</a> | <a class="no-border" href="#swift-book-exchange">swift book
+            <a class="no-border" href="#drink-machine">drink machine</a> | <a class="no-border"
+                href="#swift-book-exchange">swift book
                 exchange</a> | <a class="no-border" href="#midas">midas</a>
         </div>
 
         <div id="drink-machine" class="project-item indent">
             <div style="display: flex;">
-                <h3 class="main-highlight-color">></h3>&nbsp;<h3>drink machine</h3>&nbsp;<h5
-                    class="subtext-color">(april 2020 - july 2020)</h5>
+                <h3 class="main-highlight-color">></h3>&nbsp;<h3>drink machine</h3>&nbsp;<h5 class="subtext-color">
+                    (april 2020 - july 2020)</h5>
             </div>
             <div class="project-text indent">
-                <div class="horizontal-flex" >
-                    <div class="vertical-flex" style="width: 57%">
-                        <div class=" title-bar" style="width: 100%">
+                <div class="horizontal-flex">
+                    <div class="vertical-flex video-container">
+                        <div class="title-bar" style="width: 100%">
                             <span class="dot dot-close"></span>
                             <span class="dot dot-minimize"></span>
                             <span class="dot dot-expand"></span>
                         </div>
                         <video class="video" style="width: 100%" controls>
-                            <source src="./media/swift_book_exchange/Swift Book Exchange Quick Demo.mp4" type="video/mp4">
+                            <source src="./media/swift_book_exchange/Swift Book Exchange Quick Demo.mp4"
+                                type="video/mp4">
                         </video>
                     </div>
                     <div class="mobile-view">
@@ -110,8 +109,8 @@
 
     <div id="swift-book-exchange" class="project-item indent">
         <div style="display: flex;">
-            <h3 class="main-highlight-color">></h3>&nbsp;<h3>swift book exchange</h3>&nbsp;<h5
-                class="subtext-color">(Aug 2016 - jan 2018)</h5>
+            <h3 class="main-highlight-color">></h3>&nbsp;<h3>swift book exchange</h3>&nbsp;<h5 class="subtext-color">
+                (Aug 2016 - jan 2018)</h5>
         </div>
         <div class="project-text indent">
             <div class="title-bar">
@@ -202,7 +201,7 @@
     <div class="footer">
         <a class="no-border" href="mailto:sujay.garlanka@gmail.com">sujay.garlanka@gmail.com</a>
     </div>
-    <script src="js/website.js"></script>
+    <script src="js/particles.js"></script>
 </body>
 
 </html>

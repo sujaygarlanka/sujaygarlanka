@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/website.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
         .main {
@@ -37,12 +39,21 @@
         .navigation-item:hover:after {
             width: 100%;
         }
+
+        .navigation-icon {
+            background-color: red;
+            -webkit-mask: url(icons/experience.svg) no-repeat center;
+            mask: url(icons/experience.svg) no-repeat center;
+            width: 50%;
+        }
     </style>
 </head>
+
 <body>
     <div id="particles-js"></div>
-    <div class="header" onclick='navigate("index.html")'>
-        <h1>sujay garlanka</h1>
+    <div class="header">
+        <h1 onclick='navigate("index.html")'>sujay garlanka</h1>
+        <i id="dark-mode-icon" class="fa fa-moon-o" onclick='toggleMode()' aria-hidden="true"></i>
     </div>
     <div class="main">
         <div class="navigation-item" onclick='navigate("https://app.box.com/s/m237sy3kmrisr2k1zajuvmw7t8yqcuf8")'>
@@ -50,7 +61,8 @@
             <p>resume</p>
         </div>
         <div class="navigation-item" onclick='navigate("experience.html")'>
-            <img src="icons/experience.svg" alt="resume" width="50%" />
+            <!-- <img src="icons/experience.svg" alt="experience" width="50%" /> -->
+            <div class="navigation-icon"></div>
             <p>experience</p>
         </div>
         <div class="navigation-item" onclick='navigate("projects.html")'>
@@ -65,6 +77,7 @@
     <div class="footer">
         <a class="no-border" href="mailto:sujay.garlanka@gmail.com">sujay.garlanka@gmail.com</a>
     </div>
-    <script src="js/website.js"></script>
+    <script src="js/particles.js"></script>
 </body>
+
 </html>

@@ -11,6 +11,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/website.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
         .main {
@@ -31,8 +32,9 @@
 
 <body>
     <div id="particles-js"></div>
-    <div class="header" onclick='navigate("index.html")'>
-        <h1>sujay garlanka</h1>
+    <div class="header">
+        <h1 onclick='navigate("index.html")'>sujay garlanka</h1>
+        <i id="dark-mode-icon" class="fa fa-moon-o" onclick='toggleMode()' aria-hidden="true"></i>
     </div>
     <div class="main">
         <h2 class="indent">experience</h2>
@@ -142,7 +144,7 @@
     <div class="footer">
         <a class="no-border" href="mailto:sujay.garlanka@gmail.com">sujay.garlanka@gmail.com</a>
     </div>
-    <script src="js/website.js"></script>
+    <script src="js/particles.js"></script>
 </body>
 
 </html>
