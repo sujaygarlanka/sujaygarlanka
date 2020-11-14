@@ -25,6 +25,7 @@ function lightMode() {
   root.style.setProperty("--text-color", "var(--light-text-color");
   root.style.setProperty("--video-shadow", "var(--light-video-shadow");
   root.style.setProperty("--mobile-shadow", "var(--light-mobile-shadow");
+  root.style.setProperty("--home-icon-filter", "var(--light-home-icon-filter");
   if (document.getElementById("dark-mode-icon") != null) {
     document.getElementById("dark-mode-icon").className = "fa fa-moon-o";
   }
@@ -37,7 +38,7 @@ function darkMode() {
   root.style.setProperty("--text-color", "var(--dark-text-color");
   root.style.setProperty("--video-shadow", "var(--dark-video-shadow");
   root.style.setProperty("--mobile-shadow", "var(--dark-mobile-shadow");
-  console.log(document.getElementById("dark-mode-icon"));
+  root.style.setProperty("--home-icon-filter", "var(--dark-home-icon-filter");
   if (document.getElementById("dark-mode-icon") != null) {
     document.getElementById("dark-mode-icon").className = "fa fa-sun-o";
   }

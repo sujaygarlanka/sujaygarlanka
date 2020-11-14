@@ -28,6 +28,10 @@
             cursor: pointer;
         }
 
+        .navigation-item img {
+            filter: var(--home-icon-filter);
+        }
+
         .navigation-item:after {
             content: "";
             width: 0%;
@@ -38,13 +42,6 @@
 
         .navigation-item:hover:after {
             width: 100%;
-        }
-
-        .navigation-icon {
-            background-color: red;
-            -webkit-mask: url(icons/experience.svg) no-repeat center;
-            mask: url(icons/experience.svg) no-repeat center;
-            width: 50%;
         }
     </style>
 </head>
@@ -61,8 +58,7 @@
             <p>resume</p>
         </div>
         <div class="navigation-item" onclick='navigate("experience.html")'>
-            <!-- <img src="icons/experience.svg" alt="experience" width="50%" /> -->
-            <div class="navigation-icon"></div>
+            <img src="icons/experience.svg" alt="experience" width="50%" class="color"/>
             <p>experience</p>
         </div>
         <div class="navigation-item" onclick='navigate("projects.html")'>
