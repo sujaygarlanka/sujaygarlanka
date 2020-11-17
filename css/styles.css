@@ -148,6 +148,11 @@ li.no-bullet:before {
     margin-left: 5%;
 }
 
+.highlight-text {
+    color: var(--main-highlight);
+    font-weight: bold;
+}
+
 .main-highlight-color {
     color: var(--main-highlight);
 }
