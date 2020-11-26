@@ -22,6 +22,7 @@ function lightMode() {
   localStorage.setItem("darkMode", 0);
   let root = document.documentElement;
   root.style.setProperty("--background-color", "var(--light-background-color");
+  root.style.setProperty("--section-color", "var(--light-section-color");
   root.style.setProperty("--text-color", "var(--light-text-color");
   root.style.setProperty("--video-shadow", "var(--light-video-shadow");
   root.style.setProperty("--mobile-shadow", "var(--light-mobile-shadow");
@@ -35,6 +36,7 @@ function darkMode() {
   localStorage.setItem("darkMode", 1);
   let root = document.documentElement;
   root.style.setProperty("--background-color", "var(--dark-background-color");
+  root.style.setProperty("--section-color", "var(--dark-section-color");
   root.style.setProperty("--text-color", "var(--dark-text-color");
   root.style.setProperty("--video-shadow", "var(--dark-video-shadow");
   root.style.setProperty("--mobile-shadow", "var(--dark-mobile-shadow");
@@ -44,10 +46,29 @@ function darkMode() {
   }
 }
 
+function setGoHomeButton () {
+  var icon = document.getElementById("go-home-icon");
+  // Fade button in
+  if (window.pageYOffset >= 300) {
+    icon.style.transition = '0.8s';
+    icon.style.opacity = 1;
+  }
+  // Fade button out
+  else {
+    icon.style.transition = '0.8s';
+    icon.style.opacity = 0;
+  }
+}
+
 // Load when before page loads to get correct background color
 loadMode();
 
 // Load once page loads to change dark mode icon
 window.addEventListener('DOMContentLoaded', (event) => {
   loadMode();
+  setGoHomeButton();
+});
+
+window.addEventListener('scroll', (event) => {
+  setGoHomeButton();
 });
