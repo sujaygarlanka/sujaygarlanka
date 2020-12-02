@@ -60,6 +60,18 @@ function setGoHomeButton () {
   }
 }
 
+function openVideo(videoId) {
+  var modal = document.getElementById(videoId);
+  modal.style.display = "flex";
+}
+
+function closeVideo(videoId) {
+  var modal = document.getElementById(videoId);
+  var video = modal.querySelector("video");
+  modal.style.display = "none";
+  video.pause();
+}
+
 // Load when before page loads to get correct background color
 loadMode();
 

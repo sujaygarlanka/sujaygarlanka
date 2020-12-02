@@ -22,7 +22,7 @@
     <!-- Home Section -->
     <div id="home">
         <div class="header">
-            <h1 onclick='navigate("index.html")'>sujay garlanka</h1>
+            <h1>sujay garlanka</h1>
             <i id="dark-mode-icon" class="fa fa-moon-o" onclick='toggleMode()' aria-hidden="true"></i>
         </div>
         <div class="home-navigation">
@@ -45,7 +45,7 @@
             </div>
         </div>
     </div>
-    <!-- <hr> -->
+
     <!-- Experience Section -->
     <div id="experience">
         <h2 class="indent">experience</h2>
@@ -175,9 +175,11 @@
             </div>
             <div class="project-text indent">
                 <div class="title-bar">
-                    <span class="dot dot-close"></span>
-                    <span class="dot dot-minimize"></span>
-                    <span class="dot dot-expand"></span>
+                    <div style="display: flex;">
+                        <div class="dot dot-close"></div>
+                        <div class="dot dot-minimize"></div>
+                        <div class="dot dot-expand"></div>
+                    </div>
                 </div>
                 <img class="video" src="./media/cli/CLI Demo.gif" />
                 <p>Built a command line tool for over 200 of <a href="https://developer.box.com/reference/">Box’s API
@@ -248,9 +250,11 @@
                 <div class="horizontal-flex">
                     <div class="vertical-flex video-container">
                         <div class="title-bar" style="width: 100%">
-                            <span class="dot dot-close"></span>
-                            <span class="dot dot-minimize"></span>
-                            <span class="dot dot-expand"></span>
+                            <div style="display: flex;">
+                                <div class="dot dot-close"></div>
+                                <div class="dot dot-minimize"></div>
+                                <div class="dot dot-expand"></div>
+                            </div>
                         </div>
                         <video class="video" style="width: 100%" controls>
                             <source src="./media/swift_book_exchange/Swift Book Exchange Quick Demo.mp4"
@@ -288,14 +292,29 @@
             </div>
             <div class="project-text indent">
                 <div class="title-bar">
-                    <span class="dot dot-close"></span>
-                    <span class="dot dot-minimize"></span>
-                    <span class="dot dot-expand"></span>
+                    <div style="display: flex;">
+                        <div class="dot dot-close"></div>
+                        <div class="dot dot-minimize"></div>
+                        <div class="dot dot-expand"></div>
+                    </div>
+                    <div class="title-bar-text">
+                        <a class="no-border cursor" style="color: white" onclick='openVideo("book-exchange-video")'>Demo Video
+                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
-                <video class="video" controls>
-                    <source src="./media/swift_book_exchange/Swift Book Exchange Quick Demo.mp4" type="video/mp4">
-                </video>
-                <!-- <iframe margin="0" padding="0" border="none" width="100%" height="300" frameBorder="0" src="https://www.youtube.com/embed/qWIU2gYCGr8?rel=0"></iframe> -->
+
+                <div id="book-exchange-video" class="video-modal-background">
+                    <!-- Modal content -->
+                    <div class="close">
+                        <span onclick='closeVideo("book-exchange-video")'>&times;</span>
+                    </div>
+                    <video class="video-in-modal" controls>
+                        <source src="./media/swift_book_exchange/Swift Book Exchange Quick Demo.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <img class="video" src="./media/swift_book_exchange/Swift Book Exchange Preview.gif" />
+
                 <p>A friend and I built a website for Duke students to buy and sell books. Previously, students were
                     using a Facebook group to buy and sell books among students, which was cumbersome and inefficient.
                     My friend and I decided to build a book exchange to make this transaction among students easier. A
@@ -335,25 +354,41 @@
             </div>
             <div class="project-text indent">
                 <div class="title-bar">
-                    <span class="dot dot-close"></span>
-                    <span class="dot dot-minimize"></span>
-                    <span class="dot dot-expand"></span>
+                    <div style="display: flex;">
+                        <div class="dot dot-close"></div>
+                        <div class="dot dot-minimize"></div>
+                        <div class="dot dot-expand"></div>
+                    </div>
+                    <div class="title-bar-text">
+                        <a class="no-border cursor" style="color: white" onclick='openVideo("midas-video")'>Demo Video
+                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
-                <video class="video" controls>
-                    <source src="./media/midas/Midas Quick Demo.mp4" type="video/mp4">
-                </video>
+
+                <div id="midas-video" class="video-modal-background">
+                    <!-- Modal content -->
+                    <div class="close">
+                        <span onclick='closeVideo("midas-video")'>&times;</span>
+                    </div>
+                    <video class="video-in-modal" controls>
+                        <source src="./media/midas/Midas Quick Demo.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <img class="video" src="./media/midas/Midas Preview.gif" />
+
                 <p>Midas is a money management tool I built that catalogs and analyzes e-receipts from users' Gmail in a
                     user-friendly dashboard. Its features are:
                 </p>
                 <ul>
-                    <li>Uses Google sign and OAuth 2.0 authorization for signing in and gaining permission to access a
+                    <li>Uses Google sign in and OAuth 2.0 authorization for signing in and gaining permission to access a
                         user's email</li>
                     <li>Finds and extracts e-receipts to display them in a sortable table.</li>
                     <li>Extracts data from the e-receipts and graphs the expenditures by days, weeks or months.</li>
                     <li>Allows users to set budgets</li>
                 </ul>
                 You can visit the website and try it out yourself. I won't have access to your email, google
-                credentials, etc. because Midas uses Google sign which only provides temporary access tokens. I won't
+                credentials, etc. because Midas uses Google sign in which only provides temporary access tokens. I won't
                 get your
                 username and password to your google account.
                 <br />
