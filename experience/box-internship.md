@@ -1,6 +1,6 @@
 # Box Internship (May 2018 - Aug 2018)
 
-![Demo](cli-demo.gif)
+<img src="cli-demo.gif" alt="demo" width="600"/>
 
 Built a command line tool for over 200 of [Box’s API endpoints](https://developer.box.com/reference/)
 
