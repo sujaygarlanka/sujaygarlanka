@@ -6,7 +6,7 @@
     <script>
         function navigate(hashPath) {
             var readmes = {
-                drink: "https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md",
+                drink: "https://raw.githubusercontent.com/sujaygarlanka/box-take-home-java/main/README.md",
                 swift: "https://raw.githubusercontent.com/sujaygarlanka/swift-book-exchange/master/README.md",
                 midas: "https://raw.githubusercontent.com/sujaygarlanka/receipt-database/master/README.md"
             }
@@ -147,6 +147,10 @@
             color: var(--green);
         }
 
+        .green.selected a {
+            color: var(--green);
+        }
+
         .black a:hover {
             color: var(--text-gray);
         }
@@ -156,9 +160,9 @@
 <body>
     <div class="vertical-navigation">
         <ul>
-            <li id="drink" class="red selected"><a onclick='navigate("projects+drink")'>Drink Machine</a></li>
-            <li id="swift" class="red"><a onclick='navigate("projects+swift")'>Swift Book Exchange</a></li>
-            <li id="midas" class="red"><a onclick='navigate("projects+midas")'>Midas</a></li>
+            <li id="drink" class="green selected"><a onclick='navigate("projects+drink")'>Drink Machine</a></li>
+            <li id="swift" class="green"><a onclick='navigate("projects+swift")'>Swift Book Exchange</a></li>
+            <li id="midas" class="green"><a onclick='navigate("projects+midas")'>Midas</a></li>
         </ul>
     </div>
     <div class="main-container">
@@ -171,8 +175,14 @@
             <li class="green"><a href="#projects">Projects</a></li>
             <li class="black"><a href="https://github.com/sujaygarlanka">Github</a></li>
           </ul>
+          <div class="header">
+            <h1 class="red">Experience</h1>
+        </div>
+        <div class="readme">
+            <zero-md id="experience" src="https://raw.githubusercontent.com/sujaygarlanka/box-take-home-java/main/README.md"></zero-md>
+        </div>
         <div class="header">
-            <h1 class="red">Projects</h1>
+            <h1 class="green">Projects</h1>
         </div>
         <div class="readme">
             <zero-md id="projects" src="https://raw.githubusercontent.com/sujaygarlanka/box-take-home-java/main/README.md"></zero-md>
