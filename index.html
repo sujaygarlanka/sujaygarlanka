@@ -2,399 +2,182 @@
 <html lang="en">
 
 <head>
-    <title>Sujay Garlanka</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
-    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300&family=Kanit:wght@100&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="js/website.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- Import element definition -->
+    <script>
+        function navigate(hashPath) {
+            var readmes = {
+                drink: "https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md",
+                swift: "https://raw.githubusercontent.com/sujaygarlanka/swift-book-exchange/master/README.md",
+                midas: "https://raw.githubusercontent.com/sujaygarlanka/receipt-database/master/README.md"
+            }
+            var paths = hashPath.split("+");
+            if (paths[0])
+            window.location.hash = "#" + paths[0];
+            window.location.hash = "#" + paths[0] + "+" + paths[1];
+            var mdElem = document.getElementById(paths[0]);
+            mdElem.src = readmes[paths[1]]
+        }
+
+        $('.vertical-navigation li').click(function(e){
+            $('.vertical-navigation li').css("color", "black");
+            $(this).css("color", "red");
+        });
+    </script>
+    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
+    <style>
+        :root {
+            /* yellow - #FEB728 */
+            /* neon green - #00FF73 */
+            /* terminal green - #24E200 */
+            /* particle red - #B61A25 */
+            /* light blue - #0CCBFF */
+            /* box blue - #0061D5 */
+            --red: #FE554F;
+            --yellow: #FEB728;
+            --green: #29BD36;
+            --black: #000000;
+            --text-gray: #96979C;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: normal;
+        }
+
+        .main-container {
+            /* flex-direction: column; */
+            margin-left: 15%;
+            margin-right: 15%;
+            margin-bottom: 5%;
+            /* font-weight: 200; */
+        }
+
+        .readme {
+            border: 2px solid #E1E4E8;
+            border-radius: 10px;
+            padding: 5%;
+        }
+
+        .horizontal-navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            margin-top: 1.5%;
+            margin-bottom: 1.5%;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5%;
+            margin-bottom: 1.5%;
+        }
+
+        .red {
+            color: var(--red);
+        }
+
+        .yellow {
+            color: var(--yellow);
+        }
+
+        .green {
+            color: var(--green);
+        }
+
+        .black {
+            color: var(--black);
+        }
+
+        .vertical-navigation {
+            width: 15%;
+            position: fixed;
+            top: 39%;
+            left: 0;
+            /* border: 2px solid #E1E4E8; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .vertical-navigation li {
+            margin-bottom: 40%;
+            font-size: 15px;
+        }
+
+        .vertical-navigation li a{
+            color: var(--text-gray);
+        }
+
+        a:link {
+            text-decoration: none;
+            color: var(--black);
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: var(--black);
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .yellow a:hover {
+            color: var(--yellow);
+        }
+
+        .red a:hover {
+            color: var(--red);
+        }
+
+        .red.selected a {
+            color: var(--red);
+        }
+
+        .green a:hover {
+            color: var(--green);
+        }
+
+        .black a:hover {
+            color: var(--text-gray);
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Particles Background -->
-    <div id="particles-js"></div>
-
-    <!-- Home Section -->
-    <div id="home">
+    <div class="vertical-navigation">
+        <ul>
+            <li id="drink" class="red selected"><a onclick='navigate("projects+drink")'>Drink Machine</a></li>
+            <li id="swift" class="red"><a onclick='navigate("projects+swift")'>Swift Book Exchange</a></li>
+            <li id="midas" class="red"><a onclick='navigate("projects+midas")'>Midas</a></li>
+        </ul>
+    </div>
+    <div class="main-container">
         <div class="header">
-            <h1>sujay garlanka</h1>
-            <i id="dark-mode-icon" class="fa fa-moon-o" onclick='toggleMode()' aria-hidden="true"></i>
+            <h1>Sujay Garlanka</h1>
         </div>
-        <div class="home-navigation">
-            <div class="home-navigation-item"
-                onclick='navigate("https://app.box.com/s/m237sy3kmrisr2k1zajuvmw7t8yqcuf8")'>
-                <img src="icons/resume.svg" alt="resume" width="50%" />
-                <p>resume</p>
-            </div>
-            <div class="home-navigation-item" onclick='navigate("#experience")'>
-                <img src="icons/experience.svg" alt="experience" width="50%" class="color" />
-                <p>experience</p>
-            </div>
-            <div class="home-navigation-item" onclick='navigate("#projects")'>
-                <img src="icons/project.svg" alt="projects" width="50%" />
-                <p>projects</p>
-            </div>
-            <div class="home-navigation-item" onclick='navigate("https://github.com/sujaygarlanka")'>
-                <img src="icons/code.svg" alt="code" width="50%" />
-                <p>github</p>
-            </div>
+        <ul class="horizontal-navigation">
+            <li class="yellow"><a href="https://app.box.com/s/m237sy3kmrisr2k1zajuvmw7t8yqcuf8">Resume</a></li>
+            <li class="red"><a href="#experience">Experience</a></li>
+            <li class="green"><a href="#projects">Projects</a></li>
+            <li class="black"><a href="https://github.com/sujaygarlanka">Github</a></li>
+          </ul>
+        <div class="header">
+            <h1 class="red">Projects</h1>
+        </div>
+        <div class="readme">
+            <zero-md id="projects" src="https://raw.githubusercontent.com/sujaygarlanka/box-take-home-java/main/README.md"></zero-md>
         </div>
     </div>
-
-    <!-- Experience Section -->
-    <div id="experience">
-        <h2 class="indent">experience</h2>
-        <div class="section-navigation">
-            <a class="no-border" href="#box">box</a> | <a class="no-border" href="#box-internship">box internship</a> |
-            <a class="no-border" href="#cisco">cisco</a>
-        </div>
-        <div id="box" class="project-item indent">
-            <div class="project-title">
-                <div style="display: flex;">
-                    <h3 class="main-highlight-color">></h3>&nbsp;<h3>box</h3>&nbsp;<h5 class="subtext-color">(Aug
-                        2019 - present)</h5>
-                </div>
-                <h5 class="subtext-color">redwood city, ca</h5>
-            </div>
-            <div class="project-text indent">
-                <p>I am one of two people who develop and maintain the open source <a
-                        href="https://github.com/box/sdks">Box SDKs</a> in Github to allow people to integrate with
-                    Box's API. Every minute over <span class="highlight-text">1.3 million</span> API calls are made
-                    through our SDKs. We support SDKs in
-                    <a href="https://github.com/box/box-java-sdk">Java</a>, <a
-                        href="https://github.com/box/box-windows-sdk-v2">.NET</a>, <a
-                        href="https://github.com/box/box-python-sdk">Python</a>, <a
-                        href="https://github.com/box/box-node-sdk">Node.js</a>, <a
-                        href="https://github.com/box/boxcli">CLI</a>, <a href="https://github.com/box/box-ios-sdk">iOS
-                        content</a> and <a href="https://github.com/box/box-ios-preview-sdk">iOS preview SDKs</a>.
-                    All the features I have implemented can be found in the Github repos above. Below are a few examples
-                    of my work at Box:</p>
-                <b class="main-highlight-color">Rewrite of networking layer for iOS SDK</b>
-                <ul>
-                    <li>Removes dependency on <a href="https://github.com/Alamofire/Alamofire">Alamofire</a> by
-                        rewriting the networking layer with URLSession</li>
-                    <li>Reduces SDK size by 70% </li>
-                    <li>More space efficient by directly merging an upload stream with a multipart body stream instead
-                        of first writing it to disk</li>
-                    <li>After this rewrite, I add support for viewing the <a
-                            href="https://github.com/box/box-ios-sdk/pull/694">progress (#694)</a> of and <a
-                            href="https://github.com/box/box-ios-sdk/pull/713">cancelling (#713)</a> uploads and
-                        downloads</li>
-                    <li class="no-bullet">
-                        <div class="title-bar-code">
-                            <div style="display: flex;">
-                                <div class="dot dot-close"></div>
-                                <div class="dot dot-minimize"></div>
-                                <div class="dot dot-expand"></div>
-                            </div>
-                            <div class="title-bar-code-text "> BoxNetworkAgent.swift <a
-                                    href="https://github.com/box/box-ios-preview-sdk/pull/90" class="link"
-                                    style="display: inline-flex;">(#90)</a></div>
-                            <div class="title-bar-code-text "><a
-                                    href="https://github.com/box/box-ios-preview-sdk/pull/90" class="link-icon"><i
-                                        class="fa fa-github" aria-hidden="true"></i></a></div>
-                        </div>
-                        <script
-                            src="https://gist.github.com/sujaygarlanka/c1c8a4614bde622d99ae68e194a76703.js"></script>
-                    </li>
-                </ul>
-                
-                <b class="main-highlight-color">Support Creation and Downloading of Zip Files</b>
-                <ul>
-                    <li>Adds the ability to create a zip of any random collection of files and folders in a Box account
-                    </li>
-                    <li>Adds the ability to download it locally as well</li>
-                    <li>Allows customers who use Box on the backend to provide zip functionality for their users to
-                        download all their content easily</li>
-                    <li>Common use case is insurance companies who use Box to store their customer's claims, insurance
-                        info, etc.</li>
-                    <li class="no-bullet">
-                        <div class="title-bar-code">
-                            <div style="display: flex;">
-                                <div class="dot dot-close"></div>
-                                <div class="dot dot-minimize"></div>
-                                <div class="dot dot-expand"></div>
-                            </div>
-                            <div class="title-bar-code-text "> Code Sample from Zip PR <a
-                                    href="https://github.com/box/box-java-sdk/pull/825" class="link"
-                                    style="display: inline-flex;">(#825)</a></div>
-                            <div class="title-bar-code-text "><a href="https://github.com/box/box-java-sdk/pull/825"
-                                    class="link-icon"><i class="fa fa-github" aria-hidden="true"></i></a></div>
-                        </div>
-                        <script
-                            src="https://gist.github.com/sujaygarlanka/80fa584e09ea3c4cdc12a01ffae88b64.js"></script>
-                    </li>
-                </ul>
-
-                <p><b class="main-highlight-color">Technologies:</b> Java, .NET, Python, Node.js, Swift </p>
-                <span>
-                    <i class="fa fa-link main-highlight-color" aria-hidden="true"></i> <a class="no-border"
-                        href="https://developer.box.com/sdks-and-tools">Website</a>
-                    &nbsp;
-                    <i class="fa fa-code main-highlight-color" aria-hidden="true"></i> <a class="no-border"
-                        href="https://github.com/box/sdks">Code</a>
-                </span>
-            </div>
-        </div>
-        <div id="box-internship" class="project-item indent">
-            <div class="project-title">
-                <div style="display: flex;">
-                    <h3 class="main-highlight-color">></h3>&nbsp;<h3>box internship</h3>&nbsp;<h5 class="subtext-color">
-                        (may 2018 - Aug 2018)</h5>
-                </div>
-                <h5 class="subtext-color">redwood city, ca</h5>
-            </div>
-            <div class="project-text indent">
-                <div class="title-bar">
-                    <div style="display: flex;">
-                        <div class="dot dot-close"></div>
-                        <div class="dot dot-minimize"></div>
-                        <div class="dot dot-expand"></div>
-                    </div>
-                </div>
-                <img class="video" src="./media/cli/CLI Demo.gif" />
-                <p>Built a command line tool for over 200 of <a href="https://developer.box.com/reference/">Box’s API
-                        endpoints</a></p>
-                <ul>
-                    <li>Incorporates JWT authentication in the CLI</li>
-                    <li>Features include interactive CLI with prompting, bulk input and bulk output</li>
-                    <li>Went on to replace our older .NET CLI and is currently being used by Box customers</li>
-                    <li>Written in Node.js using the Oclif framework</li>
-                </ul>
-                <p><b class="main-highlight-color">Technologies:</b> Node.js, Oclif CLI Framework, Mocha Testing
-                    Framework</p>
-                <span>
-                    <i class="fa fa-code main-highlight-color" aria-hidden="true"></i> <a class="no-border"
-                        href="https://github.com/box/boxcli">Code</a>
-                </span>
-            </div>
-        </div>
-        <div id="cisco" class="project-item indent">
-            <div class="project-title">
-                <div style="display: flex;">
-                    <h3 class="main-highlight-color">></h3>&nbsp;<h3>cisco internship</h3>&nbsp;<h5
-                        class="subtext-color">(may 2017 - Aug 2017)</h5>
-                </div>
-                <h5 class="subtext-color">morrisville, nc</h5>
-            </div>
-            <div class="project-text indent">
-                <p>Created a proof of concept (POC) for an internal tool to digitize the creation and management of
-                    legal documents.</p>
-                <ul>
-                    <li>Implemented a template management system to select the correct form from a series of questions
-                        and
-                        have the user fill out the dynamic form</li>
-                    <li>Built in form validations to ensure legal compliance and created dynamic input fields like
-                        dynamic tables</li>
-                    <li>Inserted the contents of that form into a PDF of the appropriate legal document</li>
-                    <li>Integrated the tool with Docusign for e-signatures and approval</li>
-                    <li>It can be tracked throughout these stages from draft to pending approval
-                        to approved in the tool and previous legal documentation can be easily duplicated and reused for
-                        new
-                        contracts</li>
-                    <!-- Current process requires selecting the correct PDF, downloading it, filling it out in Word and submitting it online for approval. This is tedious for employees and hard monitor internally. -->
-                </ul>
-                <b>I cannnot post a full demo, post the code or give more information because this is proprietary to
-                    Cisco.</b>
-                <br />
-                <p><b class="main-highlight-color">Technologies:</b> AngularJS Material, AngularJS, Express.js, Node.js,
-                    MongoDB</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Projects Section -->
-    <div id="projects">
-        <h2 class="indent">projects</h2>
-        <div class="section-navigation">
-            <a class="no-border" href="#drink-machine">drink machine</a> | <a class="no-border"
-                href="#swift-book-exchange">swift book
-                exchange</a> | <a class="no-border" href="#midas">midas</a>
-        </div>
-
-        <div id="drink-machine" class="project-item indent">
-            <div style="display: flex;">
-                <h3 class="main-highlight-color">></h3>&nbsp;<h3>drink machine</h3>&nbsp;<h5 class="subtext-color">
-                    (april 2020 - july 2020)</h5>
-            </div>
-            <div class="project-text indent">
-                <div class="horizontal-flex">
-                    <div class="vertical-flex video-container">
-                        <div class="title-bar" style="width: 100%">
-                            <div style="display: flex;">
-                                <div class="dot dot-close"></div>
-                                <div class="dot dot-minimize"></div>
-                                <div class="dot dot-expand"></div>
-                            </div>
-                        </div>
-                        <video class="video" style="width: 100%" controls>
-                            <source src="./media/swift_book_exchange/Swift Book Exchange Quick Demo.mp4"
-                                type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="mobile-view">
-                        <img src="./media/DrinkMixr/DrinkMixr App Demo.gif" />
-                    </div>
-                </div>
-                <p>A friend and I built a machine that can dispense drinks with half an
-                    ounce accuracy.</p>
-                <ul>
-                    <li>Using Google Book API to get book information like ISBN, authors, cover picture, etc by simply
-                        typing in the title</li>
-                    <li>Preloaded Duke classes so people can easily fill in the course information for a book</li>
-                    <li>A dashboard to track a user's transaction history </li>
-                </ul>
-                <p><b class="main-highlight-color">Technologies:</b> React Native and Python</p>
-                <span>
-                    <i class="fa fa-mobile main-highlight-color" aria-hidden="true"></i> <a class="no-border"
-                        href="https://github.com/sujaygarlanka/DrinkMixr/tree/master/mobile_app">App Code</a>
-                    &nbsp;
-                    <i class="fa fa-code main-highlight-color" aria-hidden="true"></i> <a class="no-border"
-                        href="https://github.com/sujaygarlanka/DrinkMixr-Raspberry-Pi">Embedded Code</a>
-                </span>
-            </div>
-        </div>
-
-        <div id="swift-book-exchange" class="project-item indent">
-            <div style="display: flex;">
-                <h3 class="main-highlight-color">></h3>&nbsp;<h3>swift book exchange</h3>&nbsp;<h5
-                    class="subtext-color">
-                    (Aug 2016 - jan 2018)</h5>
-            </div>
-            <div class="project-text indent">
-                <div class="title-bar">
-                    <div style="display: flex;">
-                        <div class="dot dot-close"></div>
-                        <div class="dot dot-minimize"></div>
-                        <div class="dot dot-expand"></div>
-                    </div>
-                    <div class="title-bar-text">
-                        <a class="no-border cursor" style="color: white" onclick='openVideo("book-exchange-video")'>Demo Video
-                            <i class="fa fa-play-circle" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div id="book-exchange-video" class="video-modal-background">
-                    <!-- Modal content -->
-                    <div class="close">
-                        <span onclick='closeVideo("book-exchange-video")'>&times;</span>
-                    </div>
-                    <video class="video-in-modal" controls>
-                        <source src="./media/swift_book_exchange/Swift Book Exchange Quick Demo.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <img class="video" src="./media/swift_book_exchange/Swift Book Exchange Preview.gif" />
-
-                <p>A friend and I built a website for Duke students to buy and sell books. Previously, students were
-                    using a Facebook group to buy and sell books among students, which was cumbersome and inefficient.
-                    My friend and I decided to build a book exchange to make this transaction among students easier. A
-                    few features we included are:
-                </p>
-                <ul>
-                    <li>Using Google Book API to get book information like ISBN, authors, cover picture, etc by simply
-                        typing in the title</li>
-                    <li>Preloaded Duke classes so people can easily fill in the course information for a book</li>
-                    <li>A dashboard to track a user's transaction history </li>
-                    <li>Facebook integration to allow users to share on Facebook the books that they are currently
-                        selling on the exchange
-                    </li>
-                    <li>Duke login so only Duke students can login, preventing anyone from buying and selling books on
-                        the site</li>
-                    <li>Detailed email notifications when a user buys or sells
-                    </li>
-                </ul>
-                You need a Duke login to fully explore the site, but you can still search for books without one.
-                <br />
-                <p><b class="main-highlight-color">Technologies:</b> HTML/CSS/Javascript,
-                    jQuery/AJAX, PHP, MySQL, OAuth 2.0 </p>
-                <span>
-                    <i class="fa fa-link main-highlight-color" aria-hidden="true"></i> <a class="no-border"
-                        href="http://swiftbookexchange.com">Website</a>
-                    &nbsp;
-                    <i class="fa fa-code main-highlight-color" aria-hidden="true"></i> <a class="no-border"
-                        href="https://github.com/sujaygarlanka/swift_book_exchange">Code</a>
-                </span>
-            </div>
-        </div>
-
-        <div id="midas" class="project-item indent">
-            <div style="display: flex;">
-                <h3 class="main-highlight-color">></h3>&nbsp;<h3>midas</h3>&nbsp;<h5 class="subtext-color">(may
-                    2016 - Aug 2016)</h5>
-            </div>
-            <div class="project-text indent">
-                <div class="title-bar">
-                    <div style="display: flex;">
-                        <div class="dot dot-close"></div>
-                        <div class="dot dot-minimize"></div>
-                        <div class="dot dot-expand"></div>
-                    </div>
-                    <div class="title-bar-text">
-                        <a class="no-border cursor" style="color: white" onclick='openVideo("midas-video")'>Demo Video
-                            <i class="fa fa-play-circle" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div id="midas-video" class="video-modal-background">
-                    <!-- Modal content -->
-                    <div class="close">
-                        <span onclick='closeVideo("midas-video")'>&times;</span>
-                    </div>
-                    <video class="video-in-modal" controls>
-                        <source src="./media/midas/Midas Quick Demo.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <img class="video" src="./media/midas/Midas Preview.gif" />
-
-                <p>Midas is a money management tool I built that catalogs and analyzes e-receipts from users' Gmail in a
-                    user-friendly dashboard. Its features are:
-                </p>
-                <ul>
-                    <li>Uses Google sign in and OAuth 2.0 authorization for signing in and gaining permission to access a
-                        user's email</li>
-                    <li>Finds and extracts e-receipts to display them in a sortable table.</li>
-                    <li>Extracts data from the e-receipts and graphs the expenditures by days, weeks or months.</li>
-                    <li>Allows users to set budgets</li>
-                </ul>
-                You can visit the website and try it out yourself. I won't have access to your email, google
-                credentials, etc. because Midas uses Google sign in which only provides temporary access tokens. I won't
-                get your
-                username and password to your google account.
-                <br />
-                <p><b class="main-highlight-color">Technologies:</b> HTML/CSS/Javascript,
-                    jQuery/AJAX, PHP, MySQL, Google Scripts, Google OAuth 2.0
-                    and
-                    Sign In Libraries</p>
-                <span>
-                    <i class="fa fa-link main-highlight-color" aria-hidden="true"></i> <a class="no-border"
-                        href="https://159.203.182.82">
-                        Website</a>
-                    &nbsp;
-                    <i class="fa fa-code main-highlight-color" aria-hidden="true"></i> <a class="no-border"
-                        href="https://github.com/sujaygarlanka/receipt_database">Code</a>
-                </span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Go To The Top Icon -->
-    <div id="go-home-icon" onclick='navigate("#home")'>
-        <img src="icons/arrow.svg" alt="code" width="50px" />
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <a class="no-border" href="mailto:sujay.garlanka@gmail.com">sujay.garlanka@gmail.com</a>
-    </div>
-
-    <script src="js/particles.js"></script>
 </body>
 
 </html>
