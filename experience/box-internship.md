@@ -1,6 +1,6 @@
 # Box Internship (May 2018 - Aug 2018)
 
-![Demo](cli-demo.gif)
+<img src="https://raw.githubusercontent.com/sujaygarlanka/personal-website/github-website/experience/cli-demo.gif" width="600" height="350"/>
 
 Built a command line tool for over 200 of [Box’s API endpoints](https://developer.box.com/reference/)
 
