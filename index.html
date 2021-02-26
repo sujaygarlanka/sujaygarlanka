@@ -76,6 +76,15 @@
     </script>
     <script src="https://kit.fontawesome.com/064dc912b5.js" crossorigin="anonymous"></script>
     <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDPYGH4LDV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-LDPYGH4LDV');
+    </script>
     <style>
         :root {
             /* yellow - #FEB728 */
@@ -91,6 +100,7 @@
             --text-color: #C9D1D9;
             --github-blue: #58A6FF;
             --github-orange: #F9826C;
+            --github-green: #55CD61;
             --border-color: #21262D;
             --highlighted-border-color: #8C949E;
             --elements-background-color: #161B22;
@@ -244,7 +254,7 @@
         }
 
         .vertical-navigation a:hover {
-            color: var(--github-orange);
+            color: var(--github-green);
         }
 
         .vertical-navigation a:hover:before {
@@ -252,11 +262,11 @@
             position: absolute;
             font-size: 25px;
             left: -20px;
-            color: var(--github-orange);
+            color: var(--github-green);
         }
 
         .vertical-navigation a.selected {
-            color: var(--github-blue);
+            color: var(--github-green);
         }
 
         .vertical-navigation a.selected:before {
@@ -264,7 +274,7 @@
             position: absolute;
             font-size: 25px;
             left: -20px;
-            color: var(--github-blue);
+            color: var(--github-green);
         }
 
         .hidden {
