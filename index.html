@@ -72,6 +72,7 @@
         }
 
     </script>
+    <script src="https://kit.fontawesome.com/064dc912b5.js" crossorigin="anonymous"></script>
     <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
     <style>
         :root {
@@ -81,11 +82,9 @@
             /* particle red - #B61A25 */
             /* light blue - #0CCBFF */
             /* box blue - #0061D5 */
-            --red: #FE554F;
-            --yellow: #FEB728;
-            --green: #29BD36;
-            --black: #000000;
+
             --text-gray: #96979C;
+            /* light mode - black */
             /* dark mode - #C9D1D9; */
             --text-color: #C9D1D9;
             --github-blue: #58A6FF;
@@ -116,9 +115,31 @@
         }
 
         .readme {
-            border: 0.1px solid #21262D;
+            border: 1px solid #21262D;
+            /* border: 1px solid #C9D1D9; */
             border-radius: 10px;
-            padding: 5%;
+            /* padding: 5%; */
+        }
+
+        .readme-header {
+            height: 50px;
+            background-color: #161B22;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-right: 5%;
+            padding-left: 5%;
+        }
+
+        .readme-header i {
+            font-size: 17px;
+        }
+
+        zero-md {
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-bottom: 5%;
+            padding-top: 2.5%;
         }
 
         .header {
@@ -128,51 +149,33 @@
             margin-bottom: 1.5%;
         }
 
+        .orange {
+            color: var(--github-orange);
+        }
+
+        .blue {
+            color: var(--github-blue);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--github-blue);
+        }
+
         a:link {
             text-decoration: none;
-            color: var(--text-color);
+            color: var(--github-blue);
         }
 
         a:visited {
             text-decoration: none;
-            color: var(--text-color);
+            color: var(--github-blue);
         }
 
         a:hover {
             text-decoration: none;
             cursor: pointer;
-        }
-
-        .red {
-            color: var(--red);
-        }
-
-        .yellow {
-            color: var(--yellow);
-        }
-
-        .green {
-            color: var(--green);
-        }
-
-        .black {
-            color: var(--black);
-        }
-
-        a.yellow:hover {
-            color: var(--yellow);
-        }
-
-        a.red:hover {
-            color: var(--red);
-        }
-
-        a.green:hover {
-            color: var(--green);
-        }
-
-        a.black:hover {
-            color: var(--text-gray);
+            color: var(--github-orange);
         }
 
         .logo-header {
@@ -193,36 +196,13 @@
             /* border: 2px solid #E1E4E8; */
         }
 
-        .horizontal-navigation a {
-            color: var(--text-color);
+        .horizontal-navigation img {
+            filter: var(--black-icon-filter);
         }
 
-        .horizontal-navigation a.yellow:before {
-            content: "•";
-            font-size: 25px;
-            margin-right: 1vw;
-            color: var(--yellow);
-        }
-
-        .horizontal-navigation a.red:before {
-            content: "•";
-            font-size: 25px;
-            margin-right: 1vw;
-            color: var(--red);
-        }
-
-        .horizontal-navigation a.green:before {
-            content: "•";
-            font-size: 25px;
-            margin-right: 1vw;
-            color: var(--green);
-        }
-
-        .horizontal-navigation a.black:before {
-            content: "•";
-            font-size: 25px;
-            margin-right: 1vw;
-            color: var(--black);
+        .horizontal-navigation span {
+            display: flex;
+            align-items: center;
         }
 
         .vertical-navigation {
@@ -244,38 +224,30 @@
             margin-right: 20px;
         }
 
+        .vertical-navigation a:hover {
+            color: var(--github-orange);
+        }
+
         .vertical-navigation a:hover:before {
             content: "•";
             position: absolute;
             font-size: 25px;
             left: -20px;
             top: -7px;
+            color: var(--github-orange);
         }
 
-        .vertical-navigation a.red.selected:before{
+        .vertical-navigation a.selected{
+            color: var(--github-blue);
+        }
+
+        .vertical-navigation a.selected:before{
             content: "•";
             position: absolute;
             font-size: 25px;
             left: -20px;
             top: -7px;
-            color: var(--red);
-        }
-
-        .vertical-navigation a.red.selected{
-            color: var(--red);
-        }
-
-        .vertical-navigation a.green.selected:before{
-            content: "•";
-            position: absolute;
-            font-size: 25px;
-            left: -20px;
-            top: -7px;
-            color: var(--green);
-        }
-
-        .vertical-navigation a.green.selected{
-            color: var(--green);
+            color: var(--github-blue);
         }
 
         .hidden {
@@ -286,14 +258,14 @@
 
 <body>
     <div id="experience-nav" class="vertical-navigation">
-        <a id="box" class="red selected" onclick='navigate("#experience+box")'>Box (*HEAD)</a>
-        <a id="internship" class="red" onclick='navigate("#experience+internship")'>Box Internship</a>
-        <a id="cisco" class="red" onclick='navigate("#experience+cisco")'>Cisco</a>
+        <a id="box" class="selected" onclick='navigate("#experience+box")'>Box (*HEAD)</a>
+        <a id="internship" onclick='navigate("#experience+internship")'>Box Internship</a>
+        <a id="cisco" onclick='navigate("#experience+cisco")'>Cisco</a>
     </div>
     <div id="projects-nav" class="vertical-navigation hidden">
-        <a id="drink" class="green selected" onclick='navigate("#projects+drink")'>Drink Machine</a>
-        <a id="swift" class="green" onclick='navigate("#projects+swift")'>Swift Book Exchange</a>
-        <a id="midas" class="green" onclick='navigate("#projects+midas")'>Midas</a>
+        <a id="drink" class="selected" onclick='navigate("#projects+drink")'>Drink Machine</a>
+        <a id="swift" onclick='navigate("#projects+swift")'>Swift Book Exchange</a>
+        <a id="midas" onclick='navigate("#projects+midas")'>Midas</a>
     </div>
     <div class="main-container">
         <div class="logo-header">
@@ -301,25 +273,25 @@
                 <path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"></path>
             </svg>
             &nbsp; &nbsp;
-            <h3><span style="color: var(--github-blue)">sujaygarlanka</span> / <span style="color: var(--github-blue)">software-engineer</span></h3>
+            <h3><a href="">sujaygarlanka</a> / <a href="https://en.wikipedia.org/wiki/Software_engineer">software-engineer</a></h3>
         </div>
         <div class="horizontal-navigation">
-            <a class="yellow" href="https://app.box.com/s/m237sy3kmrisr2k1zajuvmw7t8yqcuf8">Resume</a>
-            <a class="red" onclick='navigate("#experience")'>Experience</a>
-            <a class="green" onclick='navigate("#projects")'>Projects</a>
-            <a class="black" href="https://github.com/sujaygarlanka">Github</a>
+            <span><i class="far fa-file-alt"></i>&nbsp;&nbsp;<a href="https://app.box.com/s/m237sy3kmrisr2k1zajuvmw7t8yqcuf8">Resume</a></span>
+            <span><i class="fas fa-history"></i>&nbsp;&nbsp;<a onclick='navigate("#experience")'>Experience</a></span>
+            <span><i class="fab fa-stack-overflow"></i>&nbsp;&nbsp;<a onclick='navigate("#projects")'>Projects</a></span>
+            <span><i class="fab fa-github"></i>&nbsp;&nbsp;<a href="https://github.com/sujaygarlanka">Github</a></span>
         </div>
         <div id="experience">
             <div class="header">
-                <h1 class="red">Experience</h1>
+                <h1>Experience</h1>
             </div>
             <div class="readme">
+                <div class="readme-header" style="justify-content: flex-end;">
+                    <a href="https://www.linkedin.com/in/sujay-garlanka-bbb90222/">Linked&nbsp;<i class="fab fa-linkedin"></i></a>
+                </div>
                 <zero-md
                     src="https://raw.githubusercontent.com/sujaygarlanka/personal-website/github-website/experience/box-internship.md">
                     <template>
-                        <!-- These are the default stylesheets -->
-                        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sindresorhus/github-markdown-css@4/github-markdown.min.css"> -->
-                        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PrismJS/prism@1/themes/prism.min.css"> -->
                         <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css" rel="stylesheet"></link> 
                         <link rel="stylesheet" href="./css/atom-dark.css">
                       </template>
@@ -328,12 +300,15 @@
         </div>
         <div id="projects">
             <div class="header">
-                <h1 class="green">Projects</h1>
+                <h1>Projects</h1>
             </div>
             <div class="readme">
+                <div class="readme-header">
+                    <p>README.md</p>
+                    <a href=""><i class="fab fa-github"></i></a>
+                </div>
                 <zero-md src="https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md">
                     <template>
-                        <!-- These are the default stylesheets -->
                         <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css" rel="stylesheet"></link> 
                         <link rel="stylesheet" href="./css/atom-dark.css">
                       </template>
