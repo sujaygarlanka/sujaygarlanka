@@ -1,0 +1,18 @@
+{
+    "name": "sujay_personal_website",
+    "version": "1.0.0",
+    "description": "Sujay's Personal Website",
+    "scripts": {
+        "start": "node server.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Sujay Garlanka",
+    "license": "ISC",
+    "dependencies": {
+        "angular-material": "^1.1.4",
+        "async": "^2.5.0",
+        "body-parser": "^1.17.2",
+        "express": "^4.15.3",
+        "mongodb": "^2.2.30"
+    }
+}
