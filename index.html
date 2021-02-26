@@ -4,24 +4,73 @@
 <head>
     <!-- Import element definition -->
     <script>
-        function navigate(hashPath) {
-            var readmes = {
-                drink: "https://raw.githubusercontent.com/sujaygarlanka/box-take-home-java/main/README.md",
+
+        const readmes = {
+            experience: {
+                box: "https://raw.githubusercontent.com/Box-Internship-Assignment/box-take-home-python-sujaygarlanka/main/README.md",
+                internship: "https://raw.githubusercontent.com/sujaygarlanka/personal-website/github-website/experience/box-internship.md",
+                cisco: "https://raw.githubusercontent.com/sujaygarlanka/personal-website/github-website/experience/cisco.md"
+            },
+            projects: {
+                drink: "https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md",
                 swift: "https://raw.githubusercontent.com/sujaygarlanka/swift-book-exchange/master/README.md",
                 midas: "https://raw.githubusercontent.com/sujaygarlanka/receipt-database/master/README.md"
             }
-            var paths = hashPath.split("+");
-            if (paths[0])
-            window.location.hash = "#" + paths[0];
-            window.location.hash = "#" + paths[0] + "+" + paths[1];
-            var mdElem = document.getElementById(paths[0]);
-            mdElem.src = readmes[paths[1]]
         }
 
-        $('.vertical-navigation li').click(function(e){
-            $('.vertical-navigation li').css("color", "black");
-            $(this).css("color", "red");
-        });
+        function navigate(hashPath) {
+            var paths = hashPath.split("+");
+            if (paths.length > 0) {
+                window.location.hash = paths[0];
+            }
+            if (paths.length > 1) {
+
+                // Change Readme
+                const sectionHash = paths[0];
+                const readme = paths[1];
+                const section = sectionHash.substring(1);
+                window.location.hash = sectionHash + "+" + readme;
+                var mdElem = document.getElementById(section);
+                mdElem = mdElem.getElementsByTagName("zero-md");
+                console.log(readme);
+                mdElem[0].src = readmes[section][readme];
+
+                // Select item on vertical navbar
+                const navbar = section + '-nav'; 
+                var links = document.getElementById(navbar).children;
+                for(var i = 0; i < links.length; i++) {
+                    if (links[i].id == readme) {
+                        links[i].classList.add("selected");
+                    } else {
+                        links[i].classList.remove("selected");
+                    }
+                }
+
+                refreshNavbar();
+            }
+        }
+
+        function refreshNavbar () {
+            const experienceNav = document.getElementById("experience-nav");
+            const projectsNav = document.getElementById("projects-nav");
+            const projectsElem = document.getElementById("projects");
+            const topOfProjects = projectsElem.getBoundingClientRect().top;
+            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+            if (topOfProjects < viewportHeight / 2) {
+                experienceNav.classList.add("hidden");
+                projectsNav.classList.remove("hidden");
+            } else {
+                experienceNav.classList.remove("hidden");
+                projectsNav.classList.add("hidden");
+            }
+        }
+
+        window.onscroll = refreshNavbar;
+
+        window.onload = function() {
+            navigate(window.location.hash);
+        }
+
     </script>
     <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
     <style>
@@ -37,10 +86,16 @@
             --green: #29BD36;
             --black: #000000;
             --text-gray: #96979C;
+            /* dark mode - #C9D1D9; */
+            --text-color: #C9D1D9;
+            --github-blue: #58A6FF;
+            --github-orange: #F9826C;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #0D1117;
+            color: var(--text-color);
         }
 
         h1,
@@ -61,17 +116,9 @@
         }
 
         .readme {
-            border: 2px solid #E1E4E8;
+            border: 0.1px solid #21262D;
             border-radius: 10px;
             padding: 5%;
-        }
-
-        .horizontal-navigation {
-            display: flex;
-            align-items: center;
-            justify-content: space-evenly;
-            margin-top: 1.5%;
-            margin-bottom: 1.5%;
         }
 
         .header {
@@ -79,6 +126,21 @@
             justify-content: center;
             margin-top: 1.5%;
             margin-bottom: 1.5%;
+        }
+
+        a:link {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        a:hover {
+            text-decoration: none;
+            cursor: pointer;
         }
 
         .red {
@@ -97,95 +159,186 @@
             color: var(--black);
         }
 
+        a.yellow:hover {
+            color: var(--yellow);
+        }
+
+        a.red:hover {
+            color: var(--red);
+        }
+
+        a.green:hover {
+            color: var(--green);
+        }
+
+        a.black:hover {
+            color: var(--text-gray);
+        }
+
+        .logo-header {
+            display: flex;
+            align-items: center;
+            /* align-items: flex-start; */
+        }
+
+        .horizontal-navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            margin-top: 1.5%;
+            margin-bottom: 1.5%;
+            list-style-type: none;
+            padding-left: 0;
+            /* background-color: #21262D; */
+            /* border: 2px solid #E1E4E8; */
+        }
+
+        .horizontal-navigation a {
+            color: var(--text-color);
+        }
+
+        .horizontal-navigation a.yellow:before {
+            content: "•";
+            font-size: 25px;
+            margin-right: 1vw;
+            color: var(--yellow);
+        }
+
+        .horizontal-navigation a.red:before {
+            content: "•";
+            font-size: 25px;
+            margin-right: 1vw;
+            color: var(--red);
+        }
+
+        .horizontal-navigation a.green:before {
+            content: "•";
+            font-size: 25px;
+            margin-right: 1vw;
+            color: var(--green);
+        }
+
+        .horizontal-navigation a.black:before {
+            content: "•";
+            font-size: 25px;
+            margin-right: 1vw;
+            color: var(--black);
+        }
+
         .vertical-navigation {
             width: 15%;
+            height: 250px;
             position: fixed;
             top: 39%;
             left: 0;
             /* border: 2px solid #E1E4E8; */
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
+            justify-content: space-evenly;
         }
 
-        .vertical-navigation li {
-            margin-bottom: 40%;
-            font-size: 15px;
-        }
-
-        .vertical-navigation li a{
+        .vertical-navigation a {
             color: var(--text-gray);
+            position: relative;
+            margin-left: 20%;
+            margin-right: 20px;
         }
 
-        a:link {
-            text-decoration: none;
-            color: var(--black);
+        .vertical-navigation a:hover:before {
+            content: "•";
+            position: absolute;
+            font-size: 25px;
+            left: -20px;
+            top: -7px;
         }
 
-        a:visited {
-            text-decoration: none;
-            color: var(--black);
-        }
-
-        a:hover {
-            text-decoration: none;
-        }
-
-        .yellow a:hover {
-            color: var(--yellow);
-        }
-
-        .red a:hover {
+        .vertical-navigation a.red.selected:before{
+            content: "•";
+            position: absolute;
+            font-size: 25px;
+            left: -20px;
+            top: -7px;
             color: var(--red);
         }
 
-        .red.selected a {
+        .vertical-navigation a.red.selected{
             color: var(--red);
         }
 
-        .green a:hover {
+        .vertical-navigation a.green.selected:before{
+            content: "•";
+            position: absolute;
+            font-size: 25px;
+            left: -20px;
+            top: -7px;
             color: var(--green);
         }
 
-        .green.selected a {
+        .vertical-navigation a.green.selected{
             color: var(--green);
         }
 
-        .black a:hover {
-            color: var(--text-gray);
+        .hidden {
+            visibility: hidden;
         }
     </style>
 </head>
 
 <body>
-    <div class="vertical-navigation">
-        <ul>
-            <li id="drink" class="green selected"><a onclick='navigate("projects+drink")'>Drink Machine</a></li>
-            <li id="swift" class="green"><a onclick='navigate("projects+swift")'>Swift Book Exchange</a></li>
-            <li id="midas" class="green"><a onclick='navigate("projects+midas")'>Midas</a></li>
-        </ul>
+    <div id="experience-nav" class="vertical-navigation">
+        <a id="box" class="red selected" onclick='navigate("#experience+box")'>Box (*HEAD)</a>
+        <a id="internship" class="red" onclick='navigate("#experience+internship")'>Box Internship</a>
+        <a id="cisco" class="red" onclick='navigate("#experience+cisco")'>Cisco</a>
+    </div>
+    <div id="projects-nav" class="vertical-navigation hidden">
+        <a id="drink" class="green selected" onclick='navigate("#projects+drink")'>Drink Machine</a>
+        <a id="swift" class="green" onclick='navigate("#projects+swift")'>Swift Book Exchange</a>
+        <a id="midas" class="green" onclick='navigate("#projects+midas")'>Midas</a>
     </div>
     <div class="main-container">
-        <div class="header">
-            <h1>Sujay Garlanka</h1>
+        <div class="logo-header">
+            <svg style="margin-top: 5px; fill: var(--text-color);" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"></path>
+            </svg>
+            &nbsp; &nbsp;
+            <h3><span style="color: var(--github-blue)">sujaygarlanka</span> / <span style="color: var(--github-blue)">software-engineer</span></h3>
         </div>
-        <ul class="horizontal-navigation">
-            <li class="yellow"><a href="https://app.box.com/s/m237sy3kmrisr2k1zajuvmw7t8yqcuf8">Resume</a></li>
-            <li class="red"><a href="#experience">Experience</a></li>
-            <li class="green"><a href="#projects">Projects</a></li>
-            <li class="black"><a href="https://github.com/sujaygarlanka">Github</a></li>
-          </ul>
-          <div class="header">
-            <h1 class="red">Experience</h1>
+        <div class="horizontal-navigation">
+            <a class="yellow" href="https://app.box.com/s/m237sy3kmrisr2k1zajuvmw7t8yqcuf8">Resume</a>
+            <a class="red" onclick='navigate("#experience")'>Experience</a>
+            <a class="green" onclick='navigate("#projects")'>Projects</a>
+            <a class="black" href="https://github.com/sujaygarlanka">Github</a>
         </div>
-        <div class="readme">
-            <zero-md id="experience" src="https://raw.githubusercontent.com/sujaygarlanka/box-take-home-java/main/README.md"></zero-md>
+        <div id="experience">
+            <div class="header">
+                <h1 class="red">Experience</h1>
+            </div>
+            <div class="readme">
+                <zero-md
+                    src="https://raw.githubusercontent.com/sujaygarlanka/personal-website/github-website/experience/box-internship.md">
+                    <template>
+                        <!-- These are the default stylesheets -->
+                        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sindresorhus/github-markdown-css@4/github-markdown.min.css"> -->
+                        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PrismJS/prism@1/themes/prism.min.css"> -->
+                        <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css" rel="stylesheet"></link> 
+                        <link rel="stylesheet" href="./css/atom-dark.css">
+                      </template>
+                </zero-md>
+            </div>
         </div>
-        <div class="header">
-            <h1 class="green">Projects</h1>
-        </div>
-        <div class="readme">
-            <zero-md id="projects" src="https://raw.githubusercontent.com/sujaygarlanka/box-take-home-java/main/README.md"></zero-md>
+        <div id="projects">
+            <div class="header">
+                <h1 class="green">Projects</h1>
+            </div>
+            <div class="readme">
+                <zero-md src="https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md">
+                    <template>
+                        <!-- These are the default stylesheets -->
+                        <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css" rel="stylesheet"></link> 
+                        <link rel="stylesheet" href="./css/atom-dark.css">
+                      </template>
+                </zero-md>
+            </div>
         </div>
     </div>
 </body>
