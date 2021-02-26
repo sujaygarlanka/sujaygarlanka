@@ -20,8 +20,10 @@
 
         function navigate(hashPath) {
             var paths = hashPath.split("+");
+            console.log(paths);
             if (paths.length > 0) {
                 window.location.hash = paths[0];
+                console.log(paths[0])
             }
             if (paths.length > 1) {
 
@@ -36,9 +38,9 @@
                 mdElem[0].src = readmes[section][readme];
 
                 // Select item on vertical navbar
-                const navbar = section + '-nav'; 
+                const navbar = section + '-nav';
                 var links = document.getElementById(navbar).children;
-                for(var i = 0; i < links.length; i++) {
+                for (var i = 0; i < links.length; i++) {
                     if (links[i].id == readme) {
                         links[i].classList.add("selected");
                     } else {
@@ -50,7 +52,7 @@
             }
         }
 
-        function refreshNavbar () {
+        function refreshNavbar() {
             const experienceNav = document.getElementById("experience-nav");
             const projectsNav = document.getElementById("projects-nav");
             const projectsElem = document.getElementById("projects");
@@ -67,7 +69,7 @@
 
         window.onscroll = refreshNavbar;
 
-        window.onload = function() {
+        window.onload = function () {
             navigate(window.location.hash);
         }
 
@@ -83,12 +85,16 @@
             /* light blue - #0CCBFF */
             /* box blue - #0061D5 */
 
-            --text-gray: #96979C;
+            --inactive-gray: #6E7681;
             /* light mode - black */
             /* dark mode - #C9D1D9; */
             --text-color: #C9D1D9;
             --github-blue: #58A6FF;
             --github-orange: #F9826C;
+            --border-color: #21262D;
+            --highlighted-border-color: #8C949E;
+            --elements-background-color: #161B22;
+            --highlighted-elements-background-color: #30363D;
         }
 
         body {
@@ -115,7 +121,7 @@
         }
 
         .readme {
-            border: 1px solid #21262D;
+            border: 1px solid var(--border-color);
             /* border: 1px solid #C9D1D9; */
             border-radius: 10px;
             /* padding: 5%; */
@@ -123,7 +129,7 @@
 
         .readme-header {
             height: 50px;
-            background-color: #161B22;
+            background-color: var(--elements-background-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -147,14 +153,6 @@
             justify-content: center;
             margin-top: 1.5%;
             margin-bottom: 1.5%;
-        }
-
-        .orange {
-            color: var(--github-orange);
-        }
-
-        .blue {
-            color: var(--github-blue);
         }
 
         a {
@@ -181,8 +179,29 @@
         .logo-header {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             /* align-items: flex-start; */
         }
+
+        .logo-button {
+            width: 80px;
+            height: 25px;
+            background-color: var(--elements-background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: var(--text-color)
+                /* padding */
+        }
+
+        .logo-button:hover {
+            background-color: var(--highlighted-elements-background-color);
+            border: 1px solid var(--highlighted-border-color);
+        }
+
 
         .horizontal-navigation {
             display: flex;
@@ -218,7 +237,7 @@
         }
 
         .vertical-navigation a {
-            color: var(--text-gray);
+            color: var(--inactive-gray);
             position: relative;
             margin-left: 20%;
             margin-right: 20px;
@@ -229,24 +248,22 @@
         }
 
         .vertical-navigation a:hover:before {
-            content: "•";
+            content: "*";
             position: absolute;
             font-size: 25px;
             left: -20px;
-            top: -7px;
             color: var(--github-orange);
         }
 
-        .vertical-navigation a.selected{
+        .vertical-navigation a.selected {
             color: var(--github-blue);
         }
 
-        .vertical-navigation a.selected:before{
-            content: "•";
+        .vertical-navigation a.selected:before {
+            content: "*";
             position: absolute;
             font-size: 25px;
             left: -20px;
-            top: -7px;
             color: var(--github-blue);
         }
 
@@ -258,7 +275,7 @@
 
 <body>
     <div id="experience-nav" class="vertical-navigation">
-        <a id="box" class="selected" onclick='navigate("#experience+box")'>Box (*HEAD)</a>
+        <a id="box" class="selected" onclick='navigate("#experience+box")'>Box (Current)</a>
         <a id="internship" onclick='navigate("#experience+internship")'>Box Internship</a>
         <a id="cisco" onclick='navigate("#experience+cisco")'>Cisco</a>
     </div>
@@ -269,16 +286,31 @@
     </div>
     <div class="main-container">
         <div class="logo-header">
-            <svg style="margin-top: 5px; fill: var(--text-color);" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-                <path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"></path>
-            </svg>
-            &nbsp; &nbsp;
-            <h3><a href="">sujaygarlanka</a> / <a href="https://en.wikipedia.org/wiki/Software_engineer">software-engineer</a></h3>
+            <div style="display: flex; align-items: center;">
+                <svg style="fill: var(--text-color);" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                    aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                </svg>
+                &nbsp;
+                <h3>
+                    <a href="">sujaygarlanka</a> / <a
+                        href="https://en.wikipedia.org/wiki/Software_engineer">software-engineer</a>
+                </h3>
+            </div>
+            <a href="mailto:sujay.garlanka@gmail.com">
+                <div class="logo-button">
+                    <i class="far fa-envelope"></i>&nbsp;&nbsp;Email
+                </div>
+            </a>
         </div>
         <div class="horizontal-navigation">
-            <span><i class="far fa-file-alt"></i>&nbsp;&nbsp;<a href="https://app.box.com/s/m237sy3kmrisr2k1zajuvmw7t8yqcuf8">Resume</a></span>
+            <span><i class="far fa-file-alt"></i>&nbsp;&nbsp;<a
+                    href="https://app.box.com/s/m237sy3kmrisr2k1zajuvmw7t8yqcuf8">Resume</a></span>
             <span><i class="fas fa-history"></i>&nbsp;&nbsp;<a onclick='navigate("#experience")'>Experience</a></span>
-            <span><i class="fab fa-stack-overflow"></i>&nbsp;&nbsp;<a onclick='navigate("#projects")'>Projects</a></span>
+            <span><i class="fab fa-stack-overflow"></i>&nbsp;&nbsp;<a
+                    onclick='navigate("#projects")'>Projects</a></span>
             <span><i class="fab fa-github"></i>&nbsp;&nbsp;<a href="https://github.com/sujaygarlanka">Github</a></span>
         </div>
         <div id="experience">
@@ -287,14 +319,17 @@
             </div>
             <div class="readme">
                 <div class="readme-header" style="justify-content: flex-end;">
-                    <a href="https://www.linkedin.com/in/sujay-garlanka-bbb90222/">Linked&nbsp;<i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.linkedin.com/in/sujay-garlanka-bbb90222/">Linked&nbsp;<i
+                            class="fab fa-linkedin"></i></a>
                 </div>
                 <zero-md
                     src="https://raw.githubusercontent.com/sujaygarlanka/personal-website/github-website/experience/box-internship.md">
                     <template>
-                        <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css" rel="stylesheet"></link> 
+                        <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css"
+                            rel="stylesheet">
+                        </link>
                         <link rel="stylesheet" href="./css/atom-dark.css">
-                      </template>
+                    </template>
                 </zero-md>
             </div>
         </div>
@@ -309,9 +344,11 @@
                 </div>
                 <zero-md src="https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md">
                     <template>
-                        <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css" rel="stylesheet"></link> 
-                        <link rel="stylesheet" href="./css/atom-dark.css">
-                      </template>
+                        <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css"
+                            rel="stylesheet">
+                        </link>
+                        <link rel="stylesheet" href="./css/vs-dark.css">
+                    </template>
                 </zero-md>
             </div>
         </div>

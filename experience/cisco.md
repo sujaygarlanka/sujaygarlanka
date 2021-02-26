@@ -7,5 +7,3 @@ Created a proof of concept (POC) for an internal tool to digitize the creation a
 - Inserted the contents of that form into a PDF of the appropriate legal document
 - Integrated the tool with Docusign for e-signatures and approval
 - It can be tracked throughout these stages from draft to pending approval to approved in the tool and previous legal documentation can be easily duplicated and reused for new contracts
-
-I cannnot post a full demo, post the code or give more information because this is proprietary to Cisco.
