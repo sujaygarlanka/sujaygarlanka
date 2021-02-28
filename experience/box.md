@@ -9,16 +9,6 @@ I am one of two people who develop and maintain the open source [Box SDKs](https
 - More space efficient by directly merging an upload stream with a multipart body stream instead of first writing it to disk
 - After this rewrite, I add support for viewing the progress [(#694)](https://github.com/box/box-ios-sdk/pull/694) of and cancelling uploads and downloads [(#713)](https://github.com/box/box-ios-sdk/pull/713)
 
-```html
-<!-- Do not set the `src` attribute -->
-<zero-md>
-  <!-- Write your markdown inside a `<script type="text/markdown">` tag -->
-  <script type="text/markdown">
-# **This** is my [markdown](https://example.com)
-  </script>
-</zero-md>
-```
-
 Code implementing rewrite below. It can be found in production [here](https://github.com/box/box-ios-sdk/blob/master/Sources/Network/BoxNetworkAgent.swift).
 
 ```swift
