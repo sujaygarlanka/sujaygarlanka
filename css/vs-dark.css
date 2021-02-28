@@ -55,7 +55,7 @@ pre[class*="language-"] {
 }
 
 .token.doctype .token.doctype-tag {
-	color: #569CD6;
+	color: #58A6FF;
 }
 
 .token.doctype .token.name {
@@ -64,7 +64,8 @@ pre[class*="language-"] {
 
 .token.comment,
 .token.prolog {
-	color: #6a9955;
+	/* color: #6a9955; */
+    color: #8C949E;
 }
 
 .token.punctuation,
@@ -90,7 +91,7 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.deleted {
-	color: #ce9178;
+    color: #ce9178;
 }
 
 .language-css .token.string.url {
@@ -103,7 +104,7 @@ pre[class*="language-"] {
 }
 
 .token.operator.arrow {
-	color: #569CD6;
+	color: #58A6FF;
 }
 
 .token.atrule {
@@ -127,7 +128,7 @@ pre[class*="language-"] {
 }
 
 .token.keyword {
-	color: #569CD6;
+	color: #58A6FF;
 }
 
 .token.keyword.module,
@@ -145,7 +146,7 @@ pre[class*="language-"] {
 }
 
 .token.important {
-	color: #569cd6;
+	color: #58A6FF;
 }
 
 .token.italic {
@@ -174,11 +175,11 @@ pre[class*="language-"] {
 }
 
 .token.punctuation.interpolation-punctuation {
-	color: #569cd6;
+	color: #58A6FF;
 }
 
 .token.boolean {
-	color: #569cd6;
+	color: #58A6FF;
 }
 
 .token.property,
@@ -197,7 +198,7 @@ pre[class*="language-"] {
 }
 
 .token.tag {
-	color: #569cd6;
+	color: #58A6FF;
 }
 
 .token.tag .token.punctuation {
@@ -222,7 +223,7 @@ pre[class*="language-"] {
 }
 
 .token.entity {
-	color: #569cd6;
+	color: #58A6FF;
 }
 
 .token.namespace {

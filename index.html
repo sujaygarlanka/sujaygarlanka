@@ -14,7 +14,7 @@
             projects: {
                 drink: "https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md",
                 swift: "https://raw.githubusercontent.com/sujaygarlanka/swift-book-exchange/master/README.md",
-                midas: "https://raw.githubusercontent.com/sujaygarlanka/receipt-database/master/README.md"
+                receipt: "https://raw.githubusercontent.com/sujaygarlanka/receipt-database/master/README.md"
             }
         }
 
@@ -71,6 +71,10 @@
 
         window.onload = function () {
             navigate(window.location.hash);
+            var arr = document.getElementsByTagName('script')
+            for (var n = 0; n < arr.length; n++){
+                eval(arr[n].innerHTML)
+            }    
         }
 
     </script>
@@ -111,6 +115,11 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             background-color: #0D1117;
             color: var(--text-color);
+            min-width: 400px;
+        }
+
+        pre.language-swift {
+            max-height: 300px !important;
         }
 
         h1,
@@ -151,7 +160,7 @@
             font-size: 17px;
         }
 
-        zero-md {
+        .markdown-body {
             padding-left: 5%;
             padding-right: 5%;
             padding-bottom: 5%;
@@ -292,7 +301,7 @@
     <div id="projects-nav" class="vertical-navigation hidden">
         <a id="drink" class="selected" onclick='navigate("#projects+drink")'>Drink Machine</a>
         <a id="swift" onclick='navigate("#projects+swift")'>Swift Book Exchange</a>
-        <a id="midas" onclick='navigate("#projects+midas")'>Midas</a>
+        <a id="receipt" onclick='navigate("#projects+receipt")'>Receipt Database</a>
     </div>
     <div class="main-container">
         <div class="logo-header">
@@ -332,13 +341,13 @@
                     <a href="https://www.linkedin.com/in/sujay-garlanka-bbb90222/">Linked&nbsp;<i
                             class="fab fa-linkedin"></i></a>
                 </div>
-                <zero-md
+                <zero-md no-shadow=true
                     src="https://raw.githubusercontent.com/sujaygarlanka/personal-website/master/experience/box.md">
                     <template>
                         <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css"
                             rel="stylesheet">
                         </link>
-                        <link rel="stylesheet" href="./css/atom-dark.css">
+                        <link rel="stylesheet" href="./css/vs-dark.css">
                     </template>
                 </zero-md>
             </div>
@@ -352,7 +361,7 @@
                     <p>README.md</p>
                     <a href=""><i class="fab fa-github"></i></a>
                 </div>
-                <zero-md src="https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md">
+                <zero-md no-shadow=true src="https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md">
                     <template>
                         <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css"
                             rel="stylesheet">
