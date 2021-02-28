@@ -9,7 +9,7 @@ I am one of two people who develop and maintain the open source [Box SDKs](https
 - More space efficient by directly merging an upload stream with a multipart body stream instead of first writing it to disk
 - After this rewrite, I add support for viewing the progress [(#694)](https://github.com/box/box-ios-sdk/pull/694) of and cancelling [(#713)](https://github.com/box/box-ios-sdk/pull/713) uploads and downloads
 
-Code implementing rewrite below. It can be found in production [here](https://github.com/box/box-ios-sdk/blob/master/Sources/Network/BoxNetworkAgent.swift)
+Code implementing rewrite below. It can be found in production [here](https://github.com/box/box-ios-sdk/blob/master/Sources/Network/BoxNetworkAgent.swift).
 
 ```swift
 import Foundation
