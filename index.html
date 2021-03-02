@@ -2,60 +2,65 @@
 <html lang="en">
 
 <head>
+    <title>sujay garlanka</title>
     <!-- Import element definition -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/064dc912b5.js" crossorigin="anonymous"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script>
-
-        const readmes = {
-            experience: {
-                box: "https://raw.githubusercontent.com/sujaygarlanka/personal-website/master/experience/box.md",
-                internship: "https://raw.githubusercontent.com/sujaygarlanka/personal-website/master/experience/box-internship.md",
-                cisco: "https://raw.githubusercontent.com/sujaygarlanka/personal-website/master/experience/cisco.md"
-            },
-            projects: {
-                drink: "https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md",
-                swift: "https://raw.githubusercontent.com/sujaygarlanka/swift-book-exchange/master/README.md",
-                receipt: "https://raw.githubusercontent.com/sujaygarlanka/receipt-database/master/README.md"
-            }
-        }
-
+        var numReadmes = 6;
         function navigate(hashPath) {
             var paths = hashPath.split("+");
-            console.log(paths);
-            if (paths.length > 0) {
-                window.location.hash = paths[0];
-                console.log(paths[0])
+            if (paths[0] == "") {
+                return;
             }
-            if (paths.length > 1) {
 
+            if (paths.length > 0) {
+                console.log(paths[0])
+                document.querySelector(paths[0]).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                console.log("scroll")
+                if (history.pushState) {
+                    history.pushState(null, null, paths[0]);
+                }
+                else {
+                    location.hash = paths[0];
+                }
+            }
+
+            if (paths.length > 1) {
                 // Change Readme
                 const sectionHash = paths[0];
-                const readme = paths[1];
-                const section = sectionHash.substring(1);
-                window.location.hash = sectionHash + "+" + readme;
-                var mdElem = document.getElementById(section);
-                mdElem = mdElem.getElementsByTagName("zero-md");
-                console.log(readme);
-                mdElem[0].src = readmes[section][readme];
+                const item = paths[1];
+                window.location.hash = sectionHash + "+" + item;
+
+                var readmes = $(`${sectionHash} .readme`);
+                for (var i = 0; i < readmes.length; i++) {
+                    if (readmes[i].classList.contains(item)) {
+                        readmes[i].classList.remove("hidden");
+                    } else {
+                        readmes[i].classList.add("hidden");
+                    }
+                }
 
                 // Select item on vertical navbar
-                const navbar = section + '-nav';
-                var links = document.getElementById(navbar).children;
+                var links = $(`${sectionHash}-nav`)[0].children;
                 for (var i = 0; i < links.length; i++) {
-                    if (links[i].id == readme) {
+                    if (links[i].classList.contains(item)) {
                         links[i].classList.add("selected");
                     } else {
                         links[i].classList.remove("selected");
                     }
                 }
-
-                refreshNavbar();
             }
         }
 
         function refreshNavbar() {
-            const experienceNav = document.getElementById("experience-nav");
-            const projectsNav = document.getElementById("projects-nav");
-            const projectsElem = document.getElementById("projects");
+            const experienceNav = $('#experience-nav')[0];
+            const projectsNav = $('#projects-nav')[0];
+            const projectsElem = $('#projects')[0];
             const topOfProjects = projectsElem.getBoundingClientRect().top;
             const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
             if (topOfProjects < viewportHeight / 2) {
@@ -70,23 +75,22 @@
         window.onscroll = refreshNavbar;
 
         window.onload = function () {
-            navigate(window.location.hash);
-            var arr = document.getElementsByTagName('script')
-            for (var n = 0; n < arr.length; n++){
-                eval(arr[n].innerHTML)
-            }    
+            var intervalId = setInterval(function() {
+                var markdownBodies = $('.markdown-body');
+                if (markdownBodies.length == numReadmes) {
+                    console.log(intervalId);
+                    navigate(window.location.hash);
+                    clearInterval(intervalId);
+                }
+            }, 50);
         }
 
     </script>
-    <script src="https://kit.fontawesome.com/064dc912b5.js" crossorigin="anonymous"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDPYGH4LDV"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-LDPYGH4LDV');
     </script>
     <style>
@@ -244,12 +248,13 @@
         }
 
         .vertical-navigation {
-            width: 15%;
+            width: 13%;
             height: 250px;
             position: fixed;
             top: 39%;
-            left: 0;
-            /* border: 2px solid #E1E4E8; */
+            left: 1%;
+            /* border: 2px solid var(--border-color); */
+            /* border-radius: 10px; */
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
@@ -288,20 +293,21 @@
 
         .hidden {
             visibility: hidden;
+            display: none !important;
         }
     </style>
 </head>
 
 <body>
-    <div id="experience-nav" class="vertical-navigation">
-        <a id="box" class="selected" onclick='navigate("#experience+box")'>Box (Current)</a>
-        <a id="internship" onclick='navigate("#experience+internship")'>Box Internship</a>
-        <a id="cisco" onclick='navigate("#experience+cisco")'>Cisco</a>
+    <div id="experience-nav" class="experience vertical-navigation">
+        <a class="box selected" onclick='navigate("#experience+box")'>Box (Current)</a>
+        <a class="internship" onclick='navigate("#experience+internship")'>Box Internship</a>
+        <a class="cisco" onclick='navigate("#experience+cisco")'>Cisco</a>
     </div>
     <div id="projects-nav" class="vertical-navigation hidden">
-        <a id="drink" class="selected" onclick='navigate("#projects+drink")'>Drink Machine</a>
-        <a id="swift" onclick='navigate("#projects+swift")'>Swift Book Exchange</a>
-        <a id="receipt" onclick='navigate("#projects+receipt")'>Receipt Database</a>
+        <a class="drink selected" onclick='navigate("#projects+drink")'>Drink Machine</a>
+        <a class="swift" onclick='navigate("#projects+swift")'>Swift Book Exchange</a>
+        <a class="receipt" onclick='navigate("#projects+receipt")'>Receipt Database</a>
     </div>
     <div class="main-container">
         <div class="logo-header">
@@ -336,7 +342,7 @@
             <div class="header">
                 <h1>Experience</h1>
             </div>
-            <div class="readme">
+            <div class="readme box">
                 <div class="readme-header" style="justify-content: flex-end;">
                     <a href="https://www.linkedin.com/in/sujay-garlanka-bbb90222/">Linked&nbsp;<i
                             class="fab fa-linkedin"></i></a>
@@ -351,17 +357,28 @@
                     </template>
                 </zero-md>
             </div>
-        </div>
-        <div id="projects">
-            <div class="header">
-                <h1>Projects</h1>
-            </div>
-            <div class="readme">
-                <div class="readme-header">
-                    <p>README.md</p>
-                    <a href=""><i class="fab fa-github"></i></a>
+            <div class="readme internship hidden">
+                <div class="readme-header" style="justify-content: flex-end;">
+                    <a href="https://www.linkedin.com/in/sujay-garlanka-bbb90222/">Linked&nbsp;<i
+                            class="fab fa-linkedin"></i></a>
                 </div>
-                <zero-md no-shadow=true src="https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md">
+                <zero-md no-shadow=true
+                    src="https://raw.githubusercontent.com/sujaygarlanka/personal-website/master/experience/box-internship.md">
+                    <template>
+                        <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css"
+                            rel="stylesheet">
+                        </link>
+                        <link rel="stylesheet" href="./css/vs-dark.css">
+                    </template>
+                </zero-md>
+            </div>
+            <div class="readme cisco hidden">
+                <div class="readme-header" style="justify-content: flex-end;">
+                    <a href="https://www.linkedin.com/in/sujay-garlanka-bbb90222/">Linked&nbsp;<i
+                            class="fab fa-linkedin"></i></a>
+                </div>
+                <zero-md no-shadow=true
+                    src="https://raw.githubusercontent.com/sujaygarlanka/personal-website/master/experience/cisco.md">
                     <template>
                         <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css"
                             rel="stylesheet">
@@ -371,6 +388,57 @@
                 </zero-md>
             </div>
         </div>
+        <div id="projects">
+            <div class="header">
+                <h1>Projects</h1>
+            </div>
+            <div class="readme drink">
+                <div class="readme-header">
+                    <p>README.md</p>
+                    <a href="https://github.com/sujaygarlanka/DrinkMixr"><i class="fab fa-github"></i></a>
+                </div>
+                <zero-md no-shadow=true
+                    src="https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md">
+                    <template>
+                        <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css"
+                            rel="stylesheet">
+                        </link>
+                        <link rel="stylesheet" href="./css/vs-dark.css">
+                    </template>
+                </zero-md>
+            </div>
+            <div class="readme swift hidden">
+                <div class="readme-header">
+                    <p>README.md</p>
+                    <a href="https://github.com/sujaygarlanka/swift-book-exchange"><i class="fab fa-github"></i></a>
+                </div>
+                <zero-md no-shadow=true
+                    src="https://raw.githubusercontent.com/sujaygarlanka/swift-book-exchange/master/README.md">
+                    <template>
+                        <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css"
+                            rel="stylesheet">
+                        </link>
+                        <link rel="stylesheet" href="./css/vs-dark.css">
+                    </template>
+                </zero-md>
+            </div>
+            <div class="readme receipt hidden">
+                <div class="readme-header">
+                    <p>README.md</p>
+                    <a href="https://github.com/sujaygarlanka/receipt-database"><i class="fab fa-github"></i></a>
+                </div>
+                <zero-md no-shadow=true
+                    src="https://raw.githubusercontent.com/sujaygarlanka/receipt-database/master/README.md">
+                    <template>
+                        <link href="https://cdn.jsdelivr.net/gh/hyrious/github-markdown-css/github-markdown.css"
+                            rel="stylesheet">
+                        </link>
+                        <link rel="stylesheet" href="./css/vs-dark.css">
+                    </template>
+                </zero-md>
+            </div>
+        </div>
+    </div>
     </div>
 </body>
 
