@@ -21,7 +21,6 @@
                 document.querySelector(paths[0]).scrollIntoView({
                     behavior: 'smooth'
                 });
-                console.log("scroll")
                 if (history.pushState) {
                     history.pushState(null, null, paths[0]);
                 }
@@ -75,10 +74,11 @@
         window.onscroll = refreshNavbar;
 
         window.onload = function () {
-            var intervalId = setInterval(function() {
+            var intervalId = setInterval(function () {
                 var markdownBodies = $('.markdown-body');
                 if (markdownBodies.length == numReadmes) {
                     console.log(intervalId);
+                    var paths = hashPath.split("+");
                     navigate(window.location.hash);
                     clearInterval(intervalId);
                 }
@@ -171,7 +171,7 @@
             padding-top: 2.5%;
         }
 
-        .header {
+        .title {
             display: flex;
             justify-content: center;
             margin-top: 1.5%;
@@ -199,14 +199,18 @@
             color: var(--github-orange);
         }
 
-        .logo-header {
+        .page-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            /* align-items: flex-start; */
         }
 
-        .logo-button {
+        .page-header-buttons {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .button {
             width: 80px;
             height: 25px;
             background-color: var(--elements-background-color);
@@ -217,10 +221,9 @@
             justify-content: center;
             font-size: 12px;
             color: var(--text-color)
-                /* padding */
         }
 
-        .logo-button:hover {
+        .button:hover {
             background-color: var(--highlighted-elements-background-color);
             border: 1px solid var(--highlighted-border-color);
         }
@@ -310,7 +313,7 @@
         <a class="receipt" onclick='navigate("#projects+receipt")'>Receipt Database</a>
     </div>
     <div class="main-container">
-        <div class="logo-header">
+        <div class="page-header">
             <div style="display: flex; align-items: center;">
                 <svg style="fill: var(--text-color);" viewBox="0 0 16 16" version="1.1" width="16" height="16"
                     aria-hidden="true">
@@ -320,15 +323,22 @@
                 </svg>
                 &nbsp;
                 <h3>
-                    <a href="">sujaygarlanka</a> / <a
+                    <a href="https://github.com/sujaygarlanka">sujaygarlanka</a> / <a
                         href="https://en.wikipedia.org/wiki/Software_engineer">software-engineer</a>
                 </h3>
             </div>
-            <a href="mailto:sujay.garlanka@gmail.com">
-                <div class="logo-button">
-                    <i class="far fa-envelope"></i>&nbsp;&nbsp;Email
-                </div>
-            </a>
+            <div class="page-header-buttons">
+                <a style="margin-right: 20px;" href="mailto:sujay.garlanka@gmail.com">
+                    <div class="button">
+                        <i class="far fa-envelope"></i>&nbsp;&nbsp;Email
+                    </div>
+                </a>
+                <a target="_blank" href="https://analytics.google.com/analytics/web/#/p263591175/reports/defaulthome?params=_u..nav%3Ddefault%26_r.0..selmet%3D%5B%22newUsers%22%5D">
+                    <div class="button">
+                        <i class="fas fa-mouse-pointer"></i>&nbsp;&nbsp;Views
+                    </div>
+                </a>
+            </div>
         </div>
         <div class="horizontal-navigation">
             <span><i class="far fa-file-alt"></i>&nbsp;&nbsp;<a
@@ -339,7 +349,7 @@
             <span><i class="fab fa-github"></i>&nbsp;&nbsp;<a href="https://github.com/sujaygarlanka">Github</a></span>
         </div>
         <div id="experience">
-            <div class="header">
+            <div class="title">
                 <h1>Experience</h1>
             </div>
             <div class="readme box">
@@ -389,7 +399,7 @@
             </div>
         </div>
         <div id="projects">
-            <div class="header">
+            <div class="title">
                 <h1>Projects</h1>
             </div>
             <div class="readme drink">
