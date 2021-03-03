@@ -7,3 +7,5 @@ Designed and built a command line tool for over 200 of [Box’s API endpoints](h
 - Incorporates [JWT](https://jwt.io/) authentication in the CLI
 - Features include interactive CLI with prompting, bulk input and bulk output
 - Written in Node.js using Heroku's [oclif](https://oclif.io/) framework
+
+**Technologies:** Node.js, Oclif CLI Framework, Mocha Testing Framewor
