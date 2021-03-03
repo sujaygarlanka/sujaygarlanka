@@ -5,4 +5,4 @@ Created a proof of concept (POC) for an internal tool to digitize the creation a
 - Designed and implemented a template management system thats selects the correct form from a series of questions and dynamically updates based on a user's responses
 - Inserted the contents of that form into a PDF of the appropriate legal document
 - Implemented review and approval workflows for the documents
-- Integrated the tool with Docusign for e-signatures and approval
+- Integrated the tool with DocuSign for e-signatures and approval
