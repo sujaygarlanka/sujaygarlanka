@@ -11,29 +11,24 @@
     <script>
         var numReadmes = 6;
         function navigate(hashPath) {
-            var paths = hashPath.split("+");
-            if (paths[0] == "") {
+            const paths = hashPath.split("-");
+            var section = paths[0]
+            if (section== "") {
                 return;
             }
 
             if (paths.length > 0) {
-                console.log(paths[0])
-                document.querySelector(paths[0]).scrollIntoView({
+                sectionHash = section.replace('!', '');
+                document.querySelector(sectionHash).scrollIntoView({
                     behavior: 'smooth'
                 });
-                if (history.pushState) {
-                    history.pushState(null, null, paths[0]);
-                }
-                else {
-                    location.hash = paths[0];
-                }
+                location.hash = section;
             }
 
             if (paths.length > 1) {
                 // Change Readme
-                const sectionHash = paths[0];
                 const item = paths[1];
-                window.location.hash = sectionHash + "+" + item;
+                location.hash = section + "-" + item;
 
                 var readmes = $(`${sectionHash} .readme`);
                 for (var i = 0; i < readmes.length; i++) {
@@ -77,8 +72,6 @@
             var intervalId = setInterval(function () {
                 var markdownBodies = $('.markdown-body');
                 if (markdownBodies.length == numReadmes) {
-                    console.log(intervalId);
-                    var paths = hashPath.split("+");
                     navigate(window.location.hash);
                     clearInterval(intervalId);
                 }
@@ -303,14 +296,14 @@
 
 <body>
     <div id="experience-nav" class="experience vertical-navigation">
-        <a class="box selected" onclick='navigate("#experience+box")'>Box (Current)</a>
-        <a class="internship" onclick='navigate("#experience+internship")'>Box Internship</a>
-        <a class="cisco" onclick='navigate("#experience+cisco")'>Cisco</a>
+        <a class="box selected" onclick='navigate("#!experience-box")'>Box (Current)</a>
+        <a class="internship" onclick='navigate("#!experience-internship")'>Box Internship</a>
+        <a class="cisco" onclick='navigate("#!experience-cisco")'>Cisco</a>
     </div>
     <div id="projects-nav" class="vertical-navigation hidden">
-        <a class="drink selected" onclick='navigate("#projects+drink")'>Drink Machine</a>
-        <a class="swift" onclick='navigate("#projects+swift")'>Swift Book Exchange</a>
-        <a class="receipt" onclick='navigate("#projects+receipt")'>Receipt Database</a>
+        <a class="drink selected" onclick='navigate("#!projects-drink")'>Drink Machine</a>
+        <a class="swift" onclick='navigate("#!projects-swift")'>Swift Book Exchange</a>
+        <a class="receipt" onclick='navigate("#!projects-receipt")'>Receipt Database</a>
     </div>
     <div class="main-container">
         <div class="page-header">
@@ -343,9 +336,9 @@
         <div class="horizontal-navigation">
             <span><i class="far fa-file-alt"></i>&nbsp;&nbsp;<a
                     href="https://app.box.com/s/m237sy3kmrisr2k1zajuvmw7t8yqcuf8">Resume</a></span>
-            <span><i class="fas fa-history"></i>&nbsp;&nbsp;<a onclick='navigate("#experience")'>Experience</a></span>
+            <span><i class="fas fa-history"></i>&nbsp;&nbsp;<a onclick='navigate("#!experience")'>Experience</a></span>
             <span><i class="fab fa-stack-overflow"></i>&nbsp;&nbsp;<a
-                    onclick='navigate("#projects")'>Projects</a></span>
+                    onclick='navigate("#!projects")'>Projects</a></span>
             <span><i class="fab fa-github"></i>&nbsp;&nbsp;<a href="https://github.com/sujaygarlanka">Github</a></span>
         </div>
         <div id="experience">
