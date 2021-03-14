@@ -1,0 +1,177 @@
+:root {
+    /* yellow - #FEB728 */
+    /* neon green - #00FF73 */
+    /* terminal green - #24E200 */
+    /* particle red - #B61A25 */
+    /* light blue - #0CCBFF */
+    /* box blue - #0061D5 */
+
+    --inactive-gray: #6E7681;
+    /* light mode - black */
+    /* dark mode - #C9D1D9; */
+    --text-color: #C9D1D9;
+    --github-blue: #58A6FF;
+    --github-orange: #F9826C;
+    --github-green: #55CD61;
+    --border-color: #21262D;
+    --background-color: #0D1117;
+    --highlighted-border-color: #8C949E;
+    --elements-background-color: #161B22;
+    --highlighted-elements-background-color: #30363D;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-width: 400px;
+}
+
+zero-md {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    padding-top: 2.5%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+
+.main-container {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 5%;
+}
+
+.readme {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    margin-bottom: 5%;
+}
+
+.readme-header {
+    height: 50px;
+    background-color: var(--elements-background-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 5%;
+    padding-left: 5%;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.readme-header i {
+    font-size: 17px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+}
+
+a {
+    text-decoration: none;
+    color: var(--github-blue);
+}
+
+a:link {
+    text-decoration: none;
+    color: var(--github-blue);
+}
+
+a:visited {
+    text-decoration: none;
+    color: var(--github-blue);
+}
+
+a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--github-orange);
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-header-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.button {
+    width: 80px;
+    height: 25px;
+    background-color: var(--elements-background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: var(--text-color)
+}
+
+.button:hover {
+    background-color: var(--highlighted-elements-background-color);
+    border: 1px solid var(--highlighted-border-color);
+}
+
+.horizontal-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+    padding-left: 0;
+}
+
+.horizontal-navigation img {
+    filter: var(--black-icon-filter);
+}
+
+.horizontal-navigation span {
+    display: flex;
+    align-items: center;
+}
+
+#horizontal-inner-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 5%;
+}
+
+#horizontal-floating-navigation:before {
+    filter: blur(8px);
+}
+#horizontal-floating-navigation {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    padding-left: 15%;
+    padding-right: 15%;
+    background-color: var(--elements-background-color);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    opacity: 0.9;
+}
+
+.hidden {
+    visibility: hidden;
+    display: none !important;
+}

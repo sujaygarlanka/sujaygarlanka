@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>sujay garlanka</title>
+    <title>projects</title>
     <!-- Import element definition -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/064dc912b5.js" crossorigin="anonymous"></script>
@@ -56,13 +56,49 @@
             <span><i class="fab fa-stack-overflow"></i>&nbsp;&nbsp;<a href="projects.html">Projects</a></span>
             <span><i class="fab fa-github"></i>&nbsp;&nbsp;<a href="https://github.com/sujaygarlanka">Github</a></span>
         </div>
-        <div style="margin-top: 5%" class="readme">
+        <div class="title">
+            <h1>Projects</h1>
+        </div>
+        <div id="horizontal-inner-navigation">
+            <a class="drink" href="#drink">Drink Machine</a>
+            <a class="swift" href="#swift">Swift Book Exchange</a>
+            <a class="receipt" href="#receipt">Receipt Database</a>
+        </div>
+        <div id="horizontal-floating-navigation" class="hidden">
+            <a class="drink" href="#drink">Drink Machine</a>
+            <a class="swift" href="#swift">Swift Book Exchange</a>
+            <a class="receipt" href="#receipt">Receipt Database</a>
+        </div>
+        <div id="drink" class="readme">
             <div class="readme-header">
-                <p></p>
-                <a href="https://github.com/sujaygarlanka/sujaygarlanka/blob/master/README.md"><i
-                        class="fab fa-github"></i></a>
+                <p>README.md</p>
+                <a href="https://github.com/sujaygarlanka/DrinkMixr"><i class="fab fa-github"></i></a>
             </div>
-            <zero-md src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/README.md">
+            <zero-md src="https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md">
+                <template>
+                    <link rel="stylesheet" href="css/markdown.css">
+                    <link rel="stylesheet" href="css/vs-dark.css">
+                </template>
+            </zero-md>
+        </div>
+        <div id="swift" class="readme">
+            <div class="readme-header">
+                <p>README.md</p>
+                <a href="https://github.com/sujaygarlanka/swift-book-exchange"><i class="fab fa-github"></i></a>
+            </div>
+            <zero-md src="https://raw.githubusercontent.com/sujaygarlanka/swift-book-exchange/master/README.md">
+                <template>
+                    <link rel="stylesheet" href="css/markdown.css">
+                    <link rel="stylesheet" href="css/vs-dark.css">
+                </template>
+            </zero-md>
+        </div>
+        <div id="receipt" class="readme">
+            <div class="readme-header">
+                <p>README.md</p>
+                <a href="https://github.com/sujaygarlanka/receipt-database"><i class="fab fa-github"></i></a>
+            </div>
+            <zero-md src="https://raw.githubusercontent.com/sujaygarlanka/receipt-database/master/README.md">
                 <template>
                     <link rel="stylesheet" href="css/markdown.css">
                     <link rel="stylesheet" href="css/vs-dark.css">
