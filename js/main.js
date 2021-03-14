@@ -13,6 +13,6 @@ window.onscroll = function () {
 
 window.onload = function () {
   setInterval(function () {
-    window.location.hash = window.location.hash;
-  }, 500);
+    window.location.href = window.location.hash;
+  }, 1000);
 }
