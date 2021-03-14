@@ -10,3 +10,9 @@ window.onscroll = function () {
     console.log("hide");
   }
 };
+
+window.onload = function () {
+  setInterval(function () {
+    window.location.hash = window.location.hash;
+  }, 500);
+}
