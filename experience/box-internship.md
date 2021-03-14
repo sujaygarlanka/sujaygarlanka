@@ -1,6 +1,6 @@
 # Box Internship (May 2018 - Aug 2018)
 
-<img src="https://raw.githubusercontent.com/sujaygarlanka/personal-website/github-website/experience/cli-demo.gif" width="600" height="350"/>
+<img src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/cli-demo.gif" width="600" height="350"/>
 
 Designed and built a command line tool for over 200 of [Box’s API endpoints](https://developer.box.com/reference/). It was released as an official Box [SDK](https://github.com/box/boxcli) and is now maintained by Box and used by many of Box's enterprise customers.
 
