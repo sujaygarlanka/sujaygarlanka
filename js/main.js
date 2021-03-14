@@ -4,15 +4,14 @@ window.onscroll = function () {
   var bounding = navbar.getBoundingClientRect();
   if (bounding.top < 0) {
     floatingNavbar.classList.remove("hidden");
-    console.log("show");
   } else {
     floatingNavbar.classList.add("hidden");
-    console.log("hide");
   }
 };
 
 window.onload = function () {
-  setInterval(function () {
+  var intervalId = setInterval(function () {
     window.location.href = window.location.hash;
+    clearInterval(intervalId);
   }, 1000);
 }
