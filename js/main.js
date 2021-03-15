@@ -9,9 +9,8 @@ window.onscroll = function () {
   }
 };
 
-window.onload = function () {
-  var intervalId = setInterval(function () {
-    window.location.href = window.location.hash;
-    clearInterval(intervalId);
-  }, 1000);
-}
+window.setTimeout(function () {
+  document.querySelector(window.location.hash).scrollIntoView({
+    behavior: 'smooth'
+});
+}, 1000);
