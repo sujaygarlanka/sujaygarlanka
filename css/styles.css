@@ -13,11 +13,12 @@
     --github-blue: #58A6FF;
     --github-orange: #F9826C;
     --github-green: #55CD61;
-    --border-color: #21262D;
     --background-color: #0D1117;
-    --highlighted-border-color: #8C949E;
+    --border-color: #21262D;
     --elements-background-color: #161B22;
+    --highlighted-border-color: #8C949E;
     --highlighted-elements-background-color: #30363D;
+    --readme-header-color: #ACBBC7;
 }
 
 body {
@@ -33,6 +34,27 @@ h4,
 h5,
 h6 {
     font-weight: normal;
+}
+
+a {
+    text-decoration: none;
+    color: var(--github-blue);
+}
+
+a:link {
+    text-decoration: none;
+    color: var(--github-blue);
+}
+
+a:visited {
+    text-decoration: none;
+    color: var(--github-blue);
+}
+
+a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--github-orange);
 }
 
 .main-container {
@@ -62,13 +84,13 @@ h6 {
 }
 
 .readme-header {
-    height: 50px;
-    background-color: var(--elements-background-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-right: 5%;
     padding-left: 5%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
     border-radius: 10px 10px 0px 0px;
 }
 
@@ -76,8 +98,23 @@ h6 {
     font-size: 17px;
 }
 
+.readme-header a {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace!important;
+    font-size: 15px;
+    color: var(--readme-header-color);
+}
+
+.readme-header a:hover {
+    /* font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace!important; */
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--github-blue);
+}
+
 .readme-body {
-    padding: 5%
+    padding-right: 5%;
+    padding-left: 5%;
+    padding-bottom: 5%;
 }
 
 .title {
@@ -85,27 +122,6 @@ h6 {
     justify-content: center;
     margin-top: 1.5%;
     margin-bottom: 1.5%;
-}
-
-a {
-    text-decoration: none;
-    color: var(--github-blue);
-}
-
-a:link {
-    text-decoration: none;
-    color: var(--github-blue);
-}
-
-a:visited {
-    text-decoration: none;
-    color: var(--github-blue);
-}
-
-a:hover {
-    text-decoration: none;
-    cursor: pointer;
-    color: var(--github-orange);
 }
 
 .page-header {
@@ -182,4 +198,8 @@ a:hover {
 .hidden {
     visibility: hidden;
     display: none !important;
+}
+
+.push-icon-down {
+    padding-top: 5px; 
 }
