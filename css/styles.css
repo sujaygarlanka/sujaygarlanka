@@ -6,25 +6,33 @@
     /* light blue - #0CCBFF */
     /* box blue - #0061D5 */
 
+    /* Work for website and markdown*/
+    --font-family: 'Raleway', sans-serif;
+    --background-color: #FBFBFD;
+    --link-color: #58A6FF;
+
+    /* Work for website*/
     --inactive-gray: #6E7681;
-    /* light mode - black */
-    /* dark mode - #C9D1D9; */
     --text-color: #C9D1D9;
-    --github-blue: #58A6FF;
-    --github-orange: #F9826C;
-    --github-green: #55CD61;
-    --background-color: #0D1117;
-    --border-color: #21262D;
-    --elements-background-color: #161B22;
-    --highlighted-border-color: #8C949E;
-    --highlighted-elements-background-color: #30363D;
+    --link-highlight: #C9D1D9;
+    --check-color: #55CD61;
+    --border-color: #FBFBFD;
+    --highlighted-border-color: #C9D1D9;
+    --elements-background-color: #FBFBFD;
+    --highlighted-elements-background-color: #F6F5F8;
     --readme-header-color: #ACBBC7;
+
+    /* Markdown */
+    --markdown-text-color: #24292e;
+    
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; */
+    font-family: var(--font-family);
     background-color: var(--background-color);
     color: var(--text-color);
+    font-weight: 400;
 }
 
 h1,
@@ -38,23 +46,23 @@ h6 {
 
 a {
     text-decoration: none;
-    color: var(--github-blue);
+    color: var(--link-color);
 }
 
 a:link {
     text-decoration: none;
-    color: var(--github-blue);
+    color: var(--link-color);
 }
 
 a:visited {
     text-decoration: none;
-    color: var(--github-blue);
+    color: var(--link-color);
 }
 
 a:hover {
     text-decoration: none;
     cursor: pointer;
-    color: var(--github-orange);
+    color: var(--link-highlight);
 }
 
 .main-container {
@@ -80,7 +88,6 @@ a:hover {
 .readme {
     border: 1px solid var(--border-color);
     border-radius: 10px;
-    margin-bottom: 5%;
 }
 
 .readme-header {
@@ -89,7 +96,6 @@ a:hover {
     align-items: center;
     padding-right: 5%;
     padding-left: 5%;
-    padding-top: 1.5%;
     padding-bottom: 1.5%;
     border-radius: 10px 10px 0px 0px;
 }
@@ -98,26 +104,26 @@ a:hover {
     font-size: 17px;
 }
 
-.readme-header a {
+a.readme-header {
     font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace!important;
     font-size: 15px;
     color: var(--readme-header-color);
 }
 
-.readme-header a:hover {
-    /* font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace!important; */
+a.readme-header:hover {
     text-decoration: none;
     cursor: pointer;
-    color: var(--github-blue);
+    color: var(--link-color);
 }
 
 .readme-body {
     padding-right: 5%;
     padding-left: 5%;
-    padding-bottom: 5%;
+    /* padding-bottom: 5%; */
 }
 
 .title {
+    color: var(--markdown-text-color);
     display: flex;
     justify-content: center;
     margin-top: 1.5%;
@@ -140,7 +146,7 @@ a:hover {
     height: 25px;
     background-color: var(--elements-background-color);
     border: 1px solid var(--border-color);
-    border-radius: 10px;
+    /* border-radius: 10px; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -149,7 +155,7 @@ a:hover {
 }
 
 .button:hover {
-    background-color: var(--highlighted-elements-background-color);
+    /* background-color: var(--highlighted-elements-background-color); */
     border: 1px solid var(--highlighted-border-color);
 }
 
@@ -202,4 +208,12 @@ a:hover {
 
 .push-icon-down {
     padding-top: 5px; 
+}
+
+.section-break {
+    display: flex;
+    justify-content: center;
+    padding: 5%;
+    color: var(--text-color);
+    font-size: 30px;
 }
