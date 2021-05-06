@@ -988,7 +988,7 @@
   vertical-align: middle;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   .markdown-body {
     color: #c9d1d9;
     background-color: #0d1117;
@@ -1159,4 +1159,4 @@
   .markdown-body .blob-code-inner {
     color: #c9d1d9;
   }
-}
+} */
