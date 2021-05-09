@@ -74,15 +74,15 @@ a:hover {
 
 @media screen and (max-device-width: 700px) {
     .main-container {
-        margin-left: 1%;
-        margin-right: 1%;
+        margin-left: 7%;
+        margin-right: 7%;
     }
 }
 
 @media screen and (max-width: 700px) {
     .main-container {
-        margin-left: 1%;
-        margin-right: 1%;
+        margin-left: 7%;
+        margin-right: 7%;
     }
 }
 
@@ -179,8 +179,6 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 5%;
-    padding-left: 5%;
     padding-bottom: 1.5%;
     border-radius: 10px 10px 0px 0px;
 }
@@ -199,11 +197,6 @@ a.readme-header:hover {
     text-decoration: none;
     cursor: pointer;
     color: var(--link-color);
-}
-
-.readme-body {
-    padding-right: 5%;
-    padding-left: 5%;
 }
 
 .hidden {
