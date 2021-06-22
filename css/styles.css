@@ -13,7 +13,7 @@
   --background-color: #ffffff;
   --primary-color: #24292e;
   /* mustard yellow - #e1ad01 */
-  --accent-color: #58A6FF;
+  --accent-color: #0078f7;
 
   /* Work for website*/
   --secondary-color: #a9a9a9;
@@ -233,7 +233,7 @@ a.readme-header:hover {
   display: flex;
   justify-content: center;
   padding: 5%;
-  color: var(--secondary-color);
+  color: var(--primary-color);
   font-size: 30px;
 }
 
