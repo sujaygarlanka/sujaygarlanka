@@ -138,13 +138,13 @@
 }
 
 .markdown-body a {
-  color: var(--link-color);
+  color: var(--accent-color);
   text-decoration: none;
 }
 
 .markdown-body a:hover {
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--primary-color);
 }
 
 .markdown-body strong {
