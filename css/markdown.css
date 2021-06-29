@@ -61,8 +61,8 @@
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   line-height: 1.5;
-  color: var(--markdown-text-color);
-  background-color: var(--background-color);
+  color: black;
+  background-color: transparent;
   font-family: var(--font-family);
   font-size: 16px;
   line-height: 1.5;
@@ -137,7 +137,7 @@
   line-height: inherit;
 }
 
-.markdown-body a {
+/* .markdown-body a {
   color: var(--accent-color);
   text-decoration: none;
 }
@@ -145,7 +145,7 @@
 .markdown-body a:hover {
   text-decoration: none;
   color: var(--primary-color);
-}
+} */
 
 .markdown-body strong {
   font-weight: 600;
