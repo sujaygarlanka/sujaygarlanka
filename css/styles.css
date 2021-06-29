@@ -18,10 +18,6 @@
   --highlighted-elements-background-color: #f6f5f8;
 }
 
-ul.nav>li:before {
-	content: "";
-}
-
 a.primary {
   text-decoration: none;
   color: var(--primary-color);
@@ -47,4 +43,18 @@ a.readme-header:hover {
 
 .accent {
   color: var(--accent-color) !important;
+}
+
+.nav-pills .nav-link {
+  padding-left: 0px;
+}
+
+.nav-pills .nav-link.active {
+  background-color: transparent;
+  color: var(--accent-color);
+  font-weight: bold;
+} 
+.nav-pills .nav-link:not(.active) {
+  background-color: transparent;
+  color: var(--primary-color);
 }

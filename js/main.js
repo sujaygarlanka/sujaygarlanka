@@ -1,14 +1,13 @@
 window.onload = (event) => {
   window.setTimeout(function () {
-    scrollToSection();
-  }, 700);
+    goToTab();
+  }, 500);
 };
 
-function scrollToSection() {
-  $("html, body").animate(
-    {
-      scrollTop: $(window.location.hash).offset().top,
-    },
-    500
-  );
+function goToTab() {
+  var someTabTriggerEl = document.querySelector(window.location.hash);
+  var tab = new bootstrap.Tab(someTabTriggerEl)
+  tab.show()
 }
+
+feather.replace()

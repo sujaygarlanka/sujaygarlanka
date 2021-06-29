@@ -5,9 +5,8 @@
     <title>Projects</title>
     <!-- Import element definition -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/064dc912b5.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
-    <script src="js/main.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDPYGH4LDV"></script>
     <script>
@@ -25,117 +24,146 @@
 
 <body>
     <div class="container">
-        <div class="d-flex justify-content-between pt-5 pb-3">
+        <div class="d-flex justify-content-between py-5">
             <h4>
                 <a class="primary" href="index.html">sujaygarlanka</a> <span class="accent">/</span> <a class="primary"
                     href="https://en.wikipedia.org/wiki/Software_engineer">software-engineer</a>
             </h4>
-            <ul class="nav nav-fill ms-0 mt-0">
-                <li class="nav-item">
-                    <a class="nav-link primary" aria-current="page"
-                        href="https://drive.google.com/file/d/1q-GhryHzPQM8ph1MyhSOtc-XnbowZqHt/view?usp=sharing">
-                        <h5><span class="accent">1.</span> Resume</h5>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link primary" href="experience.html">
-                        <h5><span class="accent">2.</span> Experience</h5>
-                    </a>
-                </li>
-                <li class="nav-item accent">
-                    <a class="nav-link primary accent" href="projects.html">
-                        <h5><span class="accent">3.</span> Projects</h5>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link primary" href="https://github.com/sujaygarlanka">
-                        <h5><span class="accent">4.</span> Github</h5>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="d-flex justify-content-center pt-2 pb-3">
-            <h2>Projects</h2>
-        </div>
-        <ul class="nav nav-fill sticky-top py-4 ms-0 mt-0">
-            <li class="nav-item">
-                <a class="nav-link primary" aria-current="page" href="#autobot">Autonomous Bot</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link primary" href="#drink">Drink Machine</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link primary" href="#swift">Swift Book Exchange</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link primary" href="#receipt">Receipt Database</a>
-            </li>
-        </ul>
-        <div class="pb-3" id="autobot">
-            <div class="py-3">
-                <a class="readme-header" href="https://github.com/sujaygarlanka/AutoBot">
-                    <span><i class="fas fa-code"></i>&nbsp;sujaygarlanka/AutoBot</span>
+            <a class="d-lg-none primary" data-bs-toggle="offcanvas" href="#offcanvasExample">
+                <i style="width: 30px; height: 30px;" data-feather="menu"></i>
+            </a>
+            <nav class="nav d-none d-lg-flex">
+                <a class="nav-link primary" aria-current="page"
+                    href="https://drive.google.com/file/d/1q-GhryHzPQM8ph1MyhSOtc-XnbowZqHt/view?usp=sharing">
+                    <h5><span class="accent">1.</span> Resume</h5>
                 </a>
-            </div>
-            <zero-md no-shadow=true src="https://raw.githubusercontent.com/sujaygarlanka/AutoBot/master/README.md">
-                <template>
-                    <link rel="stylesheet" href="css/markdown.css">
-                    <link rel="stylesheet" href="css/vs-dark.css">
-                </template>
-        </div>
-        <div class="d-flex justify-content-center py-3">
-            <h2>---</h2>
-        </div>
-        <div class="py-3" id="drink">
-            <div class="py-3">
-                <a class="readme-header" href="https://github.com/sujaygarlanka/DrinkMixr">
-                    <span><i class="fas fa-code"></i>&nbsp;sujaygarlanka/DrinkMixr</span>
+                <a class="nav-link primary" href="experience.html">
+                    <h5><span class="accent">2.</span> Experience</h5>
                 </a>
-            </div>
-            <zero-md no-shadow=true src="https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md">
-                <template>
-                    <link rel="stylesheet" href="css/markdown.css">
-                    <link rel="stylesheet" href="css/vs-dark.css">
-                </template>
-            </zero-md>
-        </div>
-        <div class="d-flex justify-content-center py-3">
-            <h2>---</h2>
-        </div>
-        <div class="py-3" id="swift">
-            <div class="py-3">
-                <a class="readme-header" href="https://github.com/sujaygarlanka/swift-book-exchange">
-                    <span><i class="fas fa-code"></i>&nbsp;sujaygarlanka/swift-book-exchange</span>
+                <a class="nav-link primary accent" href="projects.html">
+                    <h5><span class="accent">3.</span> Projects</h5>
                 </a>
-            </div>
-            <zero-md no-shadow=true
-                src="https://raw.githubusercontent.com/sujaygarlanka/swift-book-exchange/master/README.md">
-                <template>
-                    <link rel="stylesheet" href="css/markdown.css">
-                    <link rel="stylesheet" href="css/vs-dark.css">
-                </template>
-            </zero-md>
-        </div>
-        <div class="d-flex justify-content-center py-3">
-            <h2>---</h2>
-        </div>
-        <div class="py-3" id="receipt">
-            <div class="py-3">
-                <a class="readme-header" href="https://github.com/sujaygarlanka/receipt-database">
-                    <span><i class="fas fa-code"></i>&nbsp;sujaygarlanka/receipt-database</span>
+                <a class="nav-link primary" href="https://github.com/sujaygarlanka">
+                    <h5><span class="accent">4.</span> Github</h5>
                 </a>
+            </nav>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <nav class="nav nav-fill flex-column">
+                        <a class="nav-link pb-3 primary" aria-current="page"
+                            href="https://drive.google.com/file/d/1q-GhryHzPQM8ph1MyhSOtc-XnbowZqHt/view?usp=sharing">
+                            <h3><span class="accent"></span> Resume</h3>
+                        </a>
+                        <a class="nav-link pb-3 primary" href="experience.html">
+                            <h3><span class="accent"></span> Experience</h3>
+                        </a>
+                        <a class="nav-link pb-3 primary accent" href="projects.html">
+                            <h3><span class="accent"></span> Projects</h3>
+                        </a>
+                        <a class="nav-link pb-3 primary" href="https://github.com/sujaygarlanka">
+                            <h3><span class="accent"></span> Github</h3>
+                        </a>
+                    </nav>
+                </div>
             </div>
-            <zero-md no-shadow=true
-                src="https://raw.githubusercontent.com/sujaygarlanka/receipt-database/master/README.md">
-                <template>
-                    <link rel="stylesheet" href="css/markdown.css">
-                    <link rel="stylesheet" href="css/vs-dark.css">
-                </template>
-            </zero-md>
+        </div>
+        <div class="row">
+            <div class="col-11 d-md-none">
+                <div class="zi-subtitle pb-3">PROJECTS</div>
+                <div class="nav flex-row nav-pills">
+                    <a class="nav-link active pb-3" id="autobot" data-bs-toggle="pill" data-bs-target="#autobot-content"
+                        type="button">Autonomous Bot</a>
+                    <a class="nav-link pb-3" id="drink" data-bs-toggle="pill" data-bs-target="#drink-content"
+                        type="button">Drink Machine</a>
+                    <a class="nav-link pb-3" id="swift" data-bs-toggle="pill" data-bs-target="#swift-content"
+                        type="button">Swift Book Exchange</a>
+                    <a class="nav-link pb-3" id="receipt" data-bs-toggle="pill" data-bs-target="#receipt-content"
+                        type="button">Receipt Database</a>
+                </div>
+            </div>
+            <div class="col-2 d-none d-md-block">
+                <div class="zi-subtitle pb-3">PROJECTS</div>
+                <div class="nav flex-column nav-pills">
+                    <a class="nav-link active pb-3" id="autobot" data-bs-toggle="pill" data-bs-target="#autobot-content"
+                        type="button">Autonomous Bot</a>
+                    <a class="nav-link pb-3" id="drink" data-bs-toggle="pill" data-bs-target="#drink-content"
+                        type="button">Drink Machine</a>
+                    <a class="nav-link pb-3" id="swift" data-bs-toggle="pill" data-bs-target="#swift-content"
+                        type="button">Swift Book Exchange</a>
+                    <a class="nav-link pb-3" id="receipt" data-bs-toggle="pill" data-bs-target="#receipt-content"
+                        type="button">Receipt Database</a>
+                </div>
+            </div>
+            <div class="col-11 col-md-9">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="autobot-content">
+                        <div class="pb-3">
+                            <a class="readme-header" href="https://github.com/sujaygarlanka/AutoBot">
+                                <span><i data-feather="github"></i>&nbsp;sujaygarlanka/AutoBot</span>
+                            </a>
+                        </div>
+                        <zero-md no-shadow=true
+                            src="https://raw.githubusercontent.com/sujaygarlanka/AutoBot/master/README.md">
+                            <template>
+                                <link rel="stylesheet" href="css/markdown.css">
+                                <link rel="stylesheet" href="css/vs-dark.css">
+                            </template>
+                        </zero-md>
+                    </div>
+                    <div class="tab-pane fade" id="drink-content">
+                        <div class="pb-3">
+                            <a class="readme-header" href="https://github.com/sujaygarlanka/DrinkMixr">
+                                <span><i data-feather="github"></i>&nbsp;sujaygarlanka/DrinkMixr</span>
+                            </a>
+                        </div>
+                        <zero-md no-shadow=true
+                            src="https://raw.githubusercontent.com/sujaygarlanka/DrinkMixr/master/README.md">
+                            <template>
+                                <link rel="stylesheet" href="css/markdown.css">
+                                <link rel="stylesheet" href="css/vs-dark.css">
+                            </template>
+                        </zero-md>
+
+                    </div>
+                    <div class="tab-pane fade" id="swift-content">
+                        <div class="pb-3">
+                            <a class="readme-header" href="https://github.com/sujaygarlanka/swift-book-exchange">
+                                <span><i data-feather="github"></i>&nbsp;sujaygarlanka/swift-book-exchange</span>
+                            </a>
+                        </div>
+                        <zero-md no-shadow=true
+                            src="https://raw.githubusercontent.com/sujaygarlanka/swift-book-exchange/master/README.md">
+                            <template>
+                                <link rel="stylesheet" href="css/markdown.css">
+                                <link rel="stylesheet" href="css/vs-dark.css">
+                            </template>
+                        </zero-md>
+
+                    </div>
+                    <div class="tab-pane fade" id="receipt-content">
+                        <div class="pb-3">
+                            <a class="readme-header" href="https://github.com/sujaygarlanka/receipt-database">
+                                <span><i data-feather="github"></i>&nbsp;sujaygarlanka/receipt-database</span>
+                            </a>
+                        </div>
+                        <zero-md no-shadow=true
+                            src="https://raw.githubusercontent.com/sujaygarlanka/receipt-database/master/README.md">
+                            <template>
+                                <link rel="stylesheet" href="css/markdown.css">
+                                <link rel="stylesheet" href="css/vs-dark.css">
+                            </template>
+                        </zero-md>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="d-flex justify-content-end py-5">
         </div>
     </div>
+    <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
