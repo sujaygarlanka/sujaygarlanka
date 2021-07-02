@@ -90,7 +90,7 @@
             function (pdf) {
                 // Load information from the first page.
                 pdf.getPage(1).then(function (page) {
-                    var scale = 5;
+                    var scale = 3;
                     var viewport = page.getViewport({ scale: scale });
                     // Apply page dimensions to the <canvas> element.
                     var canvas = document.getElementById("pdf");
