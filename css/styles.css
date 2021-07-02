@@ -45,6 +45,12 @@ a.readme-header:hover {
   color: var(--accent-color) !important;
 }
 
+.container-fluid {
+  width: auto;
+  padding-right: clamp(2rem, 7vw, 7rem);
+  padding-left: clamp(2rem, 7vw, 7rem);
+}
+
 .nav-pills .nav-link {
   padding-left: 0px;
 }
@@ -54,7 +60,12 @@ a.readme-header:hover {
   color: var(--accent-color);
   font-weight: bold;
 } 
+
 .nav-pills .nav-link:not(.active) {
   background-color: transparent;
   color: var(--primary-color);
+}
+
+#pdf-container {
+  width: 100%;
 }

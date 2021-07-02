@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Resume</title>
     <!-- Import element definition -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/064dc912b5.js" crossorigin="anonymous"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDPYGH4LDV"></script>
     <script>
@@ -24,44 +24,100 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="d-flex justify-content-between pt-5 pb-3">
+    <div class="container-fluid d-flex flex-column">
+        <div class="d-flex justify-content-between pt-5">
             <h4>
-                <a class="primary" href="index.html">sujaygarlanka</a> <span class="accent">/</span> <a class="primary"
-                    href="https://en.wikipedia.org/wiki/Software_engineer">software-engineer</a>
+                <a class="primary" href="index.html">sujaygarlanka</a> <span class="accent">/</span> software-engineer
             </h4>
-            <ul class="nav nav-fill ms-0 mt-0">
-                <li class="nav-item">
-                    <a class="nav-link primary accent" aria-current="page"
-                        href="resume.html">
-                        <h5><span class="accent">1.</span> Resume</h5>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link primary" href="experience.html">
-                        <h5><span class="accent">2.</span> Experience</h5>
-                    </a>
-                </li>
-                <li class="nav-item accent">
-                    <a class="nav-link primary" href="projects.html">
-                        <h5><span class="accent">3.</span> Projects</h5>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link primary" href="https://github.com/sujaygarlanka">
-                        <h5><span class="accent">4.</span> Github</h5>
-                    </a>
-                </li>
-            </ul>
+            <a class="d-lg-none primary" data-bs-toggle="offcanvas" href="#offcanvasExample">
+                <i style="width: 30px; height: 30px;" data-feather="menu"></i>
+            </a>
+            <nav class="nav d-none d-lg-flex">
+                <a class="nav-link primary accent" aria-current="page"
+                    href="resume.html">
+                    <h5>Resume</h5>
+                </a>
+                <a class="nav-link primary" href="experience.html">
+                    <h5>Experience</h5>
+                </a>
+                <a class="nav-link primary" href="projects.html">
+                    <h5>Projects</h5>
+                </a>
+                <a class="nav-link primary" href="https://github.com/sujaygarlanka">
+                    <h5>Github</h5>
+                </a>
+            </nav>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <nav class="nav nav-fill flex-column">
+                        <a class="nav-link pb-3 primary accent" aria-current="page"
+                            href="resume.html">
+                            <h3><span class="accent"></span> Resume</h3>
+                        </a>
+                        <a class="nav-link pb-3 primary" href="experience.html">
+                            <h3><span class="accent"></span> Experience</h3>
+                        </a>
+                        <a class="nav-link pb-3 primary" href="projects.html">
+                            <h3><span class="accent"></span> Projects</h3>
+                        </a>
+                        <a class="nav-link pb-3 primary" href="https://github.com/sujaygarlanka">
+                            <h3><span class="accent"></span> Github</h3>
+                        </a>
+                    </nav>
+                </div>
+            </div>
         </div>
-        <div class="d-flex justify-content-center pt-2 pb-3">
-            <h2>Resume</h2>
+        <div class="p-3 d-flex justify-content-end">
+            <a href="https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay%20Garlanka%20Resume.pdf"><i data-feather="download-cloud"></i></a>
         </div>
-          
-        <iframe src="https://drive.google.com/file/d/1q-GhryHzPQM8ph1MyhSOtc-XnbowZqHt/preview" width="100%" height="500px" style="background-color: #FFFFFF" allow="autoplay" scrolling="no" frameborder="0"></iframe>
+        <div id="pdf-container">
+            <canvas id="pdf"></canvas>
+        </div>
         <div class="d-flex justify-content-end py-5">
         </div>
     </div>
+    <script>
+        //var pdfjsLib = window['pdfjs-dist/build/pdf'];
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
+        // simple.js
+        //var loadingTask = pdfjsLib.getDocument("https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/examples/learning/helloworld.pdf");
+        //var loadingTask = pdfjsLib.getDocument("https://drive.google.com/uc?id=1q-GhryHzPQM8ph1MyhSOtc-XnbowZqHt");
+        var loadingTask = pdfjsLib.getDocument("https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay%20Garlanka%20Resume.pdf");
+        loadingTask.promise.then(
+            function (pdf) {
+                // Load information from the first page.
+                pdf.getPage(1).then(function (page) {
+                    var scale = 5;
+                    var viewport = page.getViewport({ scale: scale });
+                    // Apply page dimensions to the <canvas> element.
+                    var canvas = document.getElementById("pdf");
+                    var context = canvas.getContext("2d");
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    canvas.style.width = "100%";
+                    canvas.style.height = "100%";
+                    //wrapper.style.width = Math.floor(viewport.width/scale) + 'pt';
+                    //wrapper.style.height = Math.floor(viewport.height/scale) + 'pt';
+
+                    // Render the page into the <canvas> element.
+                    var renderContext = {
+                        canvasContext: context,
+                        viewport: viewport
+                    };
+                    page.render(renderContext).then(function () {
+                        console.log("Page rendered!");
+                    });
+                });
+            },
+            function (reason) {
+                console.error(reason);
+            }
+        );
+    </script>
+    <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
