@@ -6,16 +6,16 @@
   /* light blue - #0CCBFF */
   /* box blue - #0061D5 */
 
-  /* Work for website and markdown*/
-  /* --font-family: 'Lato', sans-serif; */
-  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+  /* Work for custom website and markdown*/
+  --font-family: HKGroteskPro, sans-serif;
   --primary-color: #24292e;
-  /* mustard yellow - #e1ad01 */
   --accent-color: #0170F2;
 
   /* Markdown */
   --highlighted-elements-background-color: #f6f5f8;
+
+  /* Geist UI */
+  --font-sans: HKGroteskPro, sans-serif;
 }
 
 a.primary {
@@ -47,25 +47,82 @@ a.readme-header:hover {
 
 .container-fluid {
   width: auto;
-  padding-right: clamp(2rem, 7vw, 7rem);
-  padding-left: clamp(2rem, 7vw, 7rem);
+  padding-right: clamp(2rem, 6vw, 7rem);
+  padding-left: clamp(2rem, 6vw, 7rem);
 }
 
-.nav-pills .nav-link {
+.nav .nav-link {
   padding-left: 0px;
 }
 
-.nav-pills .nav-link.active {
+.nav .nav-link.active {
   background-color: transparent;
   color: var(--accent-color);
   font-weight: bold;
 } 
 
-.nav-pills .nav-link:not(.active) {
+.nav .nav-link:not(.active) {
   background-color: transparent;
   color: var(--primary-color);
+}
+
+h4.smaller {
+  font-size: 1.15rem;
+  font-weight: 500;
 }
 
 #pdf-container {
   width: 100%;
 }
+
+
+@font-face {
+  font-family: "HKGroteskPro";
+  font-weight: 100;
+  src: url("../fonts/HK Grotesk Pro/HKGroteskPro-Hairline.woff2") format("woff2"),
+  url("../fonts/HK Grotesk Pro/HKGroteskPro-Hairline.woff") format("woff");
+}
+
+@font-face {
+  font-family: "HKGroteskPro";
+  font-weight: 200;
+  src: url("../fonts/HK Grotesk Pro/HKGroteskPro-ExtraLight.woff2") format("woff2"),
+  url("../fonts/HK Grotesk Pro/HKGroteskPro-ExtraLight.woff") format("woff");
+}
+
+@font-face {
+  font-family: "HKGroteskPro";
+  font-weight: 300;
+  src: url("../fonts/HK Grotesk Pro/HKGroteskPro-Light.woff2") format("woff2"),
+  url("../fonts/HK Grotesk Pro/HKGroteskPro-Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "HKGroteskPro";
+  font-weight: 400;
+  src: url("../fonts/HK Grotesk Pro/HKGroteskPro-Regular.woff2") format("woff2"),
+  url("../fonts/HK Grotesk Pro/HKGroteskPro-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "HKGroteskPro";
+  font-weight: 500;
+  src: url("../fonts/HK Grotesk Pro/HKGroteskPro-Medium.woff2") format("woff2"),
+  url("../fonts/HK Grotesk Pro/HKGroteskPro-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "HKGroteskPro";
+  font-weight: 600;
+  src: url("../fonts/HK Grotesk Pro/HKGroteskPro-SemiBold.woff2") format("woff2"),
+  url("../fonts/HK Grotesk Pro/HKGroteskPro-SemiBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "HKGroteskPro";
+  font-weight: 700;
+  src: url("../fonts/HK Grotesk Pro/HKGroteskPro-Bold.woff2") format("woff2"),
+  url("../fonts/HK Grotesk Pro/HKGroteskPro-Bold.woff") format("woff");
+}
+
+
