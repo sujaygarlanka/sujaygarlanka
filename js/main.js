@@ -1,7 +1,5 @@
 window.onload = (event) => {
-  window.setTimeout(function () {
-    goToTab();
-  }, 500);
+  goToTab();
 };
 
 function goToTab() {
