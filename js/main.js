@@ -1,6 +1,6 @@
-window.onload = (event) => {
+$( document ).ready(function() {
   goToTab();
-};
+});
 
 function goToTab() {
   var someTabTriggerEl = document.querySelector(window.location.hash);
