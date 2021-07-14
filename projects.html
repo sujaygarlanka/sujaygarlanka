@@ -33,7 +33,7 @@
                 <i data-feather="menu"></i>
             </a>
             <nav class="nav d-none d-lg-flex">
-                <a class="nav-link primary"  href="resume.html">
+                <a class="nav-link primary" href="resume.html">
                     <h4 class="smaller">Resume</h4>
                 </a>
                 <a class="nav-link primary" href="experience.html">
@@ -69,58 +69,22 @@
             </div>
         </div>
         <div class="row">
-            <!-- <div class="col-12 col-md-2 pb-4"> -->
-                <div class="d-md-none d-flex flex-column">
-                    <div class="text-muted d-md-none d-flex justify-content-between pb-3 pe-4" data-bs-toggle="collapse"
-                        data-bs-target="#collapseNav">PROJECTS<i class="text-muted" data-feather="menu"></i></div>
-                    <div class="collapse" id="collapseNav">
-                        <div class="nav flex-column nav-pills">
-                            <a class="nav-link pb-3 active autobot" data-bs-toggle="pill"
-                                data-bs-target="#autobot-content">Autonomous Bot</a>
-                            <a class="nav-link pb-3 drink" data-bs-toggle="pill"
-                                data-bs-target="#drink-content">Drink
-                                Machine</a>
-                            <a class="nav-link pb-3 swift" data-bs-toggle="pill"
-                                data-bs-target="#swift-content">Swift
-                                Book Exchange</a>
-                            <a class="nav-link receipt" data-bs-toggle="pill"
-                                data-bs-target="#receipt-content">Receipt
-                                Database</a>
-                        </div>
-                    </div>
+            <div class="side-nav col-12 col-md-2 d-flex flex-column mb-4 overflow-auto">
+                <div class="text-muted d-flex justify-content-between pb-3 pe-4">PROJECTS</div>
+                <div class="nav flex-column nav-pills">
+                    <a id="drink" class="nav-link pb-3 active" data-bs-toggle="pill"
+                        data-bs-target="#drink-content">Drink Machine</a>
+                    <a id="swift" class="nav-link pb-3" data-bs-toggle="pill" data-bs-target="#swift-content">Book
+                        Exchange</a>
+                    <a id="receipt" class="nav-link pb-3" data-bs-toggle="pill" data-bs-target="#receipt-content">Receipt
+                        Database</a>
                 </div>
-                <div class="col-2 d-none d-md-block">
-                    <div class="text-muted pb-3">PROJECTS</div>
-                    <div class="nav flex-column nav-pills">
-                        <a class="nav-link pb-3 active autobot" data-bs-toggle="pill"
-                            data-bs-target="#autobot-content">Autonomous Bot</a>
-                        <a class="nav-link pb-3 drink" data-bs-toggle="pill" data-bs-target="#drink-content">Drink
-                            Machine</a>
-                        <a class="nav-link pb-3 swift" data-bs-toggle="pill" data-bs-target="#swift-content">Book Exchange</a>
-                        <a class="nav-link receipt" data-bs-toggle="pill" data-bs-target="#receipt-content">Receipt
-                            Database</a>
-                    </div>
-                </div>
-            <!-- </div> -->
+            </div>
             <div class="col-11 col-md-9">
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" id="autobot-content">
+                    <div class="tab-pane fade active show" id="drink-content">
                         <div class="pb-3">
-                            <a class="readme-header" href="https://github.com/sujaygarlanka/AutoBot">
-                                <span><i data-feather="github"></i>&nbsp;sujaygarlanka/AutoBot</span>
-                            </a>
-                        </div>
-                        <zero-md no-shadow=true
-                            src="https://raw.githubusercontent.com/sujaygarlanka/AutoBot/master/README.md">
-                            <template>
-                                <link rel="stylesheet" href="css/markdown.css">
-                                <link rel="stylesheet" href="css/vs-dark.css">
-                            </template>
-                        </zero-md>
-                    </div>
-                    <div class="tab-pane fade" id="drink-content">
-                        <div class="pb-3">
-                            <a class="readme-header" href="http  s://github.com/sujaygarlanka/DrinkMixr">
+                            <a class="gray" href="https://github.com/sujaygarlanka/DrinkMixr">
                                 <span><i data-feather="github"></i>&nbsp;sujaygarlanka/DrinkMixr</span>
                             </a>
                         </div>
@@ -135,7 +99,7 @@
                     </div>
                     <div class="tab-pane fade" id="swift-content">
                         <div class="pb-3">
-                            <a class="readme-header" href="https://github.com/sujaygarlanka/swift-book-exchange">
+                            <a class="gray" href="https://github.com/sujaygarlanka/swift-book-exchange">
                                 <span><i data-feather="github"></i>&nbsp;sujaygarlanka/swift-book-exchange</span>
                             </a>
                         </div>
@@ -150,7 +114,7 @@
                     </div>
                     <div class="tab-pane fade" id="receipt-content">
                         <div class="pb-3">
-                            <a class="readme-header" href="https://github.com/sujaygarlanka/receipt-database">
+                            <a class="gray" href="https://github.com/sujaygarlanka/receipt-database">
                                 <span><i data-feather="github"></i>&nbsp;sujaygarlanka/receipt-database</span>
                             </a>
                         </div>

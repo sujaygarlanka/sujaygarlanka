@@ -7,7 +7,7 @@
     <!-- Import element definition -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.455/build/pdf.min.js"></script> -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDPYGH4LDV"></script>
     <script>
@@ -16,7 +16,8 @@
         gtag('js', new Date());
         gtag('config', 'G-LDPYGH4LDV');
     </script>
-    <script src="js/main.js"></script>
+    <script src="js/pdf.js"></script>
+    <script src="js/pdf.worker.js"></script>  
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/geist-ui.css">
@@ -75,35 +76,67 @@
         </div>
         <div id="pdf-container">
             <canvas id="pdf"></canvas>
+            <!-- <div id="text-layer"></div> -->
+            <div id="annotation-layer"></div>
+            <!-- <div id="annotation-layer"></div> -->
+            <!-- <div id="text-layer"></div> -->
         </div>
-        <div class="d-flex justify-content-end py-5">
-        </div>
+        <!-- <div class="d-flex justify-content-end py-5">
+        </div> -->
     </div>
     <script>
         feather.replace();
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
-        var loadingTask = pdfjsLib.getDocument("https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay%20Garlanka%20Resume.pdf");
-        loadingTask.promise.then(
+        var pdf_doc,
+            canvas = $('#pdf').get(0),
+            context = canvas.getContext('2d');
+        //pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.455/build/pdf.worker.min.js';
+        var loadingTask = PDFJS.getDocument("https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay%20Garlanka%20Resume.pdf");
+        loadingTask.then(
             function (pdf) {
                 // Load information from the first page.
                 pdf.getPage(1).then(function (page) {
+                    //pdf_doc = page;
                     var scale = 3;
-                    var viewport = page.getViewport({ scale: scale });
+                    //var scale = 3;var scale = canvas.width / page.getViewport(1).width;
+                    var viewport = page.getViewport(scale);
+                    console.log(viewport);
                     // Apply page dimensions to the <canvas> element.
-                    var canvas = document.getElementById("pdf");
                     var context = canvas.getContext("2d");
                     canvas.height = viewport.height;
                     canvas.width = viewport.width;
                     canvas.style.width = "100%";
                     canvas.style.height = "100%";
 
-                    // Render the page into the <canvas> element.
                     var renderContext = {
                         canvasContext: context,
                         viewport: viewport
                     };
-                    page.render(renderContext).then(function () {
-                        console.log("Page rendered!");
+                    page.render(renderContext).then(function() {
+                        // Returns a promise, on resolving it will return text contents of the page
+                        return page.getAnnotations();
+                        // return page.getTextContent();
+                    }).then(function(annotationData) {
+                        if(annotationData.length == 0)
+                            return;
+                        
+                        // Get canvas offset
+                        var canvas_offset = $("#pdf").offset();
+            
+                        // Clear HTML for annotation layer and show
+                        //$("#annotation-layer").html('').show();
+                        console.log(canvas);
+                        // Assign the CSS created to the annotation-layer element
+                        $("#annotation-layer").css({ left: canvas_offset.left + 'px', top: canvas_offset.top + 'px', height: canvas.height + 'px', width: canvas.width + 'px' });
+                        console.log(viewport);
+                        console.log(annotationData);
+                        console.log(page);
+                        console.log(PDFJS.AnnotationLayer);
+                        PDFJS.AnnotationLayer.render({
+                            viewport: viewport.clone({ dontFlip: true }),
+                            div: $("#annotation-layer").get(0),
+                            annotations: annotationData,
+                            page: page
+                        });
                     });
                 });
             },
