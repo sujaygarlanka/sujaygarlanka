@@ -2621,11 +2621,11 @@ function webViewerPreviousPage() {
 }
 
 function webViewerZoomIn() {
-  //PDFViewerApplication.zoomIn();
+  PDFViewerApplication.zoomIn();
 }
 
 function webViewerZoomOut() {
- // PDFViewerApplication.zoomOut();
+  PDFViewerApplication.zoomOut();
 }
 
 function webViewerZoomReset() {
@@ -2891,7 +2891,7 @@ function webViewerKeyDown(evt) {
       case 107:
       case 187:
       case 171:
-        if (false || !isViewerInPresentationMode) {
+        if (!isViewerInPresentationMode) {
           PDFViewerApplication.zoomIn();
         }
 
@@ -2901,7 +2901,7 @@ function webViewerKeyDown(evt) {
       case 173:
       case 109:
       case 189:
-        if (false || !isViewerInPresentationMode) {
+        if (!isViewerInPresentationMode) {
           PDFViewerApplication.zoomOut();
         }
 
