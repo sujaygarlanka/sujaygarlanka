@@ -53,7 +53,7 @@ const defaultOptions = {
     kind: OptionKind.VIEWER
   },
   defaultZoomValue: {
-    value: "",
+    value: "width",
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE
   },
   disableHistory: {
@@ -2621,11 +2621,11 @@ function webViewerPreviousPage() {
 }
 
 function webViewerZoomIn() {
-  PDFViewerApplication.zoomIn();
+  //PDFViewerApplication.zoomIn();
 }
 
 function webViewerZoomOut() {
-  PDFViewerApplication.zoomOut();
+ // PDFViewerApplication.zoomOut();
 }
 
 function webViewerZoomReset() {
@@ -2891,7 +2891,7 @@ function webViewerKeyDown(evt) {
       case 107:
       case 187:
       case 171:
-        if (!isViewerInPresentationMode) {
+        if (false || !isViewerInPresentationMode) {
           PDFViewerApplication.zoomIn();
         }
 
@@ -2901,7 +2901,7 @@ function webViewerKeyDown(evt) {
       case 173:
       case 109:
       case 189:
-        if (!isViewerInPresentationMode) {
+        if (false || !isViewerInPresentationMode) {
           PDFViewerApplication.zoomOut();
         }
 
