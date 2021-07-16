@@ -53,7 +53,7 @@ const defaultOptions = {
     kind: OptionKind.VIEWER
   },
   defaultZoomValue: {
-    value: "width",
+    value: "",
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE
   },
   disableHistory: {
