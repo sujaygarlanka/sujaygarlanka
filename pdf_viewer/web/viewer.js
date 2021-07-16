@@ -49,7 +49,7 @@ const defaultOptions = {
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE
   },
   defaultUrl: {
-    value: "https://raw.githubusercontent.com/sujaygarlanka/tennis-stroke-recognition/master/papers/KatariaSikka-ActionRecognitionInTennis.pdf",
+    value: "https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay%20Garlanka%20Resume.pdf",
     kind: OptionKind.VIEWER
   },
   defaultZoomValue: {
