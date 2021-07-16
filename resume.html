@@ -2,12 +2,11 @@
 <html lang="en">
 
 <head>
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Resume</title>
-        <!-- Import element definition -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <!-- Import element definition -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDPYGH4LDV"></script>
     <script>
@@ -18,7 +17,6 @@
     </script>
     <script src="pdf_viewer/build/pdf.js"></script>
     <script src="pdf_viewer/web/viewer.js"></script>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- This snippet is used in production (included from viewer.html) -->
@@ -29,7 +27,7 @@
 </head>
 
 <body>
-    <div class="container-fluid d-flex flex-column">
+    <div class="container-fluid d-flex flex-column mb-0 pb-0">
         <div class="d-flex justify-content-between pt-5">
             <h4 class="smaller">
                 <a class="primary" href="index.html">sujaygarlanka</a> <span class="accent">/</span> software-engineer
@@ -73,7 +71,7 @@
                 </div>
             </div>
         </div>
-        <div class="pt-3 d-flex justify-content-end">
+        <div class="p-3 d-flex justify-content-end">
             <a href="https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay%20Garlanka%20Resume.pdf"><i
                     data-feather="download-cloud"></i></a>
         </div>
@@ -508,66 +506,66 @@
             </div>
         </div> <!-- overlayContainer -->
     </div> <!-- outerContainer -->
-    <div class="d-flex justify-content-end py-5">
+    <div class="d-none d-sm-flex justify-content-end py-5">
     </div>
     <script>
         feather.replace()
     </script>
+    <!-- Goes into viewer.html just before ending </body> -->
+    <!-- Got code from here https://gist.github.com/larsneo/bb75616e9426ae589f50e8c8411020f6 -->
+    <script>
+        let pinchZoomEnabled = false;
+        function enablePinchZoom(pdfViewer) {
+            let startX = 0, startY = 0;
+            let initialPinchDistance = 0;
+            let pinchScale = 1;
+            const viewer = document.getElementById("viewer");
+            const container = document.getElementById("viewerContainer");
+            const reset = () => { startX = startY = initialPinchDistance = 0; pinchScale = 1; };
+            // Prevent native iOS page zoom
+            //document.addEventListener("touchmove", (e) => { if (e.scale !== 1) { e.preventDefault(); } }, { passive: false });
+            document.addEventListener("touchstart", (e) => {
+                if (e.touches.length > 1) {
+                    startX = (e.touches[0].pageX + e.touches[1].pageX) / 2;
+                    startY = (e.touches[0].pageY + e.touches[1].pageY) / 2;
+                    initialPinchDistance = Math.hypot((e.touches[1].pageX - e.touches[0].pageX), (e.touches[1].pageY - e.touches[0].pageY));
+                } else {
+                    initialPinchDistance = 0;
+                }
+            });
+            document.addEventListener("touchmove", (e) => {
+                if (initialPinchDistance <= 0 || e.touches.length < 2) { return; }
+                if (e.scale !== 1) { e.preventDefault(); }
+                const pinchDistance = Math.hypot((e.touches[1].pageX - e.touches[0].pageX), (e.touches[1].pageY - e.touches[0].pageY));
+                const originX = startX + container.scrollLeft;
+                const originY = startY + container.scrollTop;
+                pinchScale = pinchDistance / initialPinchDistance;
+                viewer.style.transform = `scale(${pinchScale})`;
+                viewer.style.transformOrigin = `${originX}px ${originY}px`;
+            }, { passive: false });
+            document.addEventListener("touchend", (e) => {
+                if (initialPinchDistance <= 0) { return; }
+                viewer.style.transform = `none`;
+                viewer.style.transformOrigin = `unset`;
+                PDFViewerApplication.pdfViewer.currentScale *= pinchScale;
+                const rect = container.getBoundingClientRect();
+                const dx = startX - rect.left;
+                const dy = startY - rect.top;
+                container.scrollLeft += dx * (pinchScale - 1);
+                container.scrollTop += dy * (pinchScale - 1);
+                reset();
+            });
+        }
+        document.addEventListener('webviewerloaded', () => {
+            if (!pinchZoomEnabled) {
+                pinchZoomEnabled = true;
+                enablePinchZoom();
+            }
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-
-<!-- Goes into viewer.html just before ending </body> -->
-<script>
-    let pinchZoomEnabled = false;
-    function enablePinchZoom(pdfViewer) {
-        let startX = 0, startY = 0;
-        let initialPinchDistance = 0;        
-        let pinchScale = 1;    
-        const viewer = document.getElementById("viewer");
-        const container = document.getElementById("viewerContainer");
-        const reset = () => { startX = startY = initialPinchDistance = 0; pinchScale = 1; };
-        // Prevent native iOS page zoom
-        //document.addEventListener("touchmove", (e) => { if (e.scale !== 1) { e.preventDefault(); } }, { passive: false });
-        document.addEventListener("touchstart", (e) => {
-            if (e.touches.length > 1) {
-                startX = (e.touches[0].pageX + e.touches[1].pageX) / 2;
-                startY = (e.touches[0].pageY + e.touches[1].pageY) / 2;
-                initialPinchDistance = Math.hypot((e.touches[1].pageX - e.touches[0].pageX), (e.touches[1].pageY - e.touches[0].pageY));
-            } else {
-                initialPinchDistance = 0;
-            }
-        });
-        document.addEventListener("touchmove", (e) => {
-            if (initialPinchDistance <= 0 || e.touches.length < 2) { return; }
-            if (e.scale !== 1) { e.preventDefault(); }
-            const pinchDistance = Math.hypot((e.touches[1].pageX - e.touches[0].pageX), (e.touches[1].pageY - e.touches[0].pageY));
-            const originX = startX + container.scrollLeft;
-            const originY = startY + container.scrollTop;
-            pinchScale = pinchDistance / initialPinchDistance;
-            viewer.style.transform = `scale(${pinchScale})`;
-            viewer.style.transformOrigin = `${originX}px ${originY}px`;
-        }, { passive: false });
-        document.addEventListener("touchend", (e) => {
-            if (initialPinchDistance <= 0) { return; }
-            viewer.style.transform = `none`;
-            viewer.style.transformOrigin = `unset`;
-            PDFViewerApplication.pdfViewer.currentScale *= pinchScale;
-            const rect = container.getBoundingClientRect();
-            const dx = startX - rect.left;
-            const dy = startY - rect.top;
-            container.scrollLeft += dx * (pinchScale - 1);
-            container.scrollTop += dy * (pinchScale - 1);
-            reset();
-        });
-    }
-    document.addEventListener('webviewerloaded', () => {
-        if (!pinchZoomEnabled) {
-            pinchZoomEnabled = true;
-            enablePinchZoom();
-        }
-    });
-</script>
 </body>
 
 </html>
