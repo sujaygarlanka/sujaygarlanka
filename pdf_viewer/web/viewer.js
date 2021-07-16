@@ -49,6 +49,7 @@ const defaultOptions = {
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE
   },
   defaultUrl: {
+    /* Sujay Changed */
     value: "https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay%20Garlanka%20Resume.pdf",
     kind: OptionKind.VIEWER
   },
@@ -1003,6 +1004,7 @@ const PDFViewerApplication = {
     await Promise.all(promises);
   },
 
+  /* Sujay Changed */
   async open(file, args) {
     if (this.pdfLoadingTask) {
       await this.close();
@@ -1017,12 +1019,12 @@ const PDFViewerApplication = {
     const parameters = Object.create(null);
 
     if (typeof file === "string") {
-      this.setTitleUsingUrl(file);
+      // this.setTitleUsingUrl(file);
       parameters.url = file;
     } else if (file && "byteLength" in file) {
       parameters.data = file;
     } else if (file.url && file.originalUrl) {
-      this.setTitleUsingUrl(file.originalUrl);
+      // this.setTitleUsingUrl(file.originalUrl);
       parameters.url = file.url;
     }
 
@@ -2201,6 +2203,7 @@ let validateFileURL;
       } = new URL(file, window.location.href);
 
       if (origin !== viewerOrigin && protocol !== "blob:") {
+        /* Sujay Changed */
         //throw new Error("file origin does not match viewer's");
       }
     } catch (ex) {

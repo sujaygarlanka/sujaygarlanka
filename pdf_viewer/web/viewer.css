@@ -87,6 +87,7 @@
   text-align: initial;
 }
 
+/* Sujay Changed */
 .annotationLayer .linkAnnotation > a,
 .annotationLayer .buttonWidgetAnnotation.pushButton > a {
   position: absolute;
@@ -459,6 +460,7 @@
   overflow: hidden;
 }
 
+/* Sujay Changed */
 .pdfViewer .page {
   direction: ltr;
   width: 816px;
