@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume</title>
     <!-- Import element definition -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -140,7 +140,7 @@
     });
 
     function render() {
-        CANVAS.width = 500;
+        CANVAS.width = window.innerWidth * 0.8;
         var scale_required = CANVAS.width / PAGE_1.getViewport(1).width;
         // Get viewport of the page at required scale
         VIEWPORT = PAGE_1.getViewport(scale_required);
@@ -170,6 +170,8 @@
             // Get canvas offset
             var canvas_offset = $("#pdf-canvas").offset();
 
+
+            $('#annotation-layer').empty();
             // Assign the CSS created to the annotation-layer element
             $("#annotation-layer").css({ left: canvas_offset.left + 'px', top: canvas_offset.top + 'px', height: CANVAS.height + 'px', width: CANVAS.width + 'px' });
 
