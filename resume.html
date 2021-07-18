@@ -109,7 +109,7 @@
                 </div>
             </div>
         </div>
-        <div class="p-3 d-flex justify-content-end">
+        <div style="margin-right: 5%" class="pb-4 d-flex justify-content-end">
             <a href="https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay%20Garlanka%20Resume.pdf"><i
                     data-feather="download-cloud"></i></a>
         </div>
@@ -118,13 +118,20 @@
             <div id="annotation-layer"></div>
             <!-- <div id="text-layer"></div> -->
         </div>
-        <div class="justify-content-end py-3"></div>
+        <div class="justify-content-end py-5"></div>
     </div>
     <script>
     feather.replace();
 
+    // Store the window width
+    var windowWidth = $(window).width();
     $(window).resize(function () {
-        render();
+        // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+        if ($(window).width() != windowWidth) {
+            // Update the window width for next time
+            windowWidth = $(window).width();
+            render();
+        }
     });
 
     var PAGE_1,
@@ -140,6 +147,8 @@
     });
 
     function render() {
+        var pageWidth = window.innerWidth * 0.8;
+
         CANVAS.width = window.innerWidth * 0.8;
         var scale_required = CANVAS.width / PAGE_1.getViewport(1).width;
         // Get viewport of the page at required scale
@@ -151,6 +160,9 @@
         // Set canvas height
         CANVAS.width = VIEWPORT.width;
         CANVAS.height = VIEWPORT.height;
+       // CANVAS.style.width = pageWidth;
+       // CANVAS.style.height = "50"
+
 
         var renderContext = {
             canvasContext: CANVAS_CTX,
