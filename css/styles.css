@@ -47,8 +47,8 @@ a.gray:hover {
 
 .container-fluid {
   width: auto;
-  padding-right: clamp(2rem, 6vw, 7rem);
-  padding-left: clamp(2rem, 6vw, 7rem);
+  padding-right: clamp(2rem, 6.5vw, 6.5vw);
+  padding-left: clamp(2rem, 6.5vw, 6.5vw);
 }
 
 .nav .nav-link {
@@ -120,7 +120,7 @@ h4.smaller {
   url("../fonts/HK Grotesk Pro/HKGroteskPro-Bold.woff") format("woff");
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .side-nav {
     max-height: 175px;
   }
