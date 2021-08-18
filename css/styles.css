@@ -11,11 +11,8 @@
   --primary-color: #24292e;
   --accent-color: #0170F2;
 
-  /* Markdown */
-  --highlighted-elements-background-color: #f6f5f8;
-
   /* Geist UI */
-  --font-sans: HKGroteskPro, sans-serif;
+  --font-sans: var(--font-family);
 }
 
 a.primary {
