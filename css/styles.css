@@ -8,11 +8,24 @@
 
   /* Work for custom website and markdown*/
   --font-family: HKGroteskPro, sans-serif;
-  --primary-color: #24292e;
-  --accent-color: #0170F2;
+  --primary-color: #000;
+  --accent-color: #0868B8;
 
   /* Geist UI */
   --font-sans: var(--font-family);
+}
+
+a {
+  font-weight: 500;
+  color: black;
+  text-decoration: underline;
+  text-decoration-color: black;
+  text-decoration-thickness: .1em;
+  text-underline-offset: .3em;
+}
+
+a:hover {
+  color: var(--accent-color)
 }
 
 a.primary {
@@ -27,6 +40,7 @@ a.primary:hover {
 }
 
 a.gray {
+  text-decoration: none;
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace !important;
   font-size: 15px;
   color: #a9a9a9;
@@ -48,10 +62,6 @@ a.gray:hover {
   padding-left: clamp(2rem, 6.5vw, 6.5vw);
 }
 
-.nav .nav-link {
-  padding-left: 0px;
-}
-
 .nav .nav-link.active {
   background-color: transparent;
   color: var(--accent-color);
@@ -66,6 +76,10 @@ a.gray:hover {
 h4.smaller {
   font-size: 1.15rem;
   font-weight: 500;
+}
+
+img {
+  border-radius: 5px;
 }
 
 @font-face {

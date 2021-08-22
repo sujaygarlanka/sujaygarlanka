@@ -93,7 +93,7 @@ pre[class*="language-"] {
 .token.keyword,
 .token.attr-name,
 .language-autohotkey .token.selector {
-	color: #00a4db;
+	color: #0868B8;
 }
 
 .token.function,
