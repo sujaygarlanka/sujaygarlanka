@@ -6,14 +6,21 @@
   /* light blue - #0CCBFF */
   /* box blue - #0061D5 */
 
-  /* Work for custom website and markdown*/
+  /* Website, markdown and Geist UI*/
+  /* Sets the relative font sizes for the page */
+  --font-size: 16px;
+
+  /* Website and markdown*/
   --font-family: HKGroteskPro, sans-serif;
   --primary-color: #000;
   --accent-color: #0868B8;
 
   /* Geist UI */
   --font-sans: var(--font-family);
+
+  
 }
+
 
 a {
   font-weight: 500;

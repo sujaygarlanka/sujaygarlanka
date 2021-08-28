@@ -64,7 +64,7 @@
   color: black;
   background-color: transparent;
   font-family: var(--font-family);
-  font-size: 16px;
+  font-size: var(--font-size);
   line-height: 1.5;
   word-wrap: break-word;
 }
