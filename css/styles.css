@@ -72,7 +72,6 @@ a.gray:hover {
 .nav .nav-link.active {
   background-color: transparent;
   color: var(--accent-color);
-  font-weight: bold;
 } 
 
 .nav .nav-link:not(.active) {
