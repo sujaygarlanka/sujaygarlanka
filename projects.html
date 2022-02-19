@@ -25,63 +25,32 @@
 
 <body>
     <div class="container-fluid">
-        <div class="d-flex justify-content-between pt-5 pb-4">
-            <h4 class="smaller">
-                <a class="primary" href="index.html">sujaygarlanka</a> <span class="accent">/</span> software-engineer
-            </h4>
-            <a class="d-lg-none primary" data-bs-toggle="offcanvas" href="#offcanvasExample">
-                <i data-feather="menu"></i>
-            </a>
-            <nav class="nav d-none d-lg-flex">
-                <a class="nav-link primary" href="https://docs.google.com/viewerng/viewer?url=https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay+Garlanka+Resume.pdf">
-                    <h4 class="smaller">Resume</h4>
-                </a>
-                <a class="nav-link primary" href="experience.html">
-                    <h4 class="smaller">Experience</h4>
-                </a>
-                <a class="nav-link primary accent" href="projects.html">
-                    <h4 class="smaller">Projects</h4>
-                </a>
-                <a class="nav-link primary" href="https://github.com/sujaygarlanka">
-                    <h4 class="smaller">Github</h4>
-                </a>
-            </nav>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
-                <div class="offcanvas-header">
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        <div class="row">
+            <div class="d-flex py-4">
+                <div class="col-2 d-flex align-items-center">
+                    <a href="index.html">
+                        <i data-feather="arrow-left"></i>
+                    </a>
                 </div>
-                <div class="offcanvas-body">
-                    <nav class="nav nav-fill flex-column">
-                        <a class="nav-link pb-3 primary" href="https://docs.google.com/viewerng/viewer?url=https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay+Garlanka+Resume.pdf">
-                            <h3><span class="accent"></span> Resume</h3>
-                        </a>
-                        <a class="nav-link pb-3 primary" href="experience.html">
-                            <h3><span class="accent"></span> Experience</h3>
-                        </a>
-                        <a class="nav-link pb-3 primary accent" href="projects.html">
-                            <h3><span class="accent"></span> Projects</h3>
-                        </a>
-                        <a class="nav-link pb-3 primary" href="https://github.com/sujaygarlanka">
-                            <h3><span class="accent"></span> Github</h3>
-                        </a>
-                    </nav>
-                </div>
+                <div class="col-9 fs-3 px-4">Projects</div>
             </div>
         </div>
         <div class="row">
-            <div class="side-nav col-12 col-md-2 d-flex flex-column mb-4 overflow-auto">
-                <div class="nav flex-column nav-pills">
-                    <span class="text-muted pb-3">Software</span>
-                    <a id="swift" class="nav-link pb-3 active" data-bs-toggle="pill"
-                        data-bs-target="#swift-content">Book
-                        Exchange</a>
-                    <a id="receipt" class="nav-link pb-3" data-bs-toggle="pill"
-                        data-bs-target="#receipt-content">Receipt
-                        Database</a>
-                    <span class="text-muted py-3">Hardware</span>
-                    <a id="drink" class="nav-link pb-3" data-bs-toggle="pill" data-bs-target="#drink-content">Drink
-                        Machine</a>
-                </div>
+                <div class="side-nav col-12 col-md-2 d-flex flex-column mb-4">
+                    <div class="overflow-auto">
+                        <div class="nav flex-column nav-pills">
+                            <span class="text-muted pb-3">Software</span>
+                            <a id="swift" class="nav-link pb-3 active" data-bs-toggle="pill"
+                                data-bs-target="#swift-content">Book
+                                Exchange</a>
+                            <a id="receipt" class="nav-link pb-3" data-bs-toggle="pill"
+                                data-bs-target="#receipt-content">Receipt
+                                Database</a>
+                            <span class="text-muted py-3">Hardware</span>
+                            <a id="drink" class="nav-link pb-3" data-bs-toggle="pill" data-bs-target="#drink-content">Drink
+                                Machine</a>
+                        </div>
+                    </div>
             </div>
             <div class="col-11 col-md-9">
                 <div class="tab-content">
@@ -130,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex justify-content-end py-5">
+        <div class="row py-5">
         </div>
     </div>
     <script>

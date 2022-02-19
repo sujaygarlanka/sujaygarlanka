@@ -10,7 +10,7 @@
 	--accents-8:#111;
 	--geist-foreground:#000;
 	--geist-background:#fff;
-	--geist-selection:var(--geist-cyan);
+	--geist-selection:var(--selection-highlight);
 	--geist-success:#0070f3;
 	--geist-success-light:#3291ff;
 	--geist-success-dark:#0366d6;

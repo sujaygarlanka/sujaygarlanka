@@ -14,11 +14,11 @@
   --font-family: HKGroteskPro, sans-serif;
   --primary-color: #000;
   --accent-color: #0868B8;
+  --selection-highlight: #c1e6f5;
+  --muted: #a9a9a9;
 
   /* Geist UI */
   --font-sans: var(--font-family);
-
-  
 }
 
 
@@ -26,13 +26,13 @@ a {
   font-weight: 500;
   color: black;
   text-decoration: underline;
-  text-decoration-color: black;
+  text-decoration-color: var(--muted);
   text-decoration-thickness: .1em;
   text-underline-offset: .3em;
 }
 
 a:hover {
-  color: var(--accent-color)
+  color: var(--accent-color);
 }
 
 a.primary {
@@ -50,7 +50,7 @@ a.gray {
   text-decoration: none;
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace !important;
   font-size: 15px;
-  color: #a9a9a9;
+  color: var(--muted)
 }
 
 a.gray:hover {

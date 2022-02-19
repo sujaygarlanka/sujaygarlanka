@@ -25,47 +25,14 @@
 
 <body>
     <div class="container-fluid">
-        <div class="d-flex justify-content-between pt-5 pb-4">
-            <h4 class="smaller">
-                <a class="primary" href="index.html">sujaygarlanka</a> <span class="accent">/</span> software-engineer
-            </h4>
-            <a class="d-lg-none primary" data-bs-toggle="offcanvas" href="#offcanvasExample">
-                <i data-feather="menu"></i>
-            </a>
-            <nav class="nav d-none d-lg-flex">
-                <a class="nav-link primary" href="https://docs.google.com/viewerng/viewer?url=https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay+Garlanka+Resume.pdf">
-                    <h4 class="smaller">Resume</h4>
-                </a>
-                <a class="nav-link primary accent" href="experience.html">
-                    <h4 class="smaller">Experience</h4>
-                </a>
-                <a class="nav-link primary" href="projects.html">
-                    <h4 class="smaller">Projects</h4>
-                </a>
-                <a class="nav-link primary" href="https://github.com/sujaygarlanka">
-                    <h4 class="smaller">Github</h4>
-                </a>
-            </nav>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
-                <div class="offcanvas-header">
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        <div class="row">
+            <div class="d-flex py-4">
+                <div class="col-2 d-flex align-items-center">
+                    <a href="index.html">
+                        <i data-feather="arrow-left"></i>
+                    </a>
                 </div>
-                <div class="offcanvas-body">
-                    <nav class="nav nav-fill flex-column">
-                        <a class="nav-link pb-3 primary" href="https://docs.google.com/viewerng/viewer?url=https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay+Garlanka+Resume.pdf">
-                            <h3><span class="accent"></span> Resume</h3>
-                        </a>
-                        <a class="nav-link pb-3 primary accent" href="experience.html">
-                            <h3><span class="accent"></span> Experience</h3>
-                        </a>
-                        <a class="nav-link pb-3 primary" href="projects.html">
-                            <h3><span class="accent"></span> Projects</h3>
-                        </a>
-                        <a class="nav-link pb-3 primary" href="https://github.com/sujaygarlanka">
-                            <h3><span class="accent"></span> Github</h3>
-                        </a>
-                    </nav>
-                </div>
+                <div class="col-9 fs-3 px-4">Experience</div>
             </div>
         </div>
         <div class="row">
@@ -82,11 +49,6 @@
             <div class="col-11 col-md-9">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="box-content">
-                        <div class="pb-3">
-                            <a class="gray" href="https://github.com/box/sdks">
-                                <span><i data-feather="github"></i>&nbsp;box/sdks</span>
-                            </a>
-                        </div>
                         <zero-md no-shadow=true
                             src="https://raw.githubusercontent.com/sujaygarlanka/personal-website/master/experience/box.md">
                             <template>
@@ -115,12 +77,6 @@
                         </zero-md>
                     </div>
                     <div class="tab-pane fade" id="cisco-content">
-                        <div class="pb-3">
-                            <a class="gray"
-                                href="https://github.com/sujaygarlanka/sujaygarlanka/blob/master/experience/cisco.md">
-                                <span><i data-feather="github"></i></i>&nbsp;sujaygarlanka/cisco.md</span>
-                            </a>
-                        </div>
                         <zero-md no-shadow=true
                             src="https://raw.githubusercontent.com/sujaygarlanka/personal-website/master/experience/cisco.md">
                             <template>
@@ -132,8 +88,7 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex justify-content-end py-5">
-        </div>
+        <div class="row py-5"></div>
     </div>
     <script>
         feather.replace();
