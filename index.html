@@ -27,24 +27,21 @@
             height: 100%;
             line-height: 1.3em;
             letter-spacing: 1px;
-        }
-        
-        img {
-            -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0));
+            padding-right: 0px;
+            padding-left: 0px;
         }
     </style>
 </head>
 <body>
-    <!-- <div class="container-fluid"> -->
-        <!-- <div class="row"> -->
-            <div class="col-6 d-none d-lg-flex align-items-center justify-content-center" style="background-color: black">
-                <img src="./img/PRSM_0003_profile.png" height="30%">
-            </div>
-            <div class="col-6 d-flex flex-column justify-content-center px-5">
+    <div class="container-fluid d-flex">
+        <div class="col-6 d-none d-lg-flex align-items-center justify-content-center" style="background-color: black">
+            <iframe width="100%" height="100%" src="https://my.spline.design/untitled-de8cb3e84daaa5a0894fcdd19c0a15d5/" title="Morse Code"></iframe>
+        </div>
+        <div class="col-12 col-lg-6 d-flex flex-column justify-content-center">
+            <div class="px-5">
                 <div class="fs-3 text-muted pb-4">Sujay G.</div>
                 <div class="display-2 pb-4">Software<br>Engineer</div>
-                <div class="pb-5"> I am a software engineer <a href="https://www.box.com/">@box</a> and work
+                <div class="pb-5">I am a software engineer <a href="https://www.box.com/">@box</a> and work
                     on mobile and server side SDKs to
                     integrate with Box's APIs. On the side, I like tinkering with hardware and software to build interesting things.
                 </div>
@@ -60,8 +57,8 @@
                     <a href="mailto:sujay.garlanka@gmail.com"><i data-feather="mail"></i></a>
                 </div>
             </div>
-        <!-- </div> -->
-    <!-- </div> -->
+        </div>
+    </div>
     <script>
         feather.replace();
     </script>
