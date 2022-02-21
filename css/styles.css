@@ -15,7 +15,7 @@
   --primary-color: #000;
   --accent-color: #0868B8;
   --selection-highlight: #c1e6f5;
-  --muted: #a9a9a9;
+  --muted-color: #a9a9a9;
 
   /* Geist UI */
   --font-sans: var(--font-family);
@@ -26,47 +26,46 @@ a {
   font-weight: 500;
   color: black;
   text-decoration: underline;
-  text-decoration-color: var(--muted);
+  text-decoration-color: var(--muted-color);
   text-decoration-thickness: .1em;
   text-underline-offset: .3em;
 }
 
 a:hover {
+  color: black;
+  text-decoration: underline;
+  text-decoration-color: var(--primary-color);
+  text-decoration-thickness: .1em;
+  text-underline-offset: .3em;
+}
+
+/* color for icons */
+a svg:hover {
   color: var(--accent-color);
-}
-
-a.primary {
-  text-decoration: none;
-  color: var(--primary-color);
-}
-
-a.primary:hover {
-  text-decoration: none;
-  cursor: pointer;
-  color: var(--accent-color) !important;
 }
 
 a.gray {
   text-decoration: none;
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace !important;
   font-size: 15px;
-  color: var(--muted)
+  color: var(--muted-color)
 }
 
 a.gray:hover {
   text-decoration: none;
   cursor: pointer;
-  color: var(--accent-color);
-}
-
-.accent {
-  color: var(--accent-color) !important;
+  color: var(--primary-color);
 }
 
 .container-fluid {
   width: auto;
   padding-right: clamp(2rem, 6.5vw, 6.5vw);
   padding-left: clamp(2rem, 6.5vw, 6.5vw);
+}
+
+.nav .nav-link:hover {
+  text-decoration: none;
+  color: var(--accent-color) !important;
 }
 
 .nav .nav-link.active {
@@ -85,7 +84,7 @@ h4.smaller {
 }
 
 img {
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 @font-face {
