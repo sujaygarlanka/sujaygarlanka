@@ -137,10 +137,11 @@ img {
   url("../fonts/HK Grotesk Pro/HKGroteskPro-Bold.woff") format("woff");
 }
 
-@media screen and (max-width: 767px) {
+/* Limit height of side nav and make scrollable */
+/* @media screen and (max-width: 767px) {
   .side-nav {
     max-height: 175px;
   }
-}
+} */
 
 
