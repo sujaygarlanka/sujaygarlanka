@@ -30,13 +30,51 @@
             padding-right: 0px;
             padding-left: 0px;
         }
+
+        #personal-image {
+            
+        }
+
+        .img,
+        .mouse {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background-color: #000;
+            background-image: url("./istockphoto-927383726-612x612.jpg");
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center;
+        }
+        
+        .main_box {
+            cursor: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background-color: #000;
+        }
+
+        .img {
+            filter: brightness(0%);
+        }
+
+        .mouse {
+            clip-path: circle(5em at 0, 0);
+        }
+        
         
     </style>
 </head>
 <body>
     <div class="container-fluid d-flex">
-        <div class="col-6 d-none d-lg-flex align-items-center justify-content-center" style="background-color: black">
-            <iframe src='https://my.spline.design/engineeringicons-9f54c9787a867d86d9223329606f8cfc/' frameborder='0' width='100%' height='100%'></iframe>
+        <div class="main_box col-6 d-none d-lg-flex align-items-center justify-content-center">
+            <div class="img"></div>
+            <div class="mouse"></div>
         </div>
         <div class="col-12 col-lg-6 d-flex flex-column justify-content-center">
             <div class="px-5">
@@ -63,6 +101,21 @@
     </div>
     <script>
         feather.replace();
+        // Select the container box and the 
+        // mouse placeholder
+        let main = document.querySelector('.main_box');
+        let mouse = document.querySelector('.mouse');
+  
+        // Add an event listener for detecting
+        // the movement of the mouse
+        main.addEventListener('mousemove',
+            (e) => {
+  
+                // Use a circle with a clipPath
+                // and the offsetX and offsetY property
+                mouse.style.clipPath =
+        `circle(10em at ${e.offsetX}px ${e.offsetY}px)`;
+            });
     </script>
 </body>
 
