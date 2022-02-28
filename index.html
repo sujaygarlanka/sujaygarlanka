@@ -31,40 +31,16 @@
             padding-left: 0px;
         }
 
-        .img, 
-        .mouse{
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50%;
-            height: 100%;
-            background-color: white;
-            background-image: url("./main.jpeg");
-            background-repeat: no-repeat;
-            background-size: 100%;
-            background-position: center;
-            
+        .background {
+            background-color: black;
         }
         
-        .main_box {
-            cursor: none;
-        }
-
-        .img {
-            filter: brightness(0%);
-        }
-
-        .mouse {
-            -webkit-clip-path: circle(5em at 300, 300);
-            clip-path: circle(5em at 300, 300);
-        } 
     </style>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
     <div class="container-fluid d-flex">
-        <div class="main_box col-6 d-none d-lg-flex align-items-center justify-content-center">
-            <div class="img"></div>
-            <div class="mouse" style="clip-path: circle(10% at 50%, 50%);"></div>
+        <div id="particles-js" class="background col-6 d-none d-lg-flex align-items-center justify-content-center">
         </div>
         <div class="col-12 col-lg-6 d-flex flex-column justify-content-center">
             <div class="px-5">
@@ -91,21 +67,9 @@
     </div>
     <script>
         feather.replace();
-        // Select the container box and the 
-        // mouse placeholder
-        let main = document.querySelector('.main_box');
-        let mouse = document.querySelector('.mouse');
-  
-        // Add an event listener for detecting
-        // the movement of the mouse
-        main.addEventListener('mousemove',
-            (e) => {
-  
-                // Use a circle with a clipPath
-                // and the offsetX and offsetY property
-                mouse.style.clipPath =
-        `circle(10% at ${e.offsetX}px ${e.offsetY}px)`;
-            });
+        particlesJS.load('particles-js', 'js/particles.json', function() {
+            console.log('callback - particles.js config loaded');
+        });
     </script>
 </body>
 
