@@ -34,13 +34,50 @@
         .background {
             background-color: black;
         }
-        
+
+        /* Code from here https://css-tricks.com/svg-line-animation-works/ */
+        .path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 3s linear forwards;
+        }
+
+        .path-1 {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 5s linear forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
     </style>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
+
 <body>
     <div class="container-fluid d-flex">
-        <div id="particles-js" class="background col-6 d-none d-lg-flex align-items-center justify-content-center">
+        <div class="background col-6 d-none d-lg-flex align-items-center justify-content-center">
+            <svg width="auto" height="100%" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 215.46 427.71">
+                <defs>
+                    <style>
+                        .cls-1 {
+                            fill: none;
+                            stroke: #fff;
+                            stroke-miterlimit: 10;
+                            stroke-width: 10px;
+                        }
+                    </style>
+                </defs>
+                <path class="cls-1 path" d="M203.27,119.53V288a30,30,0,0,0,9.11,21.52l91.09,88.24"
+                    transform="translate(-198.27 -119.53)" />
+                <circle class="cls-1 path-1" cx="110.74" cy="284.86" r="10.64" />
+                <path class="cls-1 path" d="M408.73,547.25V381.9A30,30,0,0,0,400,360.71l-86.47-86.47"
+                    transform="translate(-198.27 -119.53)" />
+                <circle class="cls-1 path-1" cx="107.73" cy="146.55" r="10.64" />
+            </svg>
         </div>
         <div class="col-12 col-lg-6 d-flex flex-column justify-content-center">
             <div class="px-5">
@@ -48,16 +85,17 @@
                 <div class="display-2 pb-4">Software<br>Engineer</div>
                 <div class="pb-5">I am a software engineer <a href="https://www.box.com/">@box</a> and work
                     on mobile and server side SDKs to
-                    integrate with Box's APIs. On the side, I like tinkering with hardware and software to build interesting things.
+                    integrate with Box's APIs. On the side, I like tinkering with hardware and software to build
+                    interesting things.
                 </div>
                 <div class="d-flex justify-content-between pb-5">
-                    <a href="https://docs.google.com/viewerng/viewer?url=https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay+Garlanka+Resume.pdf">Resume</a>
+                    <a
+                        href="resume.html">Resume</a>
                     <a href="experience.html">Experience</a>
                     <a href="projects.html">Projects</a>
                 </div>
                 <div>
-                    <a class="me-4" href="https://github.com/sujaygarlanka"><i
-                        data-feather="github"></i></a>
+                    <a class="me-4" href="https://github.com/sujaygarlanka"><i data-feather="github"></i></a>
                     <a class="me-4" href="https://www.linkedin.com/in/sujay-garlanka/"><i
                             data-feather="linkedin"></i></a>
                     <a href="mailto:sujay.garlanka@gmail.com"><i data-feather="mail"></i></a>
@@ -67,7 +105,7 @@
     </div>
     <script>
         feather.replace();
-        particlesJS.load('particles-js', 'js/particles.json', function() {
+        particlesJS.load('particles-js', 'js/particles.json', function () {
             console.log('callback - particles.js config loaded');
         });
     </script>
