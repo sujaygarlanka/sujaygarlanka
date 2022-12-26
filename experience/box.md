@@ -1,4 +1,4 @@
-# Box (Aug 2019 - Present)
+# Box (Aug 2019 - June 2022)
 
 ### My Github Stats
 
