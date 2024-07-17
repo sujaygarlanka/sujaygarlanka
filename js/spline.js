@@ -1,32 +1,45 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import SplineLoader from '@splinetool/loader';
-
-// camera
-// const camera = new THREE.OrthographicCamera(window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2,  -50000, 10000);
-// camera.position.set(0, 0, 0);
-// camera.quaternion.setFromEuler(new THREE.Euler(0, 0, 0));
+import Environment from 'environment';
+import CannonDebugger from 'cannon-es-debugger';
 
 // scene
 const scene = new THREE.Scene();
-// scene.scale.set(0.1, 0.1, 0.1);
 
-// scene.background = new THREE.Color('#cacaff');
+const objectVisuals = {};
+
+
+// const sceneObjects = [ 'Letter 1', 'Letter 2', 'Letter 3', 'Letter 4', 'Letter 5', 'Letter 6', 'Letter 7',
+//     'Letter 8', 'Letter 9', 'Letter 10', 'Letter 11', 'Letter 12', 'Letter 13', 'Letter 14', 'Letter 15',
+//     'Letter 16', 'Wheel 1', 'Wheel 2', 'Wheel 3', 'Wheel 4', 'Robot', 'Grabber'
+// ]
+
+const sceneObjects = [ 'Letter 1', 'Robot']
+
 
 // spline scene
 const loader = new SplineLoader();
-loader.load(
-  './js/scene.splinecode',
+loader.load('./js/scene.splinecode',
   (splineScene) => {
+    // splineScene.scale = 0.1;
     scene.add(splineScene);
+    for (const name of sceneObjects) {
+        objectVisuals[name] = splineScene.children[0].getObjectByName(name);
+    }
   }
 );
-console.log(scene)
+
+const environment = new Environment();
+
+const cannonDebugger = new CannonDebugger(scene, environment.world, {
+  // options...
+})        
 
 
 let camera, canvas_div, renderer, controls;
 
-const canvas = document.querySelector('canvas.webgl')
+const canvas = document.getElementById('test');
 
 /**
  * Sizes
@@ -42,11 +55,10 @@ const sizes = {
  */
 camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 1, 1000)
 // camera = new THREE.OrthographicCamera(sizes.width / - 2, sizes.width / 2, window.height / 2, window.height / - 2,  -50000, 10000);
-// camera.position.x = 5
-// camera.position.y = 5
-// camera.position.z = 10
+camera.position.x = 5
+camera.position.y = 5
+camera.position.z = 10
 scene.add(camera)
-
 
 /**
  * Renderer
@@ -60,16 +72,11 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFShadowMap;
 
-scene.background = new THREE.Color('#cacaff');
+// scene.background = new THREE.Color('#cacaff');
 renderer.setClearAlpha(1);
 
 // Controls
 controls = new OrbitControls(camera, canvas)
-// controls.enableDamping = true
-// controls.enableZoom = false
-// controls.enableRotate = false
-// controls.enablePan = false
-
 
 window.addEventListener('resize', () =>
 {
@@ -89,78 +96,31 @@ window.addEventListener('resize', () =>
 /**
  * Animate
  */
-const clock = new THREE.Clock()
-let oldElapsedTime = 0
 
 const tick = () =>
 {
-    const elapsedTime = clock.getElapsedTime()
-    const deltaTime = elapsedTime - oldElapsedTime
-    oldElapsedTime = elapsedTime
-
-    // // Update physics
-    // // world.step(1 / 60, deltaTime, 3)
-    // world.fixedStep()
-    
-    // for(const object of objectsToUpdate)
-    // {
-    //     object.mesh.position.copy(object.getPos())
-    //     object.mesh.quaternion.copy(object.getOri())
-    // }
-
-    // Update mixer
-    // if(mixer)
-    // {
-    //     mixer.update(deltaTime)
-    // }
-    
-
     // Update controls
     controls.update();
 
+    // Update physics world
+    environment.step();
+
+    // Update the scene visuals (spline)
+    for (const name in objectVisuals) {
+        const object = environment.objects[name];
+        const visual = objectVisuals[name];
+        visual.position.copy(object.position);
+        visual.quaternion.copy(object.quaternion);
+    }
+
     // Update the debug renderer
-    // cannonDebugger.update();
+    cannonDebugger.update();
 
     // Render
     renderer.render(scene, camera);
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick);
-    
 }
 
 tick()
-
-// // renderer
-// const canvas_div = document.getElementById("canvas")
-// const renderer = new THREE.WebGLRenderer({ antialias: true });
-// renderer.setSize(window.innerWidth, window.innerHeight);
-// renderer.setAnimationLoop(animate);
-// document.body.appendChild(canvas_div);
-
-// // scene settings
-// renderer.shadowMap.enabled = true;
-// renderer.shadowMap.type = THREE.PCFShadowMap;
-
-// scene.background = new THREE.Color('#cacaff');
-// renderer.setClearAlpha(1);
-
-// // orbit controls
-// const controls = new OrbitControls(camera, canvas_div);
-// controls.enableDamping = true;
-// controls.dampingFactor = 0.125;
-
-// window.addEventListener('resize', onWindowResize);
-// function onWindowResize() {
-//   camera.left = window.innerWidth / - 2;
-//   camera.right = window.innerWidth / 2;
-//   camera.top = window.innerHeight / 2;
-//   camera.bottom = window.innerHeight / - 2;
-//   camera.updateProjectionMatrix();
-//   renderer.setSize(window.innerWidth, window.innerHeight);
-// }
-
-// function animate(time) {
-//   controls.update();
-//   renderer.render(scene, camera);
-// }
