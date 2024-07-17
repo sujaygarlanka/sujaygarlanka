@@ -1,6 +1,6 @@
 # Stanford Vision Lab (May 2023 - Today)
 
-<img style="max-width: 400px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/grasping.gif"/>
+<img style="max-width: 500px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/grasping.gif"/>
 
 I was a student researcher at SVL developing motion primitives for a robot in a simulation environment. These motion primitives are Python functionality that execute robotic actions to accomplish basic tasks. These tasks consist of grasping and placing an object, open and closing doors/drawers and navigating. The purpose of developing these primitives is to aid researchers in accomplishing the [BEHAVIOR-1K benchmark](https://openreview.net/pdf?id=_8DoIe8G3t) using the [OmniGibson](https://behavior.stanford.edu/omnigibson/) simulation environment built on NVIDIA Omniverse and Isaac Sim. 
 
@@ -14,7 +14,7 @@ The algorithmic implementation for the motion primitives follow a common logical
 3. If it returns an invalid configuration, we then execute our navigation flow. Otherwise, execute the manipulation flow.
     - Navigation or Manipulation flow
       
-<img style="max-width: 400px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/primitive_flow.png"/>
+<img style="max-width: 500px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/primitive_flow.png"/>
 
 ### Navigation Flow
 
