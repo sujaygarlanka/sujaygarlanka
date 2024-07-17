@@ -1,8 +1,8 @@
-# Stanford Vision Lab (SVL) Research Engineer (May 2023 - Current)
+# Stanford Vision Lab (May 2023 - Today)
 
 <img style="max-width: 400px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/grasping.gif"/>
 
-My work at SVL is centered on developing motion primitives for a robot in a simulation environment. These motion primitives are Python functionality that execute robotic actions to accomplish basic tasks. These tasks consist of grasping and placing an object, open and closing doors/drawers and navigating. The purpose of developing these primitives is to aid researchers in accomplishing the [BEHAVIOR-1K benchmark](https://openreview.net/pdf?id=_8DoIe8G3t) using the [OmniGibson](https://behavior.stanford.edu/omnigibson/) simulation environment built on NVIDIA Omniverse and Isaac Sim. 
+I was a student researcher at SVL developing motion primitives for a robot in a simulation environment. These motion primitives are Python functionality that execute robotic actions to accomplish basic tasks. These tasks consist of grasping and placing an object, open and closing doors/drawers and navigating. The purpose of developing these primitives is to aid researchers in accomplishing the [BEHAVIOR-1K benchmark](https://openreview.net/pdf?id=_8DoIe8G3t) using the [OmniGibson](https://behavior.stanford.edu/omnigibson/) simulation environment built on NVIDIA Omniverse and Isaac Sim. 
 
 I, along with a few others, took two approaches to building out these primitives. Our first approach was using the full observability of the environment to develop algorithmic primitives. After completing our first approach, we were dissatisfied with its ability generalize to the significantly varied tasks in the BEHAVIOR-1K benchmark. So, we then used some of the fundamental functionality developed in our first approach to aid our second approach. This approach is using reinforcement learning to learn a selection of robotic actions.  
 
