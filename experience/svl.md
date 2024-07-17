@@ -1,6 +1,6 @@
 # Stanford Vision Lab (May 2023 - Today)
 
-<img style="max-width: 500px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/grasping.gif"/>
+<img style="max-width: 500px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/grasping.gif"/>  
 
 I was a student researcher at SVL developing motion primitives for a robot in a simulation environment. These motion primitives are Python functionality that execute robotic actions to accomplish basic tasks. These tasks consist of grasping and placing an object, open and closing doors/drawers and navigating. The purpose of developing these primitives is to aid researchers in accomplishing the [BEHAVIOR-1K benchmark](https://openreview.net/pdf?id=_8DoIe8G3t) using the [OmniGibson](https://behavior.stanford.edu/omnigibson/) simulation environment built on NVIDIA Omniverse and Isaac Sim. 
 
@@ -39,7 +39,7 @@ The main technical feature in our algorithmic primitives implementation is the c
 
 When the simulation environment spawns, we create copies of the robot’s collision meshes and store their transforms relative to the base of the robot. Then for collision detection in navigation, we reassemble the robot at a specified location by using the relative transforms for the meshes to calculate the poses for the meshes in the world frame to construct the robot as shown in the image below. Once this is completed, we then check to see if the meshes overlap with the meshes of other objects in the scene. However, an additional complication is introduced when the robot is holding an object. In this case, we ignore overlaps between the end effector of the robot and the object. Lastly, we also copy the meshes of the object in the hand and check that it does not overlap with any other invalid objects in the scene, because the object in the hand should function as part of the robot.
 
-<img style="max-width: 500px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/collision.png"/>
+<img style="max-width: 500px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/collision.png"/>  
 
 **Manipulation**
 
