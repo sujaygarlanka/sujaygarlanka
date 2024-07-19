@@ -1,6 +1,6 @@
 # Stanford Vision Lab (May 2023 - Today)
 
-<img style="max-width: 500px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/grasping.gif"/>&nbsp;
+<img style="max-width: 500px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/grasping.gif"/> &nbsp;
 
 I was a student researcher at SVL developing motion primitives for a robot in a simulation environment. These motion primitives are Python functionality that execute robotic actions to accomplish basic tasks. These tasks consist of grasping and placing an object, open and closing doors/drawers and navigating. The purpose of developing these primitives is to aid researchers in accomplishing the [BEHAVIOR-1K benchmark](https://openreview.net/pdf?id=_8DoIe8G3t) using the [OmniGibson](https://behavior.stanford.edu/omnigibson/) simulation environment built on NVIDIA Omniverse and Isaac Sim. 
 
@@ -39,7 +39,7 @@ The main technical feature in our algorithmic primitives implementation is the c
 
 When the simulation environment spawns, we create copies of the robot’s collision meshes and store their transforms relative to the base of the robot. Then for collision detection in navigation, we reassemble the robot at a specified location by using the relative transforms for the meshes to calculate the poses for the meshes in the world frame to construct the robot as shown in the image below. Once this is completed, we then check to see if the meshes overlap with the meshes of other objects in the scene. However, an additional complication is introduced when the robot is holding an object. In this case, we ignore overlaps between the end effector of the robot and the object. Lastly, we also copy the meshes of the object in the hand and check that it does not overlap with any other invalid objects in the scene, because the object in the hand should function as part of the robot.
 
-<img style="max-width: 500px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/collision.png"/>&nbsp;
+<img style="max-width: 500px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/collision.png"/> &nbsp;
 
 **Manipulation**
 
@@ -64,14 +64,17 @@ The GRPC set up can have some network delays and is cumbersome to work with, so 
 In addition to our engineering efforts, we setup a simple RL environment to learn grasping. Key aspects of this environment are the following:
 
 **Observations Space**
-    - Joint positions of the robot arm
-    - Relative position of the center of the robot base the the centroid of the object to grasp
-    - Relative position of the center of the bounding box for the end effector (EEF) and the centroid fo the object to grasp
+
+- Joint positions of the robot arm
+- Relative position of the center of the robot base the the centroid of the object to grasp
+- Relative position of the center of the bounding box for the end effector (EEF) and the centroid fo the object to grasp
 
 **Action Space**
-    - Delta joint positions for the robot arm that are fed to our joint controller
+
+- Delta joint positions for the robot arm that are fed to our joint controller
 
 **Reward**
+
 The reward function for grasping is the sum of a **distance reward**,  **regularization reward** and a **collision penalty**.
 
 The distance reward is defined by 4 cases that are determined by the state before an action and the following state (i.e. current state). The table below outlines these states:
@@ -92,9 +95,11 @@ The regularization reward is a penalty that subtracts an amount proportional to 
 The collision penality is an amount subtracted everytime the robot collides with something in the environment to discourage collisions.
 
 **Termination Condition**
+
 The termination condition is when the object is in the grasp of the end effector or 400 timesteps have passed.
 
 **Resetting Condition**
+
 To learn general grasping, we reset the robot to randomized arm configurations and robot base poses around the object. To randomize the arm configuration, we generate random configurations and use our collision checking functionality to find a valid starting configuration. We do the same for the base pose where we sample around the object to grasp and find a pose that places the robot within the reach of the object and is collision free. 
 
 ### Results
