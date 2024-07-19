@@ -6,29 +6,71 @@ export default class Robot {
       this.createRobot()
     }
 
+
+    showAxes(body) {
+        const geometry = new THREE.BoxGeometry(0.01, 0.01, 0.01);
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        this.scene.add(cube);
+        this.objectsToUpdate.push({mesh: cube, pos: body.position, ori: body.quaternion});
+        cube.add(new THREE.AxesHelper(1));
+    }
+
+    step(action) {
+      const SCALING_FACTOR_WHEELS = 10
+      const SCALING_FACTOR_HINGE = 1
+
+      this.vehicle.applyEngineForce(action[0] * SCALING_FACTOR_WHEELS, 0)
+      this.vehicle.applyEngineForce(action[1] * SCALING_FACTOR_WHEELS, 1)
+      this.vehicle.applyEngineForce(action[2] * SCALING_FACTOR_WHEELS, 2)
+      this.vehicle.applyEngineForce(action[3] * SCALING_FACTOR_WHEELS, 3)
+      this.hinge.setMotorSpeed(action[4] * SCALING_FACTOR_HINGE)
+
+    }
+
     createRobot() {
         // Build the car chassis
-        const chassisShape = new CANNON.Box(new CANNON.Vec3(1.5, 2.0, 1.6))
+        const bodyWidth = 1.6
+        const chassisShape = new CANNON.Box(new CANNON.Vec3(1.5, 2.0, bodyWidth))
         const chassisBody = new CANNON.Body({ mass: 10 })
         chassisBody.addShape(chassisShape)
         chassisBody.position.set(-1.5, 2.2, 3.0)
         chassisBody.angularVelocity.set(0, 0.5, 0)
 
-        let pos;
-        let quaternion;
-
+        // Grabber front
         const grabber = new CANNON.Body({ mass: 0.1 });
-        grabber.addShape(new CANNON.Box(new CANNON.Vec3(1.0, 0.05, 0.01)));
-        pos = new CANNON.Vec3(1.1, -0.48, 2.0);
-        grabber.position.copy(chassisBody.pointToWorldFrame(pos));
+        const lengthToPivot = 3.0;
+        const distanceFromChassis = 1.3;
+        let quat = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
+        grabber.addShape(new CANNON.Box(new CANNON.Vec3(bodyWidth, 0.15, 0.15)), new CANNON.Vec3(lengthToPivot, 0.0, 0.0), quat);
+        
+        // Grabber left
+        grabber.addShape(new CANNON.Box(new CANNON.Vec3(lengthToPivot/2, 0.15, 0.05)), new CANNON.Vec3(lengthToPivot/2, 0.0, -bodyWidth - 0.1));
+
+        // Grabber right
+        grabber.addShape(new CANNON.Box(new CANNON.Vec3(lengthToPivot/2, 0.15, 0.05)), new CANNON.Vec3(lengthToPivot/2, 0.0, bodyWidth + 0.1));
+
+        let pos = chassisBody.pointToWorldFrame(new CANNON.Vec3(distanceFromChassis, -1.0, 0.0));
+        grabber.position.copy(pos);
         this.world.addBody(grabber);
 
-        // const forkRight = new CANNON.Body({ mass: 0.1 });
-        // forkRight.addShape(new CANNON.Box(new CANNON.Vec3(0.37, 0.05, 0.01)));
-        // pos = new CANNON.Vec3(1.1, -0.48, 0.4);
-        // forkRight.position.copy(chassisBody.pointToWorldFrame(pos));
-        // this.world.addBody(forkRight);
-        // this.showAxes(forkRight);
+        // Define the hinge constraint
+        const pivotA = new CANNON.Vec3(distanceFromChassis, 0, 0); // Pivot point relative to the first body
+        const pivotB =  new CANNON.Vec3(0, 0, 0); // Pivot point relative to the second body
+        // const pivotB = new CANNON.Vec3(-1.5, 0, 0); // Pivot point relative to the second body
+        const axisA = new CANNON.Vec3(0, 0, 1); // Axis of rotation (e.g., around the z-axis)
+        const axisB = new CANNON.Vec3(0, 0, 1); // Axis of rotation (e.g., around the z-axis)
+
+        // Create and add the hinge constraint
+        const hingeConstraint = new CANNON.HingeConstraint(chassisBody, grabber, {
+            pivotA: pivotA,
+            pivotB: pivotB,
+            axisA: axisA,
+            axisB: axisB
+        });
+        hingeConstraint.collideConnected = true
+        hingeConstraint.enableMotor()
+        this.world.addConstraint(hingeConstraint);
 
         // Create the vehicle
         const vehicle = new CANNON.RaycastVehicle({
@@ -36,7 +78,7 @@ export default class Robot {
         })
 
         const wheelOptions = {
-            radius: 0.55,
+            radius: 0.4,
             directionLocal: new CANNON.Vec3(0, -1, 0),
             suspensionStiffness: 100,
             suspensionRestLength: 0.15,
@@ -54,19 +96,19 @@ export default class Robot {
 
         // Add the wheels
         // Rear wheel right
-        wheelOptions.chassisConnectionPointLocal.set(-1.25, -1.7, 1.5)
+        wheelOptions.chassisConnectionPointLocal.set(-0.9, -1.8, 1.5)
         vehicle.addWheel(wheelOptions)
 
         // Rear wheel left
-        wheelOptions.chassisConnectionPointLocal.set(-1.25, -1.7, -1.5)
+        wheelOptions.chassisConnectionPointLocal.set(-0.9, -1.8, -1.5)
         vehicle.addWheel(wheelOptions)
 
         // Front wheel right
-        wheelOptions.chassisConnectionPointLocal.set(1.25, -1.7, 1.5)
+        wheelOptions.chassisConnectionPointLocal.set(0.9, -1.8, 1.5)
         vehicle.addWheel(wheelOptions)
 
         // Front wheel left
-        wheelOptions.chassisConnectionPointLocal.set(1.25, -1.7, -1.5)
+        wheelOptions.chassisConnectionPointLocal.set(0.9, -1.8, -1.5)
         vehicle.addWheel(wheelOptions)
 
         vehicle.addToWorld(this.world)
@@ -110,5 +152,6 @@ export default class Robot {
         this.vehicle = vehicle
         this.chassisBody = chassisBody
         this.wheelBodies = wheelBodies
+        this.hinge = hingeConstraint
     }
 }

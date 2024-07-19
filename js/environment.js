@@ -35,7 +35,10 @@ export default class Environment {
         this.world = world      
     }
 
-    step() {
+    step(action) {
+        if (action != null) {
+            this.robot.step(action)
+        }
         this.world.step(1 / 60)
     }
 
@@ -56,46 +59,47 @@ export default class Environment {
     createBlocks() {
         // Create a box
         const boxShape = new CANNON.Box(new CANNON.Vec3(1, 1, 1))
-        const boxBody = new CANNON.Body({ mass: 1 })
+        const boxBody = new CANNON.Body({ mass: 0.1 })
         boxBody.addShape(boxShape)
         boxBody.position.set(0, 3, 0)
         this.world.addBody(boxBody)
         this.objects['Letter 1'] = boxBody
     }
 
+    getObservation() {
+        return {
+            robotPosition: this.robot.chassisBody.position,
+            robotOrientation: this.robot.chassisBody.quaternion
+        }
+    }
+
     setupControls() {
         // Keybindings
         // Add force on keydown
         document.addEventListener('keydown', (event) => {
-            const maxForce = 10
-  
             switch (event.key) {
               case 'ArrowUp':
-                this.robot.vehicle.applyEngineForce(maxForce, 0)
-                this.robot.vehicle.applyEngineForce(maxForce, 1)
-                this.robot.vehicle.applyEngineForce(maxForce, 2)
-                this.robot.vehicle.applyEngineForce(maxForce, 3)
+                this.robot.step([1, 1, 1, 1, 0])
                 break
   
               case 'ArrowDown':
-                this.robot.vehicle.applyEngineForce(-maxForce, 0)
-                this.robot.vehicle.applyEngineForce(-maxForce, 1)
-                this.robot.vehicle.applyEngineForce(-maxForce, 2)
-                this.robot.vehicle.applyEngineForce(-maxForce, 3)
+                this.robot.step([-1, -1, -1, -1, 0])
                 break
   
               case 'ArrowLeft':
-                this.robot.vehicle.applyEngineForce(maxForce*10, 0)
-                this.robot.vehicle.applyEngineForce(-maxForce*10, 1)
-                this.robot.vehicle.applyEngineForce(maxForce*10, 2)
-                this.robot.vehicle.applyEngineForce(-maxForce*10, 3)
+                this.robot.step([3, -3, 3, -3, 0])
                 break
   
               case 'ArrowRight':
-                this.robot.vehicle.applyEngineForce(-maxForce*10, 0)
-                this.robot.vehicle.applyEngineForce(maxForce*10, 1)
-                this.robot.vehicle.applyEngineForce(-maxForce*10, 2)
-                this.robot.vehicle.applyEngineForce(maxForce*10, 3)
+                this.robot.step([-3, 3, -3, 3, 0])
+                break
+
+              case 'w':
+                this.robot.step([0, 0, 0, 0, -1])
+                break
+
+              case 's':
+                this.robot.step([0, 0, 0, 0, 1])
                 break
 
             }
@@ -103,35 +107,11 @@ export default class Environment {
   
           // Reset force on keyup
           document.addEventListener('keyup', (event) => {
-            switch (event.key) {
-              case 'ArrowUp':
-                this.robot.vehicle.applyEngineForce(0, 0)
-                this.robot.vehicle.applyEngineForce(0, 1)
-                this.robot.vehicle.applyEngineForce(0, 2)
-                this.robot.vehicle.applyEngineForce(0, 3)
-                break
-  
-              case 'ArrowDown':
-                this.robot.vehicle.applyEngineForce(0, 0)
-                this.robot.vehicle.applyEngineForce(0, 1)
-                this.robot.vehicle.applyEngineForce(0, 2)
-                this.robot.vehicle.applyEngineForce(0, 3)
-                break
-  
-              case 'ArrowLeft':
-                this.robot.vehicle.applyEngineForce(0, 0)
-                this.robot.vehicle.applyEngineForce(0, 1)
-                this.robot.vehicle.applyEngineForce(0, 2)
-                this.robot.vehicle.applyEngineForce(0, 3)
-                break
-  
-              case 'ArrowRight':
-                this.robot.vehicle.applyEngineForce(0, 0)
-                this.robot.vehicle.applyEngineForce(0, 1)
-                this.robot.vehicle.applyEngineForce(0, 2)
-                this.robot.vehicle.applyEngineForce(0, 3)
-                break
-  
+            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 's'].includes(event.key)) {
+              this.robot.step([0, 0, 0, 0, 0])
+            }
+            else {
+              this.robot.step([0, 0, 0, 0, 0])
             }
           })
     }
