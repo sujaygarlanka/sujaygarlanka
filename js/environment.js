@@ -11,8 +11,8 @@ export default class Environment {
         this.objects = {}
 
         this.createWorld()
-        this.createBlocks()
         this.createRobot()
+        // this.createBlocks()
         this.setupControls()
 
     }
@@ -34,6 +34,11 @@ export default class Environment {
 
         this.world = world      
     }
+
+    // reset() {
+    //     this.robot.
+
+    // }
 
     step(action) {
         if (action != null) {
@@ -79,27 +84,27 @@ export default class Environment {
         document.addEventListener('keydown', (event) => {
             switch (event.key) {
               case 'ArrowUp':
-                this.robot.step([1, 1, 1, 1, 0])
+                this.robot.step(0)
                 break
   
               case 'ArrowDown':
-                this.robot.step([-1, -1, -1, -1, 0])
+                this.robot.step(1)
                 break
   
               case 'ArrowLeft':
-                this.robot.step([3, -3, 3, -3, 0])
+                this.robot.step(2)
                 break
   
               case 'ArrowRight':
-                this.robot.step([-3, 3, -3, 3, 0])
+                this.robot.step(3)
                 break
 
               case 'w':
-                this.robot.step([0, 0, 0, 0, -1])
+                this.robot.step(4)
                 break
 
               case 's':
-                this.robot.step([0, 0, 0, 0, 1])
+                this.robot.step(5)
                 break
 
             }
@@ -108,10 +113,7 @@ export default class Environment {
           // Reset force on keyup
           document.addEventListener('keyup', (event) => {
             if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 's'].includes(event.key)) {
-              this.robot.step([0, 0, 0, 0, 0])
-            }
-            else {
-              this.robot.step([0, 0, 0, 0, 0])
+              this.robot.step(6)
             }
           })
     }

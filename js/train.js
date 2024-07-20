@@ -12,7 +12,33 @@ const ys = tf.tensor2d([-3, -1, 1, 3, 5, 7], [6, 1]);
 // Train the model using the data.
 await model.fit(xs, ys, {epochs: 250});
 
+class ReplayBuffer{
 
+    constructor(buffer_size){
+        this.buffer_size = buffer_size
+        this.buffer = [];
+    }
+
+    add(state, action, reward, next_state, done){
+        const experience = {state, action, reward, next_state, done};
+        if(this.buffer.length < this.buffer_size){
+            this.buffer.push(experience);
+        }else{
+            this.buffer.shift();
+            this.buffer.push(experience);
+        }
+    }
+
+    sample(batch_size){
+        const batch = [];
+        for(let i = 0; i < batch_size; i++){
+            const idx = Math.floor(Math.random() * this.buffer.length);
+            batch.push(this.buffer[idx]);
+        }
+        return batch;
+    }
+
+}
 
 class DQNAgent {
     constructor(stateSize, actionSize, model, nEpisodes) {
@@ -28,10 +54,6 @@ class DQNAgent {
 
         this.learningRate = 0.001;
         this.model = model;
-        this.lossFn = (output, targetOutput) => {
-            // Mean Squared Error (MSE) loss function
-            return output.reduce((acc, curr, idx) => acc + Math.pow(curr - targetOutput[idx], 2), 0) / output.length;
-        };
     }
 
     remember(state, action, reward, nextState, done) {
@@ -87,6 +109,20 @@ class DQNAgent {
         }
     }
 }
+
+function createModel() {
+    // Create a sequential model
+    const model = tf.sequential();
+
+    // Add a single input layer
+    model.add(tf.layers.dense({inputShape: [1], units: 1, useBias: true}));
+
+    // Add an output layer
+    model.add(tf.layers.dense({units: 1, useBias: true}));
+
+    return model;
+}
+
 
 // Example usage
 // Assuming you have a model object with methods `predict`, `backward`, `getParameters`, and `setParameters`

@@ -16,16 +16,60 @@ export default class Robot {
         cube.add(new THREE.AxesHelper(1));
     }
 
+    // step(action) {
+    //   const SCALING_FACTOR_WHEELS = 10
+    //   const SCALING_FACTOR_HINGE = 1
+
+    //   this.vehicle.applyEngineForce(action[0] * SCALING_FACTOR_WHEELS, 0)
+    //   this.vehicle.applyEngineForce(action[1] * SCALING_FACTOR_WHEELS, 1)
+    //   this.vehicle.applyEngineForce(action[2] * SCALING_FACTOR_WHEELS, 2)
+    //   this.vehicle.applyEngineForce(action[3] * SCALING_FACTOR_WHEELS, 3)
+    //   this.hinge.setMotorSpeed(action[4] * SCALING_FACTOR_HINGE)
+
+    // }
+
     step(action) {
-      const SCALING_FACTOR_WHEELS = 10
-      const SCALING_FACTOR_HINGE = 1
-
-      this.vehicle.applyEngineForce(action[0] * SCALING_FACTOR_WHEELS, 0)
-      this.vehicle.applyEngineForce(action[1] * SCALING_FACTOR_WHEELS, 1)
-      this.vehicle.applyEngineForce(action[2] * SCALING_FACTOR_WHEELS, 2)
-      this.vehicle.applyEngineForce(action[3] * SCALING_FACTOR_WHEELS, 3)
-      this.hinge.setMotorSpeed(action[4] * SCALING_FACTOR_HINGE)
-
+        const maxForce = 10
+        switch (action) {
+            case 0:
+                this.vehicle.applyEngineForce(maxForce, 0)
+                this.vehicle.applyEngineForce(maxForce, 1)
+                this.vehicle.applyEngineForce(maxForce, 2)
+                this.vehicle.applyEngineForce(maxForce, 3)
+                break
+            case 1:
+                this.vehicle.applyEngineForce(-maxForce, 0)
+                this.vehicle.applyEngineForce(-maxForce, 1)
+                this.vehicle.applyEngineForce(-maxForce, 2)
+                this.vehicle.applyEngineForce(-maxForce, 3)
+                break
+            case 2:
+                this.vehicle.applyEngineForce(maxForce*10, 0)
+                this.vehicle.applyEngineForce(-maxForce*10, 1)
+                this.vehicle.applyEngineForce(maxForce*10, 2)
+                this.vehicle.applyEngineForce(-maxForce*10, 3)
+                break
+            case 3:
+                this.vehicle.applyEngineForce(-maxForce*10, 0)
+                this.vehicle.applyEngineForce(maxForce*10, 1)
+                this.vehicle.applyEngineForce(-maxForce*10, 2)
+                this.vehicle.applyEngineForce(maxForce*10, 3)
+                break
+            case 4:
+                this.hinge.setMotorSpeed(-1)
+                break
+            case 5:
+                this.hinge.setMotorSpeed(1)
+                break
+            case 6:
+                this.vehicle.applyEngineForce(0, 0)
+                this.vehicle.applyEngineForce(0, 1)
+                this.vehicle.applyEngineForce(0, 2)
+                this.vehicle.applyEngineForce(0, 3)
+                this.hinge.setMotorSpeed(0)
+                break
+        }
+    
     }
 
     createRobot() {
@@ -34,8 +78,6 @@ export default class Robot {
         const chassisShape = new CANNON.Box(new CANNON.Vec3(1.5, 2.0, bodyWidth))
         const chassisBody = new CANNON.Body({ mass: 10 })
         chassisBody.addShape(chassisShape)
-        chassisBody.position.set(-1.5, 2.2, 3.0)
-        chassisBody.angularVelocity.set(0, 0.5, 0)
 
         // Grabber front
         const grabber = new CANNON.Body({ mass: 0.1 });
@@ -50,7 +92,7 @@ export default class Robot {
         // Grabber right
         grabber.addShape(new CANNON.Box(new CANNON.Vec3(lengthToPivot/2, 0.15, 0.05)), new CANNON.Vec3(lengthToPivot/2, 0.0, bodyWidth + 0.1));
 
-        let pos = chassisBody.pointToWorldFrame(new CANNON.Vec3(distanceFromChassis, -1.0, 0.0));
+        // let pos = chassisBody.pointToWorldFrame(new CANNON.Vec3(10, -1.0, 0.0));
         grabber.position.copy(pos);
         this.world.addBody(grabber);
 
