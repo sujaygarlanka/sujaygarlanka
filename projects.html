@@ -42,7 +42,8 @@
             <div class="side-nav col-12 col-md-2 d-flex flex-column mb-4 overflow-auto">
                 <div class="nav flex-column nav-pills">
                     <span class="text-muted pb-3">Robotics/RL</span>
-                    <a id="nn-rl" class="nav-link pb-3 active" data-bs-toggle="pill" data-bs-target="#nn-rl-content">Neural Network Library and RL</a>
+                    <a id="quad-locomotion" class="nav-link pb-3 active" data-bs-toggle="pill" data-bs-target="#quad-locomotion-content">Quadruped Locomotion</a>
+                    <a id="nn-rl" class="nav-link pb-3" data-bs-toggle="pill" data-bs-target="#nn-rl-content">Neural Network Library and RL</a>
                     <span class="text-muted pb-3">Software</span>
                     <a id="book" class="nav-link pb-3" data-bs-toggle="pill" data-bs-target="#book-content">Book
                         Exchange</a>
@@ -58,7 +59,22 @@
             </div>
             <div class="col-11 col-md-9">
                 <div class="tab-content">
-                    <div class="tab-pane fade active show" id="nn-rl-content">
+                    <div class="tab-pane fade active show" id="quad-locomotion-content">
+                        <zero-md no-shadow=true
+                            src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/projects/quadruped_locomotion.md">
+                            <template>
+                                <link rel="stylesheet" href="css/markdown.css">
+                                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11/styles/github.min.css" />
+                                <style>
+                                    pre {
+                                        height: 500px;
+                                        border: none;
+                                    }
+                                </style>
+                            </template>
+                        </zero-md>
+                    </div>
+                    <div class="tab-pane fade" id="nn-rl-content">
                         <div class="pb-3">
                             <a class="gray" href="https://github.com/sujaygarlanka/567-final-project">
                                 <span><i data-feather="github"></i>&nbsp;sujaygarlanka/567-final-project</span>
