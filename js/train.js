@@ -30,12 +30,7 @@ class ReplayBuffer{
     }
 
     sample(batch_size){
-        const batch = [];
-        for(let i = 0; i < batch_size; i++){
-            const idx = Math.floor(Math.random() * this.buffer.length);
-            batch.push(this.buffer[idx]);
-        }
-        return batch;
+        const a = tf.data.array(this.buffer).shuffle(this.buffer.length).batch(batch_size);
     }
 
 }
@@ -122,15 +117,5 @@ function createModel() {
 
     return model;
 }
-
-
-// Example usage
-// Assuming you have a model object with methods `predict`, `backward`, `getParameters`, and `setParameters`
-const model = {
-    predict: (state) => [/* Your prediction logic here */],
-    backward: (loss) => { /* Your backpropagation logic here */ },
-    getParameters: () => ({ params: [/* Your parameters here */], grads: [/* Your gradients here */] }),
-    setParameters: (params) => { /* Your logic to set parameters here */ }
-};
 
 const agent = new DQNAgent(4, 2, model, 1000);
