@@ -7,11 +7,13 @@ I worked on implementing locomotion for a quadruped in MATLAB. This proved to be
 The basic idea behind quadruped locomotion is 
 
 
-$$\begin{bmatrix}
+```math
+\begin{bmatrix}
 O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & I_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 1} & O_{3 \times 1} & O_{3 \times 1} \\
 O_{3 \times 3} & O_{3 \times 3} & I_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & R_z(\phi)^T & O_{3 \times 1} & O_{3 \times 1} & \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \\
 O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 1} & O_{3 \times 1} & O_{3 \times 1} \\
 O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 1} & O_{3 \times 1} & O_{3 \times 1} \\
 O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 1} & O_{3 \times 1} & O_{3 \times 1} \\
 O_{1 \times 3} & O_{1 \times 3} & O_{1 \times 3} & O_{1 \times 3} & O_{1 \times 3} & O_{1 \times 3} & O_{1 \times 1} & O_{1 \times 1} & O_{1 \times 1}
-\end{bmatrix}$$
+\end{bmatrix}
+```
