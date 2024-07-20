@@ -5,7 +5,7 @@ I worked on implementing locomotion for a quadruped in MATLAB. This proved to be
 ## Background
 The walking gait is a type of 
 
-$` inline test `$
+ $inline test$
 
 $$
 \begin{bmatrix}
