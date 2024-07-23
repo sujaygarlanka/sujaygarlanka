@@ -75,11 +75,7 @@ $\dot P_{foot}$ - This is the velocity of the foot at the current timestep.
 $\dot P_{foot}^{d}$ - This is the desired velocity of the foot. The x velocity is constant at $\Delta P_{foot} / T_{swing}$. The y velocity is 0 and the z velocity is the time derivative of equation 3.
 
 $$
-\begin{equation}
-F = K_{p} \cdot (P_{foot}^{d}(t) - P_{foot}) + K_{d} \cdot (\dot P_{foot}^{d}(t) - \dot P_{foot})
-\hspace{1cm}
-\end{equation}
-\\
+F = K_{p} \cdot (P_{foot}^{d}(t) - P_{foot}) + K_{d} \cdot (\dot P_{foot}^{d}(t) - \dot P_{foot}) \tag{1}
 $$
 
 
