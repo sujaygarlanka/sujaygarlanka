@@ -36,11 +36,15 @@ $P_{hip}$ - The location of the hip of a leg along the x-axis
 $P_{foot}^{d}$ - The calculated x-position for the foot
 
 $$
-\begin{gather}
-P_{foot}^{d} = P_{hip} + \frac{T_{stance} \cdot V_{COM}}{2}  + K_{step} \cdot (V_{COM} - V_{desired})\hspace{1cm}\\
-K_{step} = \sqrt{\frac{Z_{COM}^{d}}{g}}
-\end{gather}
+\begin{equation}
+P_{foot}^{d} = P_{hip} + \frac{T_{stance} \cdot V_{COM}}{2}  + K_{step} \cdot (V_{COM} - V_{desired})
+\hspace{1cm}
+\end{equation}
 \\
+\begin{equation}
+K_{step} = \sqrt{\frac{Z_{COM}^{d}}{g}}
+\hspace{1cm}
+\end{equation}
 $$
 
 The two terms to note in the equation above are $\frac{T_{stance} \cdot V_{COM}}{2}$, which is the feedforward term and $K_{step} \cdot (V_{COM} - V_{desired})$, which is the feedback term. The feedback term is important to either add or subtract to the feedforward term to increase or decrease the speed of the robot. This term is positive when $V_{COM}$ is greater than the desired velocity and consequently the next foot position goes further in front to act as a brake. When $V_{COM}$ is lower an the desired velocity of the body, the next foot position is shorter, resulting in a speed up.
@@ -49,10 +53,10 @@ The two terms to note in the equation above are $\frac{T_{stance} \cdot V_{COM}}
 The next step is to get a trajectory for the foot from the current position to the desired position. I chose a parabolic trajectory for the foot to move along like in the image below. Since the robot is moving along the x-axis, the trajectory is in the x-z plane. I use the equation below (3) with the total time the foot arc should take ($T_{swing}$) as a root to get a parabolic equation between 0 and $T_{swing}$ and multiply by a scaling constant to change the max height for the z coordinate. The x coordinate is simply $\Delta P_{foot} \cdot \frac{t}{T_{swing}}$
 
 $$
-\begin{gather}
+\begin{equation}
 z = Height \cdot t \cdot (t - T_{swing})
 \hspace{1cm}
-\end{gather}
+\end{equation}
 \\
 $$
 
@@ -71,10 +75,10 @@ $\dot P_{foot}$ - This is the velocity of the foot at the current timestep.
 $\dot P_{foot}^{d}$ - This is the desired velocity of the foot. The x velocity is constant at $\Delta P_{foot} / T_{swing}$. The y velocity is 0 and the z velocity is the time derivative of equation 3.
 
 $$
-\begin{gather}
+\begin{equation}
 F = K_{p} \cdot (P_{foot}^{d}(t) - P_{foot}) + K_{d} \cdot (\dot P_{foot}^{d}(t) - \dot P_{foot})
 \hspace{1cm}
-\end{gather}
+\end{equation}
 \\
 $$
 
@@ -83,15 +87,15 @@ Once the forces for the foot are calculated, they need to be converted to torque
 
 $J_{i}(q)^{T}$ - This is the transpose of the jacobian of the forward kinematics for a leg. The forward kinematics is simply an equation mapping the 3 joint angles of a leg to cartesian coordinate in the robot's frame.
 
-$R^{T}$ - This is the transpose of rotation matrix for the robot
+$R^{T}$ - This is the transpose of the rotation matrix for the robot
 
 $F_{i}$ - The calculated force for the foot.
 
 $$
-\begin{gather}
+\begin{equation}
 \tau_{i} = -J_{i}(q)^{T} \cdot R^{T} \cdot F_{i}
 \hspace{1cm}
-\end{gather}
+\end{equation}
 \\
 $$
 

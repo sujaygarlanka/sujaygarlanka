@@ -14,7 +14,7 @@ const showAxesBodies = [];
 //     'Letter 8', 'Letter 9', 'Letter 10', 'Letter 11', 'Letter 12', 'Letter 13', 'Letter 14', 'Letter 15',
 //     'Letter 16', 'Wheel 1', 'Wheel 2', 'Wheel 3', 'Wheel 4', 'Robot', 'Grabber'
 // ]
-const sceneObjects = [ 'Letter 1'];
+const sceneObjects = ['Letter 1'];
 
 // spline scene
 // const loader = new SplineLoader();
@@ -34,7 +34,7 @@ const environment = new Environment();
  * Debugging
  */
 const cannonDebugger = new CannonDebugger(scene, environment.world, {
-  // options...
+    // options...
 })
 showAxes(environment);
 
@@ -79,8 +79,7 @@ renderer.setClearAlpha(1);
 // Controls
 controls = new OrbitControls(camera, canvas)
 
-window.addEventListener('resize', () =>
-{
+window.addEventListener('resize', () => {
     // Update sizes
     sizes.width = canvas_div.offsetWidth
     sizes.height = canvas_div.offsetHeight
@@ -98,13 +97,14 @@ window.addEventListener('resize', () =>
  * Animate
  */
 
-const tick = () =>
-{
+const tick = () => {
     // Update controls
     controls.update();
 
     // Update physics world
+    console.log(environment)
     environment.step();
+    console.log(environment)
 
     // Update the scene visuals (spline)
     for (const name in objectVisuals) {
@@ -115,7 +115,7 @@ const tick = () =>
     }
 
     // Update the objects with axes
-    for (const {mesh, body} of showAxesBodies) {
+    for (const { mesh, body } of showAxesBodies) {
         mesh.position.copy(body.position);
         mesh.quaternion.copy(body.quaternion);
     }
@@ -135,12 +135,12 @@ tick()
 
 ////////////////////////////////////
 function showAxes(environment) {
-  for (const body of environment.world.bodies) {
-    const geometry = new THREE.BoxGeometry(0.01, 0.01, 0.01);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    const cube = new THREE.Mesh(geometry, material);
-    cube.add(new THREE.AxesHelper(1));
-    scene.add(cube);
-    showAxesBodies.push({mesh: cube, body});
-  }
+    for (const body of environment.world.bodies) {
+        const geometry = new THREE.BoxGeometry(0.01, 0.01, 0.01);
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        cube.add(new THREE.AxesHelper(1));
+        scene.add(cube);
+        showAxesBodies.push({ mesh: cube, body });
+    }
 }
