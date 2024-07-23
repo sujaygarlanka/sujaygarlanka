@@ -136,7 +136,6 @@ function J=computeLegJacobian(q,leg)
 
 ```
 
-
 $$
 \begin{bmatrix}
 O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & I_{3 \times 3} & O_{3 \times 3} & O_{3 \times 3} & O_{3 \times 1} & O_{3 \times 1} & O_{3 \times 1} \\
