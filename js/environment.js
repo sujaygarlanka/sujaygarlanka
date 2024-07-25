@@ -218,10 +218,16 @@ class Task {
         return [this.getObservation(), this.getReward(), this.isDone()]
     }
 
+    _normalizePosition(position) {
+        const maxPosition = 30
+        return Math.max(-1, Math.min(1, position / maxPosition))
+
+    }
     getObservation() {
         const position = this.env.robot.position
         const quaternion = this.env.robot.quaternion
-        return [position.x, position.y, position.z, quaternion.x, quaternion.y, quaternion.z, quaternion.w]
+
+        return [this._normalizePosition(position.x), this._normalizePosition(position.y), this._normalizePosition(position.z), quaternion.x, quaternion.y, quaternion.z, quaternion.w]
     }
 
     getReward() {
@@ -259,7 +265,6 @@ export default class Environment {
         // this.setupControls()
         this.task = new Task(this, new CANNON.Vec3(0, 0, 0), new CANNON.Quaternion())
         this.reset()
-        // this.world.step(1 / 60)
     }
 
     get actionSpace() {
@@ -291,15 +296,21 @@ export default class Environment {
     reset() {
         this.robot.position.set(0, 2.5, 0)
         this.robot.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), 0)
-        let randomOrientation = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.random() * Math.PI)
+        // let randomOrientation = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.random() * Math.PI)
+        let randomOrientation = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), 0)
         return this.task.reset(new CANNON.Vec3(2, 0, 0), randomOrientation)
     }
 
-    step(action) {
-        if (action != null) {
-            this.robot.step(action)
-        }
-        this.world.step(1 / 60)
+    applyAction(action) {
+        this.robot.step(action)
+    }
+
+    _physicsStep(timeStep) {
+        this.world.step(timeStep)
+    }
+
+    step(timeStep = 1 / 60) {
+        this._physicsStep(timeStep)
         return this.task.step()
     }
 

@@ -58,12 +58,25 @@ const dataset = tf.data.array(buffer)
     .shuffle(buffer.length)
     .batch(batchSize);
 
-// Iterate through the dataset and print the batches
-dataset.forEachAsync(data => {
-    console.log('Batch:');
-    console.log('State:', data.state.print());
-    console.log('Action:', data.action.print());
-    console.log('Reward:', data.reward.print());
-    console.log('Next State:', data.nextState.print());
-    console.log('Done:', data.done.print());
-});
+async function test() {
+    // Iterate through the dataset and print the batches
+    let vals = []
+    await dataset.forEachAsync(data => {
+        vals.push(data);
+        // console.log('Batch:');
+        // console.log('State:', data.state.print());
+        // console.log('Action:', data.action.print());
+        // console.log('Reward:', data.reward.print());
+        // console.log('Next State:', data.nextState.print());
+        // console.log('Done:', data.done.print());
+    });
+    return vals[0];
+}
+
+async function main() {
+    const data = await test();
+    console.log(data.reward);
+}
+
+main();
+

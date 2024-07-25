@@ -1,6 +1,4 @@
-// const tf = require('@tensorflow/tfjs-node');
-import tf from '@tensorflow/tfjs-node';
-// const Environment = require('./environment');
+import tf from '@tensorflow/tfjs-node-gpu';
 import Environment from './environment.js';
 
 class ReplayBuffer {
@@ -20,14 +18,44 @@ class ReplayBuffer {
         }
     }
 
-    async sample(batch_size) {
-        const batch = tf.data.array(this.buffer).shuffle(this.buffer.length).batch(batch_size);
-        let vals = [];
-        await batch.forEachAsync(e => {
-            vals.push(e);
-        })
-        // console.log(vals)
-        return vals[0]
+    // async sample(batch_size) {
+    //     const batch = tf.data.array(this.buffer).shuffle(this.buffer.length).batch(batch_size);
+    //     let vals = [];
+    //     await batch.forEachAsync(e => {
+    //         vals.push(e);
+    //     })
+    //     // console.log(vals)
+    //     return vals[0]
+    // }
+
+    sample(batchSize) {
+        let nums = new Set();
+        let minibatch = {
+            state: [],
+            action: [],
+            reward: [],
+            nextState: [],
+            done: []
+        }
+        let index = 0;
+        while (nums.size < batchSize) {
+            let val = Math.floor(Math.random() * batchSize);
+            if (!nums.has(val)) {
+                nums.add(val);
+                minibatch.state.push(this.buffer[val].state);
+                minibatch.action.push([index, this.buffer[val].action]);
+                minibatch.reward.push(this.buffer[val].reward);
+                minibatch.nextState.push(this.buffer[val].nextState);
+                minibatch.done.push(this.buffer[val].done);
+                index += 1;
+            }
+        }
+        minibatch.state = tf.tensor2d(minibatch.state, [batchSize, this.buffer[0].state.length], 'float32');
+        minibatch.action = tf.tensor2d(minibatch.action, [batchSize, 2], 'int32');
+        minibatch.reward = tf.tensor1d(minibatch.reward, 'float32');
+        minibatch.nextState = tf.tensor2d(minibatch.nextState, [batchSize, this.buffer[0].nextState.length], 'float32');
+        minibatch.done = tf.tensor1d(minibatch.done, 'bool');
+        return minibatch
     }
 
     get length() {
@@ -37,7 +65,7 @@ class ReplayBuffer {
 }
 
 class DQNAgent {
-    constructor(model, actionSpaceSize) {
+    constructor(model, actionSpaceSize, nEpisodes) {
         this.actionSpaceSize = actionSpaceSize;
         this.memory = new ReplayBuffer(2000);
 
@@ -50,12 +78,13 @@ class DQNAgent {
         this.model = model;
     }
 
-    async act(state, evalMode = false) {
+    act(state, evalMode = false) {
         if (!evalMode && Math.random() <= this.epsilon) {
             return Math.floor(Math.random() * this.actionSpaceSize);
         }
-        const actValues = await this.model.predict(tf.tensor2d([state], [1, this.actionSpaceSize]));
-        return tf.argMax(actValues, 1);
+        const data = tf.tensor2d([state], [1, this.actionSpaceSize], 'float32');
+        const actValues = this.model.predict(data);
+        return tf.argMax(actValues, 1).dataSync()[0];
     }
 
     remember(state, action, reward, nextState, done) {
@@ -63,34 +92,33 @@ class DQNAgent {
     }
 
     async learn() {
-        const minibatch = await this.memory.sample(batchSize);
-        console.log(minibatch.state.print())
+        const minibatch = this.memory.sample(batchSize);
         const states = minibatch.state;
         const actions = minibatch.action;
         const rewards = minibatch.reward;
         const nextStates = minibatch.nextState;
         const dones = minibatch.done;
-        // console.log(minibatch)
 
-        // nextStates.print();
-        // console.log(nextStates.shape)
-        // const outputs = await this.model.predict(nextStates);
-        // const targets = rewards.where(dones, rewards + this.gamma * tf.max(outputs, 1))
-        // const output = await this.model.predict(states);
+        const outputs = this.model.predict(nextStates);
+        let updates = tf.mul(tf.max(outputs, 1), tf.scalar(this.gamma))
+        updates = tf.add(rewards, updates)
+        const targets = rewards.where(dones, updates);
+        let output = this.model.predict(states);
 
-        // actions.expandDims(1);
-        // tf.tensorScatterUpdate(output, actions, targets);
+        output = tf.tensorScatterUpdate(output, actions, targets);
         // output.scatterUpdate(actions, targets);
 
-        // await this.model.fit(states, output, { epochs: 1, verbose: 0 });
+        await this.model.fit(states, output, { epochs: 1, verbose: 0 });
+    }
 
+    updateEpsilon() {     
         if (this.epsilon > this.epsilonMin) {
             this.epsilon *= this.epsilonDecay;
         }
     }
 }
 
-function createModel(obsSpaceSize, actionSpaceSize, batchSize) {
+function createModel(obsSpaceSize, actionSpaceSize) {
     // Create a sequential model
     const model = tf.sequential();
 
@@ -98,11 +126,11 @@ function createModel(obsSpaceSize, actionSpaceSize, batchSize) {
     model.add(tf.layers.dense({ inputShape: [obsSpaceSize], units: 64, useBias: true, activation: 'relu' }));
     model.add(tf.layers.dense({ units: 128, useBias: true, activation: 'relu' }));
     model.add(tf.layers.dense({ units: actionSpaceSize, useBias: true }));
-
+    model.compile({ loss: 'meanSquaredError', optimizer: 'sgd' });
     return model;
 }
 
-async function evaluate(env, agent) {
+function evaluate(env, agent) {
     let episodeLengths = [];
     let episodeRewards = [];
 
@@ -115,7 +143,7 @@ async function evaluate(env, agent) {
 
         while (!done) {
             // Agent takes an action
-            let action = await agent.act(state, true);
+            let action = agent.act(state, true);
 
             // Environment steps with the action and returns next state, reward, and done flag
             let stepResult = env.step(action);
@@ -140,25 +168,30 @@ async function evaluate(env, agent) {
 
 
 async function train(agent, env, nEpisodes, batchSize) {
-    await tf.ready();
+    let bestReward = -Infinity;
     let eval_lens = [];
     let eval_rewards = [];
+    let state;
+    let eps_reward;
+    let eps_len;
     // Training loop
     for (let e = 1; e <= nEpisodes; e++) {
-        let state = env.reset();
-        let eps_len = 0;
-        let eps_reward = 0;
-
+        state = env.reset();
+        eps_len = 0;
+        eps_reward = 0;
+        console.log(state)
+        console.log(env.task.getReward())
         while (true) {
-            const action = await agent.act(state);
-            const [nextState, reward, done] = env.step(action);
+            const action = agent.act(state);
+            env.applyAction(action);
+            const [nextState, reward, done] = env.step();
             agent.remember(state, action, reward, nextState, done);
             state = nextState;
             eps_len += 1;
             eps_reward += reward;
 
             if (done) {
-                console.log(`episode: ${e}/${nEpisodes}, eps_reward: ${eps_reward}, eps_len, ${eps_len} e: ${agent.epsilon}`);
+                console.log(`episode: ${e}/${nEpisodes}, eps_reward: ${eps_reward}, eps_len: ${eps_len} e: ${agent.epsilon}`);
                 break;
             }
 
@@ -166,25 +199,27 @@ async function train(agent, env, nEpisodes, batchSize) {
                 await agent.learn(batchSize);
             }
         }
+        agent.updateEpsilon()
 
-        if (e % 100 === 0) {
-            const [eps_len, eps_reward] = await evaluate(env, agent); // Assuming eval is a function that evaluates the agent
-            eval_lens.push(eps_len);
-            eval_rewards.push(eps_reward);
-            console.log(`episode: ${e}/${nEpisodes}, eval score: ${eps_len}, eval reward: ${eps_reward}`);
-
-            if (eps_len > 2000) {
-                break;
+        if (e % 10 === 0) {
+            const [eps_len_eval, eps_reward_eval] = evaluate(env, agent); // Assuming eval is a function that evaluates the agent
+            eval_lens.push(eps_len_eval);
+            eval_rewards.push(eps_reward_eval);
+            console.log(`episode: ${e}/${nEpisodes}, eval score: ${eps_len_eval}, eval reward: ${eps_reward_eval}`);
+            if (eps_reward_eval > bestReward) {
+                bestReward = eps_reward_eval;
+                await agent.model.save('file://./navigation_policy');
+                console.log('Model saved');
             }
         }
     }
 }
 
 const batchSize = 32;
-const nEpisodes = 1000;
+const nEpisodes = 100;
 
 const env = new Environment();
 const model = createModel(env.observationSpace, env.actionSpace, batchSize);
-const agent = new DQNAgent(model, env.actionSpace);
+const agent = new DQNAgent(model, env.actionSpace, nEpisodes);
 train(agent, env, nEpisodes, batchSize);
 

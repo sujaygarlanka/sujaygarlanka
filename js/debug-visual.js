@@ -93,6 +93,24 @@ window.addEventListener('resize', () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
+
+let predictionFcnId;
+async function predict(model) {
+    const startTime = performance.now();
+    let state = environment.task.getObservation();
+    state = tf.tensor2d([state], [1, environment.actionSpace], 'float32');
+    const output = model.predict(state)
+    let action = await tf.argMax(output, 1).data();
+    action = action[0]
+    environment.applyAction(action);
+    console.log(action);
+    console.log(performance.now() - startTime);
+}
+// tf.setBackend('webgl');
+tf.loadLayersModel('http://localhost:8080/js/navigation_policy/model.json').then((model) => {
+    predictionFcnId = setInterval(() => {predict(model)}, 500);
+});
+
 /**
  * Animate
  */
@@ -102,9 +120,7 @@ const tick = () => {
     controls.update();
 
     // Update physics world
-    console.log(environment)
     environment.step();
-    console.log(environment)
 
     // Update the scene visuals (spline)
     for (const name in objectVisuals) {

@@ -3,6 +3,7 @@
 I worked on implementing locomotion for a quadruped in MATLAB. This proved to be far more involved than I first imagined. I ended up implementing a walking gait and used that for forward, backward and lateral movement. Below, I elaborate on the math and coding required for the walking gait, which sets the foundation for more complicated locomotion like running and jumping.
 
 ## Background
+
 The walking gait is a coordinated movement between the legs of the robot that allow it move forward along the x-axis. The gait consists of two operating modes. The first is the **leg swing** where the robot moves two diagonally opposite front and rear legs forward in an arc. This is shown in the animation below. The second is **standing**, which is when other two diagonally opposite front and rear legs balance and push the body forward. Both operating modes exist at every timestep and each calculate the torques required for the legs differently. Below I outline some of the math involved to generate the motor torques in each mode.
 
 - [Leg Swing](#leg-swing)
@@ -12,8 +13,6 @@ The walking gait is a coordinated movement between the legs of the robot that al
 
 For the leg swing, the only goal is to move the feet of the quadruped in an arc forward. The diagram below illustrates this.
 
-
-
 The steps for doing the above are the following:
 1. Calculate the final foot position for each leg
 2. Get the trajectory for the foot for the final position
@@ -21,6 +20,7 @@ The steps for doing the above are the following:
 
 
 ### Step 1
+
 For the first step, the final foot position is calculated using the equation below (1). The terms in the equation below are the following:
 
 $T_{stance}$ - The desired time it takes for a single step.
@@ -52,6 +52,7 @@ $$
 The two terms to note in the equation above are $\frac{T_{stance} \cdot V_{COM}}{2}$, which is the feedforward term and $K_{step} \cdot (V_{COM} - V_{desired})$, which is the feedback term. The feedback term is important to either add or subtract to the feedforward term to increase or decrease the speed of the robot. This term is positive when $V_{COM}$ is greater than the desired velocity and consequently the next foot position goes further in front to act as a brake. When $V_{COM}$ is lower than the desired velocity of the body, the next foot position is shorter, resulting in a speed up.
 
 ### Step 2
+
 The next step is to get a trajectory for the foot from the current position to the desired position. I chose a parabolic trajectory for the foot to move along like in the image below. Since the robot is moving along the x-axis, the trajectory is in the x-z plane. I use the equation below (3) with the total time the foot arc should take ($T_{swing}$) as a root to get a parabolic equation between 0 and $T_{swing}$ and multiply by a scaling constant to change the max height for the z coordinate. The x coordinate is simply $\Delta P_{foot} \cdot \frac{t}{T_{swing}}$
 
 $$
@@ -63,6 +64,7 @@ z = Height \cdot t \cdot (t - T_{swing})
 $$
 
 ### Step 3
+
 The last step is more involved and requires getting the forces applied to each foot of the leg to get to a point along the parabola, and using that to calculate the joint torques. 
 
 To get the forces for the foot of each leg, I use a PD controller that is applied at every timestep. The PD controller equation is below (4).
@@ -212,7 +214,6 @@ $$
 
 With the equations above representing $\dot X$, the matrix equation can be written with $A$ and $B$ below.
 
-
 $$
 A = 
 \begin{bmatrix}
@@ -237,6 +238,7 @@ O_{1 \times 3} & O_{1 \times 3} & O_{1 \times 3} & O_{1 \times 3}
 $$
 
 ## Step 2
+
 Model predictive control is simply finding a series of $n$ control inputs over $n$ timesteps that gets the desired state at each timestep. For my implementation, I did prediction MPC over time horizon of 10 timesteps with each timestep being 0.03 seconds. For illustrating the math below, I will show that calculation for 3 timesteps in the future.
 
 The linearized model for 0.03 seconds is illustrated above. In MPC, the equality constraint equations simply show what the state at the end of each timestep should be using the linearized model. The constraint equations for three timesteps are below where $u[k+n]_{12x1}$ is the control for each timestep and $x[k+n]_{13x1}$ is the state for each timestep and A and B are from the linearized model from step 2.
@@ -284,5 +286,6 @@ B_{eq} = A_{eq}X
 $$
 
 ## Step 3
+
 This last step is using quadratic programming to optimize a cost function representing the diparity between the desired state at each of the 3 timesteps and the predicted state.
 
