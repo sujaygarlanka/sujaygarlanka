@@ -78,7 +78,6 @@ $$
 F = K_{p} \cdot (P_{foot}^{d}(t) - P_{foot}) + K_{d} \cdot (\dot P_{foot}^{d}(t) - \dot P_{foot}) \tag{1}
 $$
 
-
 Once the forces for the foot are calculated, they need to be converted to torques because that control input for the quadruped. The torques can be calculated using the equation below (5).
 
 $J_{i}(q)^{T}$ - This is the transpose of the jacobian of the forward kinematics for a leg. The forward kinematics is simply an equation mapping the 3 joint angles of a leg to cartesian coordinate in the robot's frame.
