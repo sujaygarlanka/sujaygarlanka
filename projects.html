@@ -15,7 +15,7 @@
             a.appendChild(r);
         })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
     </script>
-    <script type="module">
+    <!-- <script type="module">
         import ZeroMd from "https://cdn.jsdelivr.net/npm/zero-md@3"
         customElements.define('zero-md', class extends ZeroMd {
           parseKatex(text) {
@@ -25,7 +25,7 @@
             })
           }
         })
-    </script>
+    </script> -->
     <!-- Import element definition -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -33,6 +33,7 @@
     <script src="js/main.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
     <link rel="stylesheet" href="css/geist-ui.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -72,7 +73,7 @@
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="quad-locomotion-content">
                         <zero-md no-shadow=true
-                            src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/projects/quadruped_locomotion.md">
+                            src="http://127.0.0.1:8080/projects/quadruped_locomotion.md">
                             <template>
                                 <link rel="stylesheet" href="css/markdown.css">
                                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11/styles/github.min.css" />
