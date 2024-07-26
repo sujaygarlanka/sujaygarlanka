@@ -94,22 +94,23 @@ window.addEventListener('resize', () => {
 })
 
 
-let predictionFcnId;
-async function predict(model) {
-    const startTime = performance.now();
-    let state = environment.task.getObservation();
-    state = tf.tensor2d([state], [1, environment.actionSpace], 'float32');
-    const output = model.predict(state)
-    let action = await tf.argMax(output, 1).data();
-    action = action[0]
-    environment.applyAction(action);
-    console.log(action);
-    console.log(performance.now() - startTime);
-}
+// let predictionFcnId;
+// async function predict(model) {
+//     // const startTime = performance.now();
+//     let state = environment.task.getObservation();
+//     state = tf.tensor2d([state], [1, environment.observationSpace], 'float32');
+//     const output = model.predict(state)
+//     let action = await tf.argMax(output, 1).data();
+//     action = action[0]
+//     environment.applyAction(action);
+//     // console.log(action);
+//     // console.log(performance.now() - startTime);
+//     // environment.reset()
+// }
 // tf.setBackend('webgl');
-tf.loadLayersModel('http://localhost:8080/js/navigation_policy/model.json').then((model) => {
-    predictionFcnId = setInterval(() => {predict(model)}, 500);
-});
+// tf.loadLayersModel('http://localhost:8080/js/navigation_policy/model.json').then((model) => {
+//     predictionFcnId = setInterval(() => {predict(model)}, 2000);
+// });
 
 /**
  * Animate
@@ -120,7 +121,7 @@ const tick = () => {
     controls.update();
 
     // Update physics world
-    environment.step();
+    const [nextState, reward, done] = environment.step();
 
     // Update the scene visuals (spline)
     for (const name in objectVisuals) {

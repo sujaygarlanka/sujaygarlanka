@@ -23,40 +23,46 @@ class Robot {
             case 0:
                 this.vehicle.applyEngineForce(maxForce, 0)
                 this.vehicle.applyEngineForce(maxForce, 1)
-                this.vehicle.applyEngineForce(maxForce, 2)
-                this.vehicle.applyEngineForce(maxForce, 3)
+                // this.vehicle.applyEngineForce(maxForce, 2)
+                // this.vehicle.applyEngineForce(maxForce, 3)
                 break
             case 1:
                 this.vehicle.applyEngineForce(-maxForce, 0)
                 this.vehicle.applyEngineForce(-maxForce, 1)
-                this.vehicle.applyEngineForce(-maxForce, 2)
-                this.vehicle.applyEngineForce(-maxForce, 3)
+                // this.vehicle.applyEngineForce(-maxForce, 2)
+                // this.vehicle.applyEngineForce(-maxForce, 3)
                 break
             case 2:
-                this.vehicle.applyEngineForce(maxForce * 10, 0)
-                this.vehicle.applyEngineForce(-maxForce * 10, 1)
-                this.vehicle.applyEngineForce(maxForce * 10, 2)
-                this.vehicle.applyEngineForce(-maxForce * 10, 3)
+                // this.vehicle.applyEngineForce(maxForce, 0)
+                // this.vehicle.applyEngineForce(-maxForce, 1)
+                // this.vehicle.applyEngineForce(maxForce, 2)
+                // this.vehicle.applyEngineForce(-maxForce, 3)
+                this.vehicle.setSteeringValue(0.5, 2)
+                this.vehicle.setSteeringValue(0.5, 3)
                 break
             case 3:
-                this.vehicle.applyEngineForce(-maxForce * 10, 0)
-                this.vehicle.applyEngineForce(maxForce * 10, 1)
-                this.vehicle.applyEngineForce(-maxForce * 10, 2)
-                this.vehicle.applyEngineForce(maxForce * 10, 3)
+                // this.vehicle.applyEngineForce(-maxForce * 10, 0)
+                // this.vehicle.applyEngineForce(maxForce * 10, 1)
+                // this.vehicle.applyEngineForce(-maxForce * 10, 2)
+                // this.vehicle.applyEngineForce(maxForce * 10, 3)
+                this.vehicle.setSteeringValue(-0.5, 2)
+                this.vehicle.setSteeringValue(-0.5, 3)
                 break
             case 4:
-                this.hinge.setMotorSpeed(-1)
-                break
-            case 5:
-                this.hinge.setMotorSpeed(1)
-                break
-            case 6:
                 this.vehicle.applyEngineForce(0, 0)
                 this.vehicle.applyEngineForce(0, 1)
                 this.vehicle.applyEngineForce(0, 2)
                 this.vehicle.applyEngineForce(0, 3)
-                this.hinge.setMotorSpeed(0)
+                this.vehicle.setSteeringValue(0.0, 2)
+                this.vehicle.setSteeringValue(0.0, 3)
+                // this.hinge.setMotorSpeed(0)
                 break
+            // case 5:
+            //     this.hinge.setMotorSpeed(-1)
+            //     break
+            // case 6:
+            //     this.hinge.setMotorSpeed(1)
+            //     break
         }
     }
 
@@ -67,46 +73,47 @@ class Robot {
         const chassisBody = new CANNON.Body({ mass: 10 })
         chassisBody.addShape(chassisShape)
 
-        // Grabber front
-        const grabber = new CANNON.Body({ mass: 0.1 });
-        const lengthToPivot = 3.0;
-        const distanceFromChassis = 1.3;
-        let quat = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
-        grabber.addShape(new CANNON.Box(new CANNON.Vec3(bodyWidth, 0.15, 0.15)), new CANNON.Vec3(lengthToPivot, 0.0, 0.0), quat);
 
-        // Grabber left
-        grabber.addShape(new CANNON.Box(new CANNON.Vec3(lengthToPivot / 2, 0.15, 0.05)), new CANNON.Vec3(lengthToPivot / 2, 0.0, -bodyWidth - 0.1));
+        // // Grabber front
+        // const grabber = new CANNON.Body({ mass: 0.1 });
+        // const lengthToPivot = 3.0;
+        // const distanceFromChassis = 1.3;
+        // let quat = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
+        // grabber.addShape(new CANNON.Box(new CANNON.Vec3(bodyWidth, 0.15, 0.15)), new CANNON.Vec3(lengthToPivot, 0.0, 0.0), quat);
 
-        // Grabber right
-        grabber.addShape(new CANNON.Box(new CANNON.Vec3(lengthToPivot / 2, 0.15, 0.05)), new CANNON.Vec3(lengthToPivot / 2, 0.0, bodyWidth + 0.1));
+        // // Grabber left
+        // grabber.addShape(new CANNON.Box(new CANNON.Vec3(lengthToPivot / 2, 0.15, 0.05)), new CANNON.Vec3(lengthToPivot / 2, 0.0, -bodyWidth - 0.1));
 
-        // let pos = chassisBody.pointToWorldFrame(new CANNON.Vec3(10, -1.0, 0.0));
-        // grabber.position.copy(pos);
-        this.world.addBody(grabber);
+        // // Grabber right
+        // grabber.addShape(new CANNON.Box(new CANNON.Vec3(lengthToPivot / 2, 0.15, 0.05)), new CANNON.Vec3(lengthToPivot / 2, 0.0, bodyWidth + 0.1));
 
-        // Define the hinge constraint
-        const pivotA = new CANNON.Vec3(distanceFromChassis, 0, 0); // Pivot point relative to the first body
-        const pivotB = new CANNON.Vec3(0, 0, 0); // Pivot point relative to the second body
-        // const pivotB = new CANNON.Vec3(-1.5, 0, 0); // Pivot point relative to the second body
-        const axisA = new CANNON.Vec3(0, 0, 1); // Axis of rotation (e.g., around the z-axis)
-        const axisB = new CANNON.Vec3(0, 0, 1); // Axis of rotation (e.g., around the z-axis)
+        // // let pos = chassisBody.pointToWorldFrame(new CANNON.Vec3(10, -1.0, 0.0));
+        // // grabber.position.copy(pos);
+        // this.world.addBody(grabber);
 
-        // Create and add the hinge constraint
-        const hingeConstraint = new CANNON.HingeConstraint(chassisBody, grabber, {
-            pivotA: pivotA,
-            pivotB: pivotB,
-            axisA: axisA,
-            axisB: axisB
-        });
-        hingeConstraint.collideConnected = true
-        hingeConstraint.enableMotor()
-        this.world.addConstraint(hingeConstraint);
+        // // Define the hinge constraint
+        // const pivotA = new CANNON.Vec3(distanceFromChassis, 0, 0); // Pivot point relative to the first body
+        // const pivotB = new CANNON.Vec3(0, 0, 0); // Pivot point relative to the second body
+        // // const pivotB = new CANNON.Vec3(-1.5, 0, 0); // Pivot point relative to the second body
+        // const axisA = new CANNON.Vec3(0, 0, 1); // Axis of rotation (e.g., around the z-axis)
+        // const axisB = new CANNON.Vec3(0, 0, 1); // Axis of rotation (e.g., around the z-axis)
+
+        // // Create and add the hinge constraint
+        // const hingeConstraint = new CANNON.HingeConstraint(chassisBody, grabber, {
+        //     pivotA: pivotA,
+        //     pivotB: pivotB,
+        //     axisA: axisA,
+        //     axisB: axisB
+        // });
+        // hingeConstraint.collideConnected = true
+        // // hingeConstraint.enableMotor()
+        // this.world.addConstraint(hingeConstraint);
 
         // Create the vehicle
         const vehicle = new CANNON.RaycastVehicle({
             chassisBody,
         })
-
+        const wheelMaterial = new CANNON.Material('wheel')
         const wheelOptions = {
             radius: 0.4,
             directionLocal: new CANNON.Vec3(0, -1, 0),
@@ -122,6 +129,7 @@ class Robot {
             maxSuspensionTravel: 0.3,
             customSlidingRotationalSpeed: -30,
             useCustomSlidingRotationalSpeed: true,
+            material: wheelMaterial,
         }
 
         // Add the wheels
@@ -145,7 +153,7 @@ class Robot {
 
         // Add the wheel bodies
         const wheelBodies = []
-        const wheelMaterial = new CANNON.Material('wheel')
+        // const wheelMaterial = new CANNON.Material('wheel')
         vehicle.wheelInfos.forEach((wheel) => {
             const cylinderShape = new CANNON.Cylinder(wheel.radius, wheel.radius, wheel.radius / 2, 20)
             const wheelBody = new CANNON.Body({
@@ -182,7 +190,7 @@ class Robot {
         this.vehicle = vehicle
         this.chassisBody = chassisBody
         this.wheelBodies = wheelBodies
-        this.hinge = hingeConstraint
+        // this.hinge = hingeConstraint
     }
 
     get position() {
@@ -194,7 +202,7 @@ class Robot {
     }
 
     get actionSpace() {
-        return 7
+        return 5
     }
 }
 
@@ -262,7 +270,7 @@ export default class Environment {
         this.createWorld()
         this.createRobot()
         // this.createBlocks()
-        // this.setupControls()
+        this.setupControls()
         this.task = new Task(this, new CANNON.Vec3(0, 0, 0), new CANNON.Quaternion())
         this.reset()
     }
@@ -282,6 +290,7 @@ export default class Environment {
         world.allowSleep = true
         world.gravity.set(0, -9.82, 0)
         world.solver.iterations = 10
+        world.defaultContactMaterial.friction = 1.0
 
         // Create a plane
         const groundShape = new CANNON.Plane()
@@ -290,12 +299,13 @@ export default class Environment {
         groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2)
         world.addBody(groundBody)
 
+
         this.world = world
     }
 
     reset() {
         this.robot.position.set(0, 2.5, 0)
-        this.robot.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), 0)
+        // this.robot.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), 0)
         // let randomOrientation = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.random() * Math.PI)
         let randomOrientation = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), 0)
         return this.task.reset(new CANNON.Vec3(2, 0, 0), randomOrientation)
@@ -310,7 +320,7 @@ export default class Environment {
     }
 
     step(timeStep = 1 / 60) {
-        this._physicsStep(timeStep)
+        this._physicsStep(1/60)
         return this.task.step()
     }
 
@@ -335,28 +345,28 @@ export default class Environment {
         document.addEventListener('keydown', (event) => {
             switch (event.key) {
                 case 'ArrowUp':
-                    this.robot.step(0)
+                    this.applyAction(0)
                     break
 
                 case 'ArrowDown':
-                    this.robot.step(1)
+                    this.applyAction(1)
                     break
 
                 case 'ArrowLeft':
-                    this.robot.step(2)
+                    this.applyAction(2)
                     break
 
                 case 'ArrowRight':
-                    this.robot.step(3)
+                    this.applyAction(3)
                     break
 
-                case 'w':
-                    this.robot.step(4)
-                    break
+                // case 'w':
+                //     this.robot.step(5)
+                //     break
 
-                case 's':
-                    this.robot.step(5)
-                    break
+                // case 's':
+                //     this.robot.step(6)
+                //     break
 
             }
         })
@@ -364,7 +374,7 @@ export default class Environment {
         // Reset force on keyup
         document.addEventListener('keyup', (event) => {
             if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 's'].includes(event.key)) {
-                this.robot.step(6)
+                this.applyAction(4)
             }
         })
     }

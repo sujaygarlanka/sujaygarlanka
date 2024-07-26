@@ -65,8 +65,9 @@ class ReplayBuffer {
 }
 
 class DQNAgent {
-    constructor(model, actionSpaceSize, nEpisodes) {
+    constructor(model, actionSpaceSize, obsSpaceSize, nEpisodes) {
         this.actionSpaceSize = actionSpaceSize;
+        this.obsSpaceSize = obsSpaceSize;
         this.memory = new ReplayBuffer(2000);
 
         this.gamma = 0.95;  // discount rate
@@ -82,7 +83,7 @@ class DQNAgent {
         if (!evalMode && Math.random() <= this.epsilon) {
             return Math.floor(Math.random() * this.actionSpaceSize);
         }
-        const data = tf.tensor2d([state], [1, this.actionSpaceSize], 'float32');
+        const data = tf.tensor2d([state], [1, this.obsSpaceSize], 'float32');
         const actValues = this.model.predict(data);
         return tf.argMax(actValues, 1).dataSync()[0];
     }
@@ -134,19 +135,18 @@ function evaluate(env, agent) {
     let episodeLengths = [];
     let episodeRewards = [];
 
-    for (let e = 0; e < 10; e++) {
+    for (let e = 0; e < 3; e++) {
         // Reset the environment and get the initial state
         let state = env.reset();
         let done = false;
         let counter = 0;
         let totalReward = 0;
-
         while (!done) {
             // Agent takes an action
             let action = agent.act(state, true);
-
+            env.applyAction(action);
             // Environment steps with the action and returns next state, reward, and done flag
-            let stepResult = env.step(action);
+            let stepResult = env.step();
             let nextState = stepResult[0];
             let reward = stepResult[1];
             done = stepResult[2];
@@ -167,8 +167,9 @@ function evaluate(env, agent) {
 }
 
 
-async function train(agent, env, nEpisodes, batchSize) {
-    let bestReward = -Infinity;
+async function train(agent, env, eval_env, nEpisodes, batchSize) {
+    // let bestReward = -Infinity;\
+    let bestReward = Infinity;
     let eval_lens = [];
     let eval_rewards = [];
     let state;
@@ -179,8 +180,6 @@ async function train(agent, env, nEpisodes, batchSize) {
         state = env.reset();
         eps_len = 0;
         eps_reward = 0;
-        console.log(state)
-        console.log(env.task.getReward())
         while (true) {
             const action = agent.act(state);
             env.applyAction(action);
@@ -201,12 +200,12 @@ async function train(agent, env, nEpisodes, batchSize) {
         }
         agent.updateEpsilon()
 
-        if (e % 10 === 0) {
-            const [eps_len_eval, eps_reward_eval] = evaluate(env, agent); // Assuming eval is a function that evaluates the agent
+        if (e % 3 === 0) {
+            const [eps_len_eval, eps_reward_eval] = evaluate(eval_env, agent); // Assuming eval is a function that evaluates the agent
             eval_lens.push(eps_len_eval);
             eval_rewards.push(eps_reward_eval);
             console.log(`episode: ${e}/${nEpisodes}, eval score: ${eps_len_eval}, eval reward: ${eps_reward_eval}`);
-            if (eps_reward_eval > bestReward) {
+            if (eps_reward_eval < bestReward) {
                 bestReward = eps_reward_eval;
                 await agent.model.save('file://./navigation_policy');
                 console.log('Model saved');
@@ -219,7 +218,8 @@ const batchSize = 32;
 const nEpisodes = 100;
 
 const env = new Environment();
+const eval_env = new Environment();
 const model = createModel(env.observationSpace, env.actionSpace, batchSize);
-const agent = new DQNAgent(model, env.actionSpace, nEpisodes);
-train(agent, env, nEpisodes, batchSize);
+const agent = new DQNAgent(model, env.actionSpace, env.observationSpace, nEpisodes);
+train(agent, env, eval_env, nEpisodes, batchSize);
 
