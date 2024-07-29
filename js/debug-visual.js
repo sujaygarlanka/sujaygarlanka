@@ -94,34 +94,43 @@ window.addEventListener('resize', () => {
 })
 
 
-// let predictionFcnId;
-// async function predict(model) {
-//     // const startTime = performance.now();
-//     let state = environment.task.getObservation();
-//     state = tf.tensor2d([state], [1, environment.observationSpace], 'float32');
-//     const output = model.predict(state)
-//     let action = await tf.argMax(output, 1).data();
-//     action = action[0]
-//     environment.applyAction(action);
-//     // console.log(action);
-//     // console.log(performance.now() - startTime);
-//     // environment.reset()
-// }
+let predictionFcnId;
+async function predict(model) {
+    // const startTime = performance.now();
+    let state = environment.task.getObservation();
+    state = tf.tensor2d([state], [1, environment.observationSpace], 'float32');
+    const output = model.predict(state)
+    // console.log(await output.print());
+    let action = await tf.argMax(output, 1).data();
+    action = action[0]
+    console.log(action);
+    environment.applyAction(action);
+    // console.log(performance.now() - startTime);
+    // environment.reset()
+}
 // tf.setBackend('webgl');
-// tf.loadLayersModel('http://localhost:8080/js/navigation_policy/model.json').then((model) => {
-//     predictionFcnId = setInterval(() => {predict(model)}, 2000);
-// });
+tf.loadLayersModel('http://localhost:8080/js/navigation_policy/model.json').then((model) => {
+    predictionFcnId = setInterval(() => {predict(model)}, 200);
+});
 
 /**
  * Animate
  */
 
+let totalReward = 0;
 const tick = () => {
     // Update controls
     controls.update();
 
-    // Update physics world
-    const [nextState, reward, done] = environment.step();
+    // Update physics worlds
+    // environment.applyAction(0); 
+    const [nextState, reward, done] = environment.step(true);
+    totalReward += reward;
+    if (done) {
+        console.log(totalReward);
+        environment.reset();
+        totalReward = 0;
+    }
 
     // Update the scene visuals (spline)
     for (const name in objectVisuals) {

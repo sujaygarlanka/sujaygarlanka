@@ -10,7 +10,7 @@
         }
 
         #canvas {
-          height: 100vh;
+          height: 50vh;
         }
 
     </style>
@@ -31,12 +31,46 @@
       }
    </script>
    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-</head>
+   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
 <body>
     <div id="canvas">
       <canvas id="test" class="webgl"></canvas>
     </div>
+    <div id="plotly-chart" style="width:100%;"></div>
     
     <script type="module" src="./js/debug-visual.js"></script>
+    <script>
+      async function loadJsonFile(url) {
+          try {
+              const response = await fetch(url);
+              if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              const jsonData = await response.json();
+              return jsonData;
+          } catch (err) {
+              console.error('Error fetching or parsing the file:', err);
+          }
+      }
+
+      document.addEventListener('DOMContentLoaded', async function() {
+          const jsonData = await loadJsonFile('./js/data.json');
+          // Layout for the plot
+          const layout = {
+              title: 'Plot',
+              xaxis: {
+                  title: 'x'
+              },
+              yaxis: {
+                  title: 'y'
+              }
+          };
+
+          // Plotting the values
+          Plotly.newPlot('plotly-chart', jsonData, layout);
+      });
+    </script>
+    
 </body>
 </html>

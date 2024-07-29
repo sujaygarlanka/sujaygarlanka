@@ -1,82 +1,51 @@
-import tf from '@tensorflow/tfjs-node';
+import tf from '@tensorflow/tfjs-node-gpu';
+import Environment from './environment.js';
+import fs from 'fs';
 
-// Example buffer array
-const buffer = [
-    {
-        state: [
-            -0.4940644837801413,
-            2.3257690177973416,
-            -0.1305248817038711,
-            -0.000020222126655508873,
-            -0.10534113961017255,
-            0.00014966111883097792,
-            0.994436132437999
-        ],
-        action: 5,
-        reward: -3.4178533177807977,
-        nextState: [
-            -0.5009567253146936,
-            2.3256217323615562,
-            -0.13572147190494488,
-            -0.00005840305590235634,
-            -0.1042974299404198,
-            0.0005207287113017051,
-            0.994546012780965
-        ],
-        done: false
-    },
-    {
-        state: [
-            -0.5009567253146936,
-            2.3256217323615562,
-            -0.13572147190494488,
-            -0.00005840305590235634,
-            -0.1042974299404198,
-            0.0005207287113017051,
-            0.994546012780965
-        ],
-        action: 3,
-        reward: -3.42313728397016,
-        nextState: [
-            -0.5080210162945955,
-            2.325528500418252,
-            -0.14005941765431854,
-            -0.000056199799869033355,
-            -0.10597441733991478,
-            0.0004676335147390169,
-            0.9943687449985262
-        ],
-        done: false
+async function evaluate(env, model) {
+    let episodeLengths = [];
+    let episodeRewards = [];
+
+    for (let e = 0; e < 10; e++) {
+        // Reset the environment and get the initial state
+        let state = env.reset();
+        let done = false;
+        let counter = 0;
+        let totalReward = 0;
+        while (!done) {
+            // Agent takes an action
+            state = tf.tensor2d([state], [1, env.observationSpace], 'float32');
+            const output = model.predict(state)
+            let action = await tf.argMax(output, 1).data();
+            action = action[0]
+            env.applyAction(action);
+            // Environment steps with the action and returns next state, reward, and done flag
+            let stepResult;
+            for (let i = 0; i < 12; i++) {
+                stepResult = env.step();
+                let nextState = stepResult[0];
+                let reward = stepResult[1];
+                done = stepResult[2];
+
+                state = nextState;
+                counter += 1;
+                totalReward += reward;
+            }
+        }
+
+        episodeRewards.push(totalReward);
+        episodeLengths.push(counter);
     }
-];
 
-// Batch size
-const batchSize = 2;
-
-// Create a dataset from the buffer, shuffle it, and batch it
-const dataset = tf.data.array(buffer)
-    .shuffle(buffer.length)
-    .batch(batchSize);
-
-async function test() {
-    // Iterate through the dataset and print the batches
-    let vals = []
-    await dataset.forEachAsync(data => {
-        vals.push(data);
-        // console.log('Batch:');
-        // console.log('State:', data.state.print());
-        // console.log('Action:', data.action.print());
-        // console.log('Reward:', data.reward.print());
-        // console.log('Next State:', data.nextState.print());
-        // console.log('Done:', data.done.print());
-    });
-    return vals[0];
+    let meanEpisodeLength = episodeLengths.reduce((a, b) => a + b, 0) / episodeLengths.length;
+    let meanEpisodeReward = episodeRewards.reduce((a, b) => a + b, 0) / episodeRewards.length;
+    console.log(meanEpisodeReward)
+    return [meanEpisodeLength, meanEpisodeReward];
 }
 
-async function main() {
-    const data = await test();
-    console.log(data.reward);
-}
+const eval_env = new Environment();
+tf.loadLayersModel("http://localhost:8080/js/navigation_policy/model.json").then((model) => {
+    evaluate(eval_env, model);
+});
 
-main();
 

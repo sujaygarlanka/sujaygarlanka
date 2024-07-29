@@ -56,7 +56,7 @@ class Robot {
                 this.vehicle.applyEngineForce(0, 3)
                 // this.vehicle.setSteeringValue(0.0, 2)
                 // this.vehicle.setSteeringValue(0.0, 3)
-                this.hinge.setMotorSpeed(0)
+                // this.hinge.setMotorSpeed(0)
                 break
             case 5:
                 this.hinge.setMotorSpeed(-1)
@@ -75,40 +75,40 @@ class Robot {
         chassisBody.addShape(chassisShape)
 
 
-        // Grabber front
-        const grabber = new CANNON.Body({ mass: 0.1 });
-        const lengthToPivot = 3.0;
-        const distanceFromChassis = 1.3;
-        let quat = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
-        grabber.addShape(new CANNON.Box(new CANNON.Vec3(bodyWidth, 0.15, 0.15)), new CANNON.Vec3(lengthToPivot, 0.0, 0.0), quat);
+        // // Grabber front
+        // const grabber = new CANNON.Body({ mass: 0.1 });
+        // const lengthToPivot = 3.0;
+        // const distanceFromChassis = 1.3;
+        // let quat = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
+        // grabber.addShape(new CANNON.Box(new CANNON.Vec3(bodyWidth, 0.15, 0.15)), new CANNON.Vec3(lengthToPivot, 0.0, 0.0), quat);
 
-        // Grabber left
-        grabber.addShape(new CANNON.Box(new CANNON.Vec3(lengthToPivot / 2, 0.15, 0.05)), new CANNON.Vec3(lengthToPivot / 2, 0.0, -bodyWidth - 0.1));
+        // // Grabber left
+        // grabber.addShape(new CANNON.Box(new CANNON.Vec3(lengthToPivot / 2, 0.15, 0.05)), new CANNON.Vec3(lengthToPivot / 2, 0.0, -bodyWidth - 0.1));
 
-        // Grabber right
-        grabber.addShape(new CANNON.Box(new CANNON.Vec3(lengthToPivot / 2, 0.15, 0.05)), new CANNON.Vec3(lengthToPivot / 2, 0.0, bodyWidth + 0.1));
+        // // Grabber right
+        // grabber.addShape(new CANNON.Box(new CANNON.Vec3(lengthToPivot / 2, 0.15, 0.05)), new CANNON.Vec3(lengthToPivot / 2, 0.0, bodyWidth + 0.1));
 
-        // let pos = chassisBody.pointToWorldFrame(new CANNON.Vec3(10, -1.0, 0.0));
-        // grabber.position.copy(pos);
-        this.world.addBody(grabber);
+        // // let pos = chassisBody.pointToWorldFrame(new CANNON.Vec3(10, -1.0, 0.0));
+        // // grabber.position.copy(pos);
+        // this.world.addBody(grabber);
 
-        // Define the hinge constraint
-        const pivotA = new CANNON.Vec3(distanceFromChassis, 0, 0); // Pivot point relative to the first body
-        const pivotB = new CANNON.Vec3(0, 0, 0); // Pivot point relative to the second body
-        // const pivotB = new CANNON.Vec3(-1.5, 0, 0); // Pivot point relative to the second body
-        const axisA = new CANNON.Vec3(0, 0, 1); // Axis of rotation (e.g., around the z-axis)
-        const axisB = new CANNON.Vec3(0, 0, 1); // Axis of rotation (e.g., around the z-axis)
+        // // Define the hinge constraint
+        // const pivotA = new CANNON.Vec3(distanceFromChassis, 0, 0); // Pivot point relative to the first body
+        // const pivotB = new CANNON.Vec3(0, 0, 0); // Pivot point relative to the second body
+        // // const pivotB = new CANNON.Vec3(-1.5, 0, 0); // Pivot point relative to the second body
+        // const axisA = new CANNON.Vec3(0, 0, 1); // Axis of rotation (e.g., around the z-axis)
+        // const axisB = new CANNON.Vec3(0, 0, 1); // Axis of rotation (e.g., around the z-axis)
 
-        // Create and add the hinge constraint
-        const hingeConstraint = new CANNON.HingeConstraint(chassisBody, grabber, {
-            pivotA: pivotA,
-            pivotB: pivotB,
-            axisA: axisA,
-            axisB: axisB
-        });
-        hingeConstraint.collideConnected = true
-        hingeConstraint.enableMotor()
-        this.world.addConstraint(hingeConstraint);
+        // // Create and add the hinge constraint
+        // const hingeConstraint = new CANNON.HingeConstraint(chassisBody, grabber, {
+        //     pivotA: pivotA,
+        //     pivotB: pivotB,
+        //     axisA: axisA,
+        //     axisB: axisB
+        // });
+        // hingeConstraint.collideConnected = true
+        // hingeConstraint.enableMotor()
+        // this.world.addConstraint(hingeConstraint);
 
         // Create the vehicle
         const vehicle = new CANNON.RaycastVehicle({
@@ -191,8 +191,14 @@ class Robot {
         this.vehicle = vehicle
         this.chassisBody = chassisBody
         this.wheelBodies = wheelBodies
-        this.hinge = hingeConstraint
+        // this.hinge = hingeConstraint
     }
+    
+    completeStop(){
+        this.vehicle.chassisBody.velocity.set(0, 0, 0);
+        this.vehicle.chassisBody.angularVelocity.set(0, 0, 0);
+    }
+    
 
     get position() {
         return this.chassisBody.position
@@ -228,29 +234,54 @@ class Task {
     }
 
     _normalizePosition(position) {
-        const maxPosition = 30
+        const maxPosition = 10
         return Math.max(-1, Math.min(1, position / maxPosition))
 
     }
     getObservation() {
         const position = this.env.robot.position
         const quaternion = this.env.robot.quaternion
+        const finalPosition = this.finalPosition
+        const finalQuaternion = this.finalQuaternion
 
-        return [this._normalizePosition(position.x), this._normalizePosition(position.y), this._normalizePosition(position.z), quaternion.x, quaternion.y, quaternion.z, quaternion.w]
+        return [
+            this._normalizePosition(position.x), 
+            this._normalizePosition(position.y), 
+            this._normalizePosition(position.z), 
+            quaternion.x, 
+            quaternion.y, 
+            quaternion.z, 
+            quaternion.w,
+            this._normalizePosition(finalPosition.x),
+            this._normalizePosition(finalPosition.y),
+            this._normalizePosition(finalPosition.z),
+            finalQuaternion.x,
+            finalQuaternion.y,
+            finalQuaternion.z,
+            finalQuaternion.w
+        ]
     }
 
     getReward() {
         // Reward function
+        const LAMBDA = 10
         const positionError = this.env.robot.position.distanceTo(this.finalPosition)
+        let positionReward = LAMBDA*(Math.E**-positionError)
+
+        // Goal Reward
+        if (positionError < 0.2) {
+            positionReward += 100
+        }
+
         let orientationError = this.finalQuaternion.inverse().mult(this.env.robot.quaternion);
         orientationError = Math.sqrt(Math.pow(orientationError.x, 2) + Math.pow(orientationError.y, 2) + Math.pow(orientationError.z, 2) + Math.pow(orientationError.w, 2))
-        return -positionError
+        return positionReward
         // return -positionError - orientationError
     }
 
     isDone() {
         // Termination function
-        if (this.num_step == 1000) {
+        if (this.num_step >= 700) {
             return true
         }
         else {
@@ -259,7 +290,7 @@ class Task {
     }
 
     get getObservationSpace() {
-        return 7
+        return 14
     }
 }
 
@@ -271,7 +302,7 @@ export default class Environment {
         this.createWorld()
         this.createRobot()
         // this.createBlocks()
-        this.setupControls()
+        // this.setupControls()
         this.task = new Task(this, new CANNON.Vec3(0, 0, 0), new CANNON.Quaternion())
         this.reset()
     }
@@ -282,6 +313,10 @@ export default class Environment {
 
     get observationSpace() {
         return this.task.getObservationSpace
+    }
+
+    randomRange(min, max) {
+        return Math.random() * (max - min) + min
     }
 
     createWorld() {
@@ -299,28 +334,35 @@ export default class Environment {
         groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2)
         world.addBody(groundBody)
 
-
         this.world = world
     }
 
     reset() {
+        this.robot.completeStop()
         this.robot.position.set(0, 2.5, 0)
         this.robot.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), 0)
         // let randomOrientation = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.random() * Math.PI)
         let randomOrientation = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), 0)
-        return this.task.reset(new CANNON.Vec3(2, 0, 0), randomOrientation)
+        const randomPosition = new CANNON.Vec3(this.randomRange(-5, 5), 2.0, this.randomRange(-5, 5))
+        // return this.task.reset(new CANNON.Vec3(0, 2.0, 5), randomOrientation)
+        return this.task.reset(randomPosition, randomOrientation)
     }
 
     applyAction(action) {
         this.robot.step(action)
     }
 
-    _physicsStep(timeStep) {
-        this.world.step(timeStep)
+    _physicsStep(fixed) {
+        if (fixed) {
+            this.world.fixedStep()
+        }
+        else {
+            this.world.step(1 / 60)
+        }
     }
 
-    step(timeStep = 1 / 60) {
-        this._physicsStep(1/60)
+    step(fixed=false) {
+        this._physicsStep(fixed)
         return this.task.step()
     }
 
