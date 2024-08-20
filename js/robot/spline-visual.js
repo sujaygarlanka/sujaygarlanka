@@ -1,6 +1,5 @@
 import { Application } from '@splinetool/runtime';
 import Environment from 'environment';
-import * as CANNON from 'cannon-es';
 import * as THREE from 'three';
 import RobotController from 'controller';
 
@@ -17,8 +16,10 @@ document.getElementById('canvas').style.backgroundColor = 'black';
 
 // start the application and load the scene
 const spline = new Application(canvas);
+// https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode
 spline.load('https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode').then(() => {
-    // console.log(spline.findObjectByName('Robot').quaternion)
+    // document.getElementById('loader').style.display = 'none';
+    // canvas.style.display = 'block';
     for (const name of sceneObjects) {
         objectVisuals[name] = spline.findObjectByName(name);
     }
