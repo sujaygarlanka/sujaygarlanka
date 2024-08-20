@@ -1,5 +1,5 @@
 import tf, { step } from '@tensorflow/tfjs-node-gpu';
-import Environment from './environment.js';
+import Environment from '../environment.js';
 import fs from 'fs';
 
 class ReplayBuffer {

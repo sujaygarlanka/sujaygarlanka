@@ -1,5 +1,5 @@
 import tf from '@tensorflow/tfjs-node-gpu';
-import Environment from './environment.js';
+import Environment from '../environment.js';
 import fs from 'fs';
 
 async function evaluate(env, model) {

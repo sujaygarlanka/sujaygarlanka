@@ -289,8 +289,9 @@ $$
 
 This last step is using quadratic programming to optimize a cost function representing the diparity between the desired state at each of the 3 timesteps and the predicted state and the magnitude of the control inputs. So the goal is to get to the desired states with the smallest control inputs. As a reminder, these control inputs are the forces that  are applied to the feet of the robot. The quadratic cost function is the following:
 
-$$
 Q - This matrix are the gains in the cost function for the state and is the following diagonal matrix. For example, 40, 50, and 60 are the gains for prioritizing the position of the rigid body in the state to match the position in the desired state.
+
+$$
 Q_{13x13} = \begin{bmatrix}
   40 & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  \\
   0  & 50 & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  \\
@@ -306,8 +307,11 @@ Q_{13x13} = \begin{bmatrix}
   0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 1  & 0  \\
   0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0
 \end{bmatrix} \\
+$$
 
-R_{12x12} - This diagonal matrix are the gains for the forces for a single foot
+$R_{12x12}$ - This diagonal matrix are the gains for the forces for a single foot
+
+$$
 \begin{bmatrix}
 0.01 & 0 & 0 \\
 0 & 0.01 & 0 \\
@@ -319,7 +323,7 @@ $$
 J = \frac{1}{2}(x-x_{desired})^{T}Q(x-x_{desired}) + \frac{1}{2}u^TRu
 $$
 
-Th equation above needs to be simplified to put into a form that can be passed into the *quadprog* in MATLAB. 
+Th equation above needs to be simplified to put into a form that can be passed into *quadprog* in MATLAB. 
 
 $$
 J = \frac{1}{2}x^TQx - \frac{1}{2}x^TQx_{desired} - \frac{1}{2}x_{desired}^TQx + \frac{1}{2}u^TRu\\
@@ -327,7 +331,7 @@ J = \frac{1}{2}x^TQx - \frac{1}{2}x^TQx_{desired} - \frac{1}{2}x_{desired}^TQx +
 = \underbrace{\frac{1}{2}x^TQx + \frac{1}{2}u^TRu}_{\frac{1}{2}XHX} + \underbrace{-x_{desired}^TQ}_{f^TX}\\
 $$
 
-The $H$ and $f$ are matrices that are passed into *quadprog*. For multiple 
+The $H$ and $f$ are matrices that are passed into *quadprog* that represent 
 
 $$
 \begin{bmatrix}
@@ -337,7 +341,5 @@ $$
   \vdots & \vdots & \vdots & \ddots & \vdots \\
   0   & 0   & 0   & \cdots & d_n
 \end{bmatrix}
-
-
 $$
 
