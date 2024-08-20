@@ -13,6 +13,7 @@ const sceneObjects = [ 'Letter 1', 'Letter 2', 'Letter 3', 'Letter 4', 'Letter 5
 
 // make sure you have a canvas in the body
 const canvas = document.getElementById('spline');
+document.getElementById('canvas').style.backgroundColor = 'black';
 
 // start the application and load the scene
 const spline = new Application(canvas);
