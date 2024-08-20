@@ -16,7 +16,7 @@ const canvas = document.getElementById('spline');
 
 // start the application and load the scene
 const spline = new Application(canvas);
-spline.load('https://sujaygarlanka.com/js/robot/scene.splinecode').then(() => {
+spline.load('https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode').then(() => {
     // console.log(spline.findObjectByName('Robot').quaternion)
     for (const name of sceneObjects) {
         objectVisuals[name] = spline.findObjectByName(name);
