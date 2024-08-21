@@ -245,7 +245,7 @@ class Robot {
     }
     
     completeStop(){
-        this.applyAction(4)
+        this.step(4, false)
         this.vehicle.chassisBody.velocity.set(0, 0, 0);
         this.vehicle.chassisBody.angularVelocity.set(0, 0, 0);
     }
