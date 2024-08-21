@@ -57,11 +57,11 @@ class Robot {
                     break
                 // Up
                 case 5:
-                    this.hinge.setMotorSpeed(-1)
+                    this.hinge.setMotorSpeed(1)
                     break
                 // Down
                 case 6:
-                    this.hinge.setMotorSpeed(1)
+                    this.hinge.setMotorSpeed(-1)
                     break
                 // Magnetize
                 case 7:
@@ -103,7 +103,7 @@ class Robot {
         // Arm front
         const arm = new CANNON.Body({ mass: 0.1 });
         const lengthToPivot = 2.1;
-        const distanceFromChassis = 1.3;
+        const distanceFromChassis = 1.1;
         let quat = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
         arm.addShape(new CANNON.Box(new CANNON.Vec3(bodyWidth, 0.15, 0.05)), new CANNON.Vec3(lengthToPivot, 0, 0.0), quat);
 
@@ -122,8 +122,6 @@ class Robot {
             return contactPoint.distanceTo(new CANNON.Vec3(lengthToPivot + 0.4, 0, 0.0)) <= 0.5
         }
 
-        // let pos = chassisBody.pointToWorldFrame(new CANNON.Vec3(10, -1.0, 0.0));
-        // arm.position.copy(pos);
         this.world.addBody(arm);
 
         const attach = (c) =>
@@ -144,14 +142,14 @@ class Robot {
 
         // Define the hinge constraint
         const height = -1.0;
-        const pivotA = new CANNON.Vec3(distanceFromChassis, height, 0); // Pivot point relative to the first body
-        const pivotB = new CANNON.Vec3(0, 0, 0); // Pivot point relative to the second body
-        // const pivotB = new CANNON.Vec3(-1.5, 0, 0); // Pivot point relative to the second body
+        // const pivotA = new CANNON.Vec3(-1.5, 0, 0); // Pivot point relative to the second body
+        const pivotA = new CANNON.Vec3(0, 0, 0); // Pivot point relative to the second body
+        const pivotB = new CANNON.Vec3(distanceFromChassis, height, 0); // Pivot point relative to the first body
         const axisA = new CANNON.Vec3(0, 0, 1); // Axis of rotation (e.g., around the z-axis)
         const axisB = new CANNON.Vec3(0, 0, 1); // Axis of rotation (e.g., around the z-axis)
 
         // Create and add the hinge constraint
-        const hingeConstraint = new CANNON.HingeConstraint(chassisBody, arm, {
+        const hingeConstraint = new CANNON.HingeConstraint(arm, chassisBody, {
             pivotA: pivotA,
             pivotB: pivotB,
             axisA: axisA,
@@ -247,6 +245,7 @@ class Robot {
     }
     
     completeStop(){
+        this.applyAction(4)
         this.vehicle.chassisBody.velocity.set(0, 0, 0);
         this.vehicle.chassisBody.angularVelocity.set(0, 0, 0);
     }
@@ -257,6 +256,15 @@ class Robot {
 
     set position(position) {
         this.chassisBody.position.copy(position)
+    }
+
+    set armPosition(position) {
+        const armPosition = this.chassisBody.pointToWorldFrame(position)
+        this.arm.position.copy(armPosition)
+    }
+
+    set armQuaternion(quaternion) {
+        this.arm.quaternion.copy(quaternion)
     }
 
     get quaternion() {
@@ -403,8 +411,7 @@ export default class Environment {
     createWorld() {
         // Create world
         const world = new CANNON.World()
-        // world.broadphase = new CANNON.SAPBroadphase(world)
-        world.allowSleep = true
+        world.broadphase = new CANNON.SAPBroadphase(world)
         world.gravity.set(0, -9.82, 0)
         world.solver.iterations = 10
 
@@ -419,8 +426,11 @@ export default class Environment {
 
     reset() {
         this.robot.completeStop()
-        this.robot.position.set(-8, 3, 5)
-        this.robot.orientation = Math.PI / 1.85
+        this.robot.position = new CANNON.Vec3(-8, 3, 0)
+        this.robot.orientation = Math.PI / 2
+
+        this.robot.armPosition = new CANNON.Vec3(2, 0, 0)
+        this.robot.armQuaternion = this.robot.quaternion
 
         // let randomOrientation = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.random() * Math.PI)
         let randomOrientation = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), 0)
@@ -525,13 +535,13 @@ export default class Environment {
         yield {'command': 'magnetize'}
 
         // Attach Block
-        let pos2 = block.pointToWorldFrame(new CANNON.Vec3(0, 0, -4.5))
+        let pos2 = block.pointToWorldFrame(new CANNON.Vec3(0, 0, -4.4))
         yield {'command': 'navigate', 'position': new CANNON.Vec3(pos2.x, 0, pos2.z), 'orientation': null}
         yield {'command': 'arm', 'orientation': 0.9}
 
         // Place Block
         yield {'command': 'navigate', 'position': new CANNON.Vec3(blockDesiredPos.x, 0, pos2.z), 'orientation': -Math.PI/2}
-        yield {'command': 'navigate', 'position': new CANNON.Vec3(blockDesiredPos.x, 0, blockDesiredPos.z - 4.5), 'orientation': null}
+        yield {'command': 'navigate', 'position': new CANNON.Vec3(blockDesiredPos.x, 0, blockDesiredPos.z - 4.4), 'orientation': null}
         // Hack to fix orientation
         this.robot.orientation = -Math.PI/2
         yield {'command': 'arm', 'orientation': 0}
@@ -559,13 +569,13 @@ export default class Environment {
         yield {'command': 'magnetize'}
 
         // Attach Block
-        pos2 = block.pointToWorldFrame(new CANNON.Vec3(0, 0, 4.5))
+        pos2 = block.pointToWorldFrame(new CANNON.Vec3(0, 0, 4.4))
         yield {'command': 'navigate', 'position': new CANNON.Vec3(pos2.x, 0, pos2.z), 'orientation': null}
         yield {'command': 'arm', 'orientation': 0.9}
 
         // Place Block
         yield {'command': 'navigate', 'position': new CANNON.Vec3(blockDesiredPos.x, 0, pos2.z), 'orientation': Math.PI/2}
-        yield {'command': 'navigate', 'position': new CANNON.Vec3(blockDesiredPos.x, 0, blockDesiredPos.z + 4.5), 'orientation': null}
+        yield {'command': 'navigate', 'position': new CANNON.Vec3(blockDesiredPos.x, 0, blockDesiredPos.z + 4.4), 'orientation': null}
         // Hack to fix orientation
         this.robot.orientation = Math.PI/2
         yield {'command': 'arm', 'orientation': 0}

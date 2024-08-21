@@ -6,6 +6,9 @@ export default class RobotController {
     }
 
     *actionGenerator(command) {
+        if (command === undefined) {
+            yield null
+        }
         switch (command.command) {
             case 'navigate':
                 yield *this.navigate(command.position, command.orientation)
@@ -119,8 +122,6 @@ export default class RobotController {
         const transformedQuat = quat.mult(this.robot.quaternion.inverse())
         const target = new CANNON.Vec3(0, 0, 0)
         transformedQuat.toEuler(target)
-        // console.log(this.robot.orientation)
-        // console.log(target.y)
         return target.y
     }
 

@@ -19,7 +19,7 @@ const sceneObjects = [ 'Letter 1', 'Letter 2', 'Letter 3', 'Letter 4', 'Letter 5
 
 // spline scene
 const loader = new SplineLoader();
-loader.load('./js/scene.splinecode',
+loader.load('./js/robot/scene.splinecode',
   (splineScene) => {
     // splineScene.scale = 0.1;
     scene.add(splineScene);
@@ -126,7 +126,7 @@ const tick = () => {
     // Update controls
     controls.update();
 
-    // Update physics worlds
+    // Update physics world
     if (actionGenerator != null && environment.enableController) {
         const action = actionGenerator.next().value;
         if (action == null) {

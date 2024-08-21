@@ -17,7 +17,7 @@ document.getElementById('canvas').style.backgroundColor = 'black';
 // start the application and load the scene
 const spline = new Application(canvas);
 // https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode
-spline.load('https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode').then(() => {
+spline.load('https://prod.spline.design/1Q02qeiYPCkty7Wk/scene.splinecode').then(() => {
     // document.getElementById('loader').style.display = 'none';
     // canvas.style.display = 'block';
     for (const name of sceneObjects) {
