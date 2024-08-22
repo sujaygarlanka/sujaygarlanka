@@ -24,6 +24,12 @@
     <link rel="stylesheet" href="css/geist-ui.css">
     <link rel="stylesheet" href="css/styles.css">
     <style>
+
+        :root {
+            --background-color: #000;
+            --background-color-alpha: #0000;
+        }
+
         html,
         body,
         .container-fluid {
@@ -36,7 +42,7 @@
         }
 
         .background {
-            background-color: black;
+            background-color: var(--background-color);
         }
 
         #big-text {
@@ -49,30 +55,24 @@
             position: fixed;
         }
 
-        #spline {
-            width: 1000;
-            height: 1444;
-            display: block;
-            height: 100%;
-            width: 100%;
-        }
-
         #loader {
             width: 120px;
             height: 20px;
             background: 
-                linear-gradient(#000 50%,#0000 0),
-                linear-gradient(#0000 50%,#000 0),
-                linear-gradient(#000 50%,#0000 0),
-                linear-gradient(#0000 50%,#000 0),
-                linear-gradient(#000 50%,#0000 0),
-                linear-gradient(#0000 50%,#000 0)
+                linear-gradient(var(--background-color) 50%, var(--background-color-alpha) 0),
+                linear-gradient(var(--background-color-alpha) 50%, var(--background-color) 0),
+                linear-gradient(var(--background-color) 50%, var(--background-color-alpha) 0),
+                linear-gradient(var(--background-color-alpha) 50%, var(--background-color) 0),
+                linear-gradient(var(--background-color) 50%,var(--background-color-alpha) 0),
+                linear-gradient(var(--background-color-alpha) 50%, var(--background-color) 0)
                 #ddd;
+                
             background-size: calc(100%/6 + 1px) 200%;
             background-repeat: no-repeat;
             animation: l12 2s infinite;
             margin: auto;
         }
+
         @keyframes l12 {
             0%     {background-position: calc(0*100%/5) 100%,calc(1*100%/5)   0%,calc(2*100%/5) 100%,calc(3*100%/5)   0%,calc(4*100%/5) 100%,calc(5*100%/5)   0%}
             16.67% {background-position: calc(0*100%/5)   0%,calc(1*100%/5)   0%,calc(2*100%/5) 100%,calc(3*100%/5)   0%,calc(4*100%/5) 100%,calc(5*100%/5)   0%}
@@ -103,8 +103,8 @@
 
 <body>
     <div class="container-fluid d-flex">
-        <div id="canvas" class="col-6 d-none d-lg-flex">
-            <!-- <div id="loader"></div> -->
+        <div id="canvas" class="col-6 d-none d-lg-flex background">
+            <div id="loader"></div>
             <canvas id="spline" class="webgl"></canvas>
         </div>
         <div class="col-12 col-lg-6 d-flex flex-column justify-content-center">

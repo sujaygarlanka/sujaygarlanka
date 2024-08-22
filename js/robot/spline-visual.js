@@ -12,19 +12,43 @@ const sceneObjects = [ 'Letter 1', 'Letter 2', 'Letter 3', 'Letter 4', 'Letter 5
 
 // make sure you have a canvas in the body
 const canvas = document.getElementById('spline');
-document.getElementById('canvas').style.backgroundColor = 'black';
+const loader = document.getElementById('loader');
+canvasHide()
+
 
 // start the application and load the scene
 const spline = new Application(canvas);
 // https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode
-spline.load('https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode').then(() => {
-    // document.getElementById('loader').style.display = 'none';
-    // canvas.style.display = 'block';
-    for (const name of sceneObjects) {
-        objectVisuals[name] = spline.findObjectByName(name);
-    }
-    resize()
-});
+
+setTimeout(function() {
+    console.log('Loading scene');
+    loader.style.display = 'block';
+    spline.load(
+    'https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode',
+    ).then(() => {
+        loader.style.display = 'none';
+        canvasHide()
+        for (const name of sceneObjects) {
+            objectVisuals[name] = spline.findObjectByName(name);
+        }
+        render()
+        canvasShow()
+        resize()
+    });
+}, 500);
+
+function canvasHide() {
+    canvas.style.display = 'none';
+    canvas.width = 0;
+    canvas.height = 0;
+}
+
+function canvasShow() {
+    canvas.style.display = 'block';
+    canvas.width = document.getElementById('canvas').offsetWidth;
+    canvas.height = document.getElementById('canvas').offsetHeight;
+}
+
 
 const environment = new Environment();
 const robotController = new RobotController(environment.robot); 
@@ -87,5 +111,3 @@ function render() {
 
     window.requestAnimationFrame(render);
 }
-
-render();

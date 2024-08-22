@@ -59,7 +59,7 @@ export default class RobotController {
         }
         yield *this.brake()
         if (orientation !== null) {
-            yield *this.turn(orientation, 0.001, false) 
+            yield *this.turn(orientation, 0.005, false) 
             yield *this.brake()
         }
     }
@@ -104,7 +104,7 @@ export default class RobotController {
     }
 
     *wait() {
-        for (let i = 0; i<100; i++) {
+        for (let i = 0; i<50; i++) {
             yield [4, false]
         }
     }
