@@ -102,7 +102,7 @@ class Robot {
 
         // Arm front
         const arm = new CANNON.Body({ mass: 0.1 });
-        const lengthToPivot = 2.1;
+        const lengthToPivot = 2.3;
         const distanceFromChassis = 1.1;
         let quat = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
         arm.addShape(new CANNON.Box(new CANNON.Vec3(bodyWidth, 0.15, 0.05)), new CANNON.Vec3(lengthToPivot, 0, 0.0), quat);
@@ -115,7 +115,7 @@ class Robot {
 
         // Arm magnet
         let quatFront = new CANNON.Quaternion().setFromAxisAngle(new CANNON.Vec3(0, 0, 1), Math.PI / 2);
-        arm.addShape(new CANNON.Cylinder(0.25, 0.25, 0.1), new CANNON.Vec3(lengthToPivot + 0.25, 0, 0.0), quatFront);
+        arm.addShape(new CANNON.Cylinder(0.25, 0.25, 0.1), new CANNON.Vec3(lengthToPivot + 0.18, 0, 0.0), quatFront);
 
         this.inContact = (c) => {
             const contactPoint = c.target.pointToLocalFrame(c.contact.bj.position.vadd(c.contact.rj))
@@ -163,7 +163,7 @@ class Robot {
         const vehicle = new CANNON.RaycastVehicle({
             chassisBody,
         })
-        const wheelMaterial = new CANNON.Material('wheel')
+        const wheelMaterial = new CANNON.Material('wheelMaterial')
         const wheelOptions = {
             radius: 0.5,
             directionLocal: new CANNON.Vec3(0, -1, 0),
@@ -184,19 +184,19 @@ class Robot {
 
         // Add the wheels
         // Rear wheel right
-        wheelOptions.chassisConnectionPointLocal.set(-0.75, -1.8, 1.3)
+        wheelOptions.chassisConnectionPointLocal.set(-0.75, -1.8, 1.4)
         vehicle.addWheel(wheelOptions)
 
         // Rear wheel left
-        wheelOptions.chassisConnectionPointLocal.set(-0.75, -1.8, -1.3)
+        wheelOptions.chassisConnectionPointLocal.set(-0.75, -1.8, -1.4)
         vehicle.addWheel(wheelOptions)
 
         // Front wheel right
-        wheelOptions.chassisConnectionPointLocal.set(0.75, -1.8, 1.3)
+        wheelOptions.chassisConnectionPointLocal.set(0.75, -1.8, 1.4)
         vehicle.addWheel(wheelOptions)
 
         // Front wheel left
-        wheelOptions.chassisConnectionPointLocal.set(0.75, -1.8, -1.3)
+        wheelOptions.chassisConnectionPointLocal.set(0.75, -1.8, -1.4)
         vehicle.addWheel(wheelOptions)
 
         vehicle.addToWorld(this.world)
@@ -207,11 +207,10 @@ class Robot {
         vehicle.wheelInfos.forEach((wheel) => {
             const cylinderShape = new CANNON.Cylinder(wheel.radius, wheel.radius, wheel.radius / 2, 20)
             const wheelBody = new CANNON.Body({
-                mass: 0,
+                mass: 1,
                 material: wheelMaterial,
             })
             wheelBody.type = CANNON.Body.KINEMATIC
-            wheelBody.collisionFilterGroup = 0 // turn off collisions
             const quaternion = new CANNON.Quaternion().setFromEuler(-Math.PI / 2, 0, 0)
             wheelBody.addShape(cylinderShape, new CANNON.Vec3(), quaternion)
             wheelBodies.push(wheelBody)
@@ -411,9 +410,9 @@ export default class Environment {
     createWorld() {
         // Create world
         const world = new CANNON.World()
-        world.broadphase = new CANNON.SAPBroadphase(world)
+        // world.broadphase = new CANNON.SAPBroadphase(world)
         world.gravity.set(0, -9.82, 0)
-        world.solver.iterations = 10
+        // world.solver.iterations = 10
 
         // Create a plane
         const groundShape = new CANNON.Plane()
@@ -427,7 +426,7 @@ export default class Environment {
     reset() {
         this.robot.completeStop()
         this.robot.position = new CANNON.Vec3(-8, 3, 0)
-        this.robot.orientation = Math.PI / 2
+        this.robot.orientation = -Math.PI / 2
 
         this.robot.armPosition = new CANNON.Vec3(2, 0, 0)
         this.robot.armQuaternion = this.robot.quaternion
@@ -520,14 +519,48 @@ export default class Environment {
         yield {'command': 'wait'}
 
         //////////////////////////
-        // Top Block
+        // Bottom Block
         //////////////////////////
-        let blockId = this.randomizedBlocks[0].index
-        let blockDesiredPos = this.randomizedBlocks[0].desiredPos
+        let blockId = this.randomizedBlocks[1].index
+        let blockDesiredPos = this.randomizedBlocks[1].desiredPos
         let block = this.objects[`Letter ${blockId + 1}`]
 
         // Navigate to Block
-        let pos1 = block.pointToWorldFrame(new CANNON.Vec3(0, 0, -5.0))
+        let pos1 = block.pointToWorldFrame(new CANNON.Vec3(0, 0, 5.0))
+        yield {'command': 'navigate', 'position': new CANNON.Vec3(this.robot.position.x, 0, pos1.z), 'orientation': 0.0}
+        yield {'command': 'navigate', 'position': new CANNON.Vec3(pos1.x, 0, pos1.z), 'orientation': Math.PI/2}
+        // Hack to fix orientation
+        this.robot.orientation = Math.PI/2
+        yield {'command': 'magnetize'}
+
+        // Attach Block
+        let pos2 = block.pointToWorldFrame(new CANNON.Vec3(0, 0, 4.4))
+        yield {'command': 'navigate', 'position': new CANNON.Vec3(pos2.x, 0, pos2.z), 'orientation': null}
+        yield {'command': 'arm', 'orientation': 0.9}
+
+        // Place Block
+        yield {'command': 'navigate', 'position': new CANNON.Vec3(blockDesiredPos.x, 0, pos2.z), 'orientation': Math.PI/2}
+        yield {'command': 'navigate', 'position': new CANNON.Vec3(blockDesiredPos.x, 0, blockDesiredPos.z + 4.4), 'orientation': null}
+        // Hack to fix orientation
+        this.robot.orientation = Math.PI/2
+        yield {'command': 'arm', 'orientation': 0}
+        yield {'command': 'demagnetize'}
+        yield {'command': 'backup', 'time': 1}
+
+        //////////////////////////
+        // Return Home
+        //////////////////////////
+        yield {'command': 'navigate', 'position': new CANNON.Vec3(-8, 0, this.robot.position.z), 'orientation': -Math.PI/2}
+
+        //////////////////////////
+        // Top Block
+        //////////////////////////
+        blockId = this.randomizedBlocks[0].index
+        blockDesiredPos = this.randomizedBlocks[0].desiredPos
+        block = this.objects[`Letter ${blockId + 1}`]
+
+        // Navigate to Block
+        pos1 = block.pointToWorldFrame(new CANNON.Vec3(0, 0, -5.0))
         yield {'command': 'navigate', 'position': new CANNON.Vec3(this.robot.position.x, 0, pos1.z), 'orientation': 0.0}
         yield {'command': 'navigate', 'position': new CANNON.Vec3(pos1.x, 0, pos1.z), 'orientation': -Math.PI/2}
         // Hack to fix orientation
@@ -535,7 +568,7 @@ export default class Environment {
         yield {'command': 'magnetize'}
 
         // Attach Block
-        let pos2 = block.pointToWorldFrame(new CANNON.Vec3(0, 0, -4.4))
+        pos2 = block.pointToWorldFrame(new CANNON.Vec3(0, 0, -4.4))
         yield {'command': 'navigate', 'position': new CANNON.Vec3(pos2.x, 0, pos2.z), 'orientation': null}
         yield {'command': 'arm', 'orientation': 0.9}
 
@@ -548,39 +581,7 @@ export default class Environment {
         yield {'command': 'demagnetize'}
         yield {'command': 'backup', 'time': 1}
 
-        //////////////////////////
-        // Return Home
-        //////////////////////////
-        yield {'command': 'navigate', 'position': new CANNON.Vec3(-8, 0, this.robot.position.z), 'orientation': -Math.PI/2}
-
-        //////////////////////////
-        // Bottom Block
-        //////////////////////////
-        blockId = this.randomizedBlocks[1].index
-        blockDesiredPos = this.randomizedBlocks[1].desiredPos
-        block = this.objects[`Letter ${blockId + 1}`]
-
-        // Navigate to Block
-        pos1 = block.pointToWorldFrame(new CANNON.Vec3(0, 0, 5.0))
-        yield {'command': 'navigate', 'position': new CANNON.Vec3(this.robot.position.x, 0, pos1.z), 'orientation': 0.0}
-        yield {'command': 'navigate', 'position': new CANNON.Vec3(pos1.x, 0, pos1.z), 'orientation': Math.PI/2}
-        // Hack to fix orientation
-        this.robot.orientation = Math.PI/2
-        yield {'command': 'magnetize'}
-
-        // Attach Block
-        pos2 = block.pointToWorldFrame(new CANNON.Vec3(0, 0, 4.4))
-        yield {'command': 'navigate', 'position': new CANNON.Vec3(pos2.x, 0, pos2.z), 'orientation': null}
-        yield {'command': 'arm', 'orientation': 0.9}
-
-        // Place Block
-        yield {'command': 'navigate', 'position': new CANNON.Vec3(blockDesiredPos.x, 0, pos2.z), 'orientation': Math.PI/2}
-        yield {'command': 'navigate', 'position': new CANNON.Vec3(blockDesiredPos.x, 0, blockDesiredPos.z + 4.4), 'orientation': null}
-        // Hack to fix orientation
-        this.robot.orientation = Math.PI/2
-        yield {'command': 'arm', 'orientation': 0}
-        yield {'command': 'demagnetize'}
-        yield {'command': 'backup', 'time': 1}
+        
 
     }
     

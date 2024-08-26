@@ -13,6 +13,7 @@ const sceneObjects = [ 'Letter 1', 'Letter 2', 'Letter 3', 'Letter 4', 'Letter 5
 // make sure you have a canvas in the body
 const canvas = document.getElementById('spline');
 const loader = document.getElementById('loader');
+loader.style.display = 'block';
 canvasHide()
 
 
@@ -22,16 +23,15 @@ const spline = new Application(canvas);
 
 setTimeout(function() {
     console.log('Loading scene');
-    loader.style.display = 'block';
     spline.load(
-    'https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode',
+        'https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode',
     ).then(() => {
-        loader.style.display = 'none';
         canvasHide()
         for (const name of sceneObjects) {
             objectVisuals[name] = spline.findObjectByName(name);
         }
         render()
+        loader.style.display = 'none';
         canvasShow()
         resize()
     });
@@ -45,10 +45,9 @@ function canvasHide() {
 
 function canvasShow() {
     canvas.style.display = 'block';
-    canvas.width = document.getElementById('canvas').offsetWidth;
-    canvas.height = document.getElementById('canvas').offsetHeight;
+    canvas.width = document.getElementById('canvas').offsetWidth * window.devicePixelRatio;
+    canvas.height = document.getElementById('canvas').offsetHeight * window.devicePixelRatio;
 }
-
 
 const environment = new Environment();
 const robotController = new RobotController(environment.robot); 
@@ -61,8 +60,8 @@ window.addEventListener('resize', () => {
     resize()
 })
 
-
 function resize() {
+    // console.log(spline.canvas.offsetWidth)
     const width = spline.canvas.offsetWidth/2.5
     const cubeSize = 2
     const numCubes = 4
@@ -74,7 +73,6 @@ function resize() {
 
 // render loop
 function render() {
-
     if (actionGenerator != null && environment.enableController) {
         const action = actionGenerator.next().value;
         if (action == null) {
@@ -84,7 +82,7 @@ function render() {
         }
     }
 
-    const [nextState, reward, done] = environment.step(true);
+    const [nextState, reward, done] = environment.step();
 
     if (environment.robot.magnetized) {
         spline.setVariable('magnetize', 100)
@@ -111,3 +109,4 @@ function render() {
 
     window.requestAnimationFrame(render);
 }
+// render()
