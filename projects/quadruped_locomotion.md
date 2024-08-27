@@ -2,6 +2,9 @@
 
 I worked on implementing locomotion for a quadruped in MATLAB. This proved to be far more involved than I first imagined. I ended up implementing a walking gait and used that for forward, backward and lateral movement. Below, I elaborate on the math and coding required for the walking gait, which sets the foundation for more complicated locomotion like running and jumping.
 
+<img style="max-width: 400px; margin: 10px;" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/projects/media/walking_forward.gif"/>
+<img style="max-width: 400px; margin: 10px;" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/projects/media/walking_backward.gif"/>
+
 ## Background
 
 The walking gait is a coordinated movement between the legs of the robot that allow it move forward along the x-axis. The gait consists of two operating modes. The first is the **leg swing** where the robot moves two diagonally opposite front and rear legs forward in an arc. This is shown in the animation below. The second is **standing**, which is when other two diagonally opposite front and rear legs balance and push the body forward. Both operating modes exist at every timestep and each calculate the torques required for the legs differently. Below I outline some of the math involved to generate the motor torques in each mode.
@@ -9,9 +12,13 @@ The walking gait is a coordinated movement between the legs of the robot that al
 - [Leg Swing](#leg-swing)
 - [Standing](#standing)
 
+<img style="max-width: 600px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/projects/media/walking_gait.gif"/>
+
 ## Leg Swing
 
 For the leg swing, the only goal is to move the feet of the quadruped in an arc forward. The diagram below illustrates this.
+
+<img style="max-width: 600px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/projects/media/foot_arc.png"/>
 
 The steps for doing the above are the following:
 1. Calculate the final foot position for each leg
@@ -140,11 +147,16 @@ function J=computeLegJacobian(q,leg)
 
 ## Standing
 
-The goal of the standing operating mode is to use the opposite diagonal legs on the ground to get the body to move forward while balancing. This requires finding the Ground Reaction Forces (GRFs) for the two feet on the ground to accomplish the goal. These are the forces that affect the quadruped when the feet apply forces to the ground. From these forces, we calculate the joint torques for the legs. There are three steps to effectively calculating these forces and is quite involved. I will give a broad summary of the math involved in these steps. The three steps are:
+The goal of the standing operating mode is to use the opposite diagonal legs on the ground to get the body to move forward while balancing. This requires finding the Ground Reaction Forces (GRFs) for the two feet on the ground to accomplish the goal. These are the forces that affect the quadruped when the feet apply forces to the ground. The diagram below shows this for a 2D quadruped. 
+
+<img style="max-width: 300px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/projects/media/GRF.png"/>
+
+From these forces, we calculate the joint torques for the legs. There are three steps to effectively calculating these forces and is quite involved. I will give a broad summary of the math involved in these steps. The three steps are:
 
 1. Linearize the quadruped dynamics
 2. Formulate model predictive control (MPC) matrix equation
 3. Use quadratic programming to optimize forces that satisfy MPC equation 
+
 
 ### Step 1
 
@@ -203,8 +215,9 @@ $$
 
 The state $\dot X$ is the following and represents the dynamics of the quadruped body.
 
-$\dot P_{3 \times 1}$ = The velocity of the robot body.
-$\dot \theta_{3 \times 1}$ =  The time derivative of the euler angles. This requires a tranformation matrix that linearizes around the yaw ($\phi$). This is a simplification because the robot does not rotate much along the other two rotational axes.
+$\dot P_{3 \times 1}$ - The velocity of the robot body.
+
+$\dot \theta_{3 \times 1}$ -  The time derivative of the euler angles. This requires a tranformation matrix that linearizes around the yaw ($\phi$). This is a simplification because the robot does not rotate much along the other two rotational axes.
 
 $T(\phi)_{3 \times 3}$ - The transformation matrix
 
@@ -234,6 +247,17 @@ $$
 $$
 
 With the equations above representing $\dot X$, the matrix equation can be written with $A$ and $B$ below.
+
+$S(\vec{a})$ - This is a skew-symmetric operator that turns a 3D vector ($\vec{a}$) into a matrix like below. This is so that cross product $ \vec{r}_{i} \times \vec{F}_{i}$ can be achieved by matrix multiplication.
+
+$$
+S(\vec{a}) =
+\begin{bmatrix}
+0 & -a_{z} & a_{y} \\
+a_{z} & 0 & -a_{x} \\
+-a_{y} & a_{x} & 0
+\end{bmatrix}
+$$
 
 $$
 A_{eq} = 

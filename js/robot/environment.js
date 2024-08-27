@@ -550,7 +550,7 @@ export default class Environment {
         //////////////////////////
         // Return Home
         //////////////////////////
-        yield {'command': 'navigate', 'position': new CANNON.Vec3(-8, 0, this.robot.position.z), 'orientation': -Math.PI/2}
+        yield {'command': 'navigate', 'position': new CANNON.Vec3(-8, 0, this.robot.position.z), 'orientation': Math.PI/2}
 
         //////////////////////////
         // Top Block
