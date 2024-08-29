@@ -1,4 +1,4 @@
-# Stanford Vision Lab (May 2023 - Today)
+# Stanford Vision Lab (May 2023 - Aug 2024)
 
 <img style="max-width: 500px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/grasping.gif"/> &nbsp;
 
