@@ -82,7 +82,7 @@ function render() {
         }
     }
 
-    const [nextState, reward, done] = environment.step();
+    const [nextState, reward, done] = environment.step(true);
 
     if (environment.robot.magnetized) {
         spline.setVariable('magnetize', 100)

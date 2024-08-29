@@ -81,10 +81,10 @@ The distance reward is defined by 4 cases that are determined by the state befor
 
 | Previous State             | Current State (After action)                 | Reward                                                                                  |
 |----------------------------|----------------------------------------------|-----------------------------------------------------------------------------------------|
-| Not grasping object        | Not grasping object                          | e^(distance between EEF and object * -1) * DIST_COEFF                                   |
-| Not grasping object        | Grasping object (picked object)              | e^(distance between robot center and object * -1) * DIST_COEFF + GRASP_REWARD           |
-| Grasping object            | Not grasping object (dropped object)         | e^(distance between EEF and object * -1) * DIST_COEFF                                   |
-| Grasping object            | Grasping object                              | e^(distance between robot center and object * -1) * DIST_COEFF + GRASP_REWARD           |
+| Not grasping object        | Not grasping object                          | $e^{(\text{distance between EEF and object} \times -1)} \times \text{dist\_coeff}$                            |
+| Not grasping object        | Grasping object (picked object)              | $e^{(\text{distance between robot center and object} \times -1)} \times \text{dist\_coeff} + \text{grasp\_reward}$           |
+| Grasping object            | Not grasping object (dropped object)         | $e^{(\text{distance between EEF and object} \times -1)} \times \text{dist\_coeff}$                                   |
+| Grasping object            | Grasping object                              | $e^{(\text{distance between robot center and object} \times -1)} \times \text{dist\_coeff} + \text{grasp\_reward}$           |
 
 The reward function is shaped in a way where the closer the end effector is to the object when it is not holding an object, the higher the reward. Once the robot grasps the object, the lower the moment of inertia for the robot object pair, the higher the reward. A graph of the reward per frame and cumulative distance reward for a robot grasping, then dropping the desired object is shown below.
 

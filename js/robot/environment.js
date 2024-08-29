@@ -96,7 +96,7 @@ class Robot {
     createRobot() {
         // Build the car chassis
         const bodyWidth = 1.25
-        const chassisShape = new CANNON.Box(new CANNON.Vec3(1.5, 1.8, bodyWidth))
+        const chassisShape = new CANNON.Box(new CANNON.Vec3(1.4, 1.7, bodyWidth))
         const chassisBody = new CANNON.Body({ mass: 20 })
         chassisBody.addShape(chassisShape)
 
@@ -141,7 +141,7 @@ class Robot {
         arm.addEventListener('collide', attach)
 
         // Define the hinge constraint
-        const height = -1.0;
+        const height = -0.75;
         // const pivotA = new CANNON.Vec3(-1.5, 0, 0); // Pivot point relative to the second body
         const pivotA = new CANNON.Vec3(0, 0, 0); // Pivot point relative to the second body
         const pivotB = new CANNON.Vec3(distanceFromChassis, height, 0); // Pivot point relative to the first body
@@ -184,19 +184,19 @@ class Robot {
 
         // Add the wheels
         // Rear wheel right
-        wheelOptions.chassisConnectionPointLocal.set(-0.75, -1.8, 1.4)
+        wheelOptions.chassisConnectionPointLocal.set(-0.75, -1.5, 1.4)
         vehicle.addWheel(wheelOptions)
 
         // Rear wheel left
-        wheelOptions.chassisConnectionPointLocal.set(-0.75, -1.8, -1.4)
+        wheelOptions.chassisConnectionPointLocal.set(-0.75, -1.5, -1.4)
         vehicle.addWheel(wheelOptions)
 
         // Front wheel right
-        wheelOptions.chassisConnectionPointLocal.set(0.75, -1.8, 1.4)
+        wheelOptions.chassisConnectionPointLocal.set(0.75, -1.5, 1.4)
         vehicle.addWheel(wheelOptions)
 
         // Front wheel left
-        wheelOptions.chassisConnectionPointLocal.set(0.75, -1.8, -1.4)
+        wheelOptions.chassisConnectionPointLocal.set(0.75, -1.5, -1.4)
         vehicle.addWheel(wheelOptions)
 
         vehicle.addToWorld(this.world)
@@ -392,7 +392,6 @@ export default class Environment {
         this.createBlocks()
         this.setupUserInput()
         this.enableController = true
-        
     }
 
     get actionSpace() {
@@ -474,6 +473,7 @@ export default class Environment {
         for (let i=0; i<16; i++) {
             const boxShape = new CANNON.Box(new CANNON.Vec3(1, 1, 1))
             const boxBody = new CANNON.Body({ mass: 0.01 })
+
             const {row, column} = this.indexToGrid(i, 4)
             let x = column * 3 - 4.5
             let z = row * 3 - 4.5
