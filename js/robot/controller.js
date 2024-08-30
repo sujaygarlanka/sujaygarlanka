@@ -59,31 +59,20 @@ export default class RobotController {
         }
         yield *this.brake()
         if (orientation !== null) {
-            yield *this.turn(orientation, 0.005, false) 
+            yield *this.turn(orientation, 0.005) 
             yield *this.brake()
         }
     }
     
-    *turn(orientation, precision=0.01, cheat=false) {
+    *turn(orientation, precision=0.01) {
         // console.log(orientation) 
         while (Math.abs(this._angleRobotFrame(orientation)) >= precision) {
             if (this._angleRobotFrame(orientation) > 0) {
-                if (cheat) {
-                    this.robot.orientation = 0.1
-                    yield [4, true]
-                } else {
-                    yield [2, false]
-                }
+                yield [2, false]
                 
             }
             else {
-                if (cheat) {
-                    this.robot.orientation = -0.01
-                    yield [4, true]
-                } else {
-                    yield [3, false]
-                }
-                
+                yield [3, false]
             }
         }
     }

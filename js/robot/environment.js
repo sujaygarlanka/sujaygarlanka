@@ -4,9 +4,9 @@ class Robot {
     constructor(env) {
         this.env = env
         this.world = env.world
-        this.createRobot()
         this.objectConstraint = null
         this.magnetized = false
+        this.createRobot()
     }
 
     step(action, force) {
@@ -274,14 +274,14 @@ class Robot {
         this.chassisBody.quaternion.copy(quaternion)
     }
 
-    get orientation() {
+    get yaw() {
         const euler = new CANNON.Vec3()
         this.chassisBody.quaternion.toEuler(euler)
         return euler.y
     }
 
-    set orientation(orientation) {
-        this.chassisBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), orientation)
+    set yaw(angle) {
+        this.chassisBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), angle)
     }
 
     get velocity() {
@@ -384,14 +384,15 @@ export default class Environment {
     constructor() {
         this.objects = {}
         this.objectsId = []
+        this.enableController = true
+        this.task = new Task(this, new CANNON.Vec3(0, 0, 0), new CANNON.Quaternion())
 
         this.createWorld()
         this.createRobot()
-        this.task = new Task(this, new CANNON.Vec3(0, 0, 0), new CANNON.Quaternion())
         this.reset()
         this.createBlocks()
         this.setupUserInput()
-        this.enableController = true
+        
     }
 
     get actionSpace() {
@@ -425,7 +426,7 @@ export default class Environment {
     reset() {
         this.robot.completeStop()
         this.robot.position = new CANNON.Vec3(-8, 3, 0)
-        this.robot.orientation = -Math.PI / 2
+        this.robot.yaw = -Math.PI / 2
 
         this.robot.armPosition = new CANNON.Vec3(2, 0, 0)
         this.robot.armQuaternion = this.robot.quaternion
@@ -530,7 +531,7 @@ export default class Environment {
         yield {'command': 'navigate', 'position': new CANNON.Vec3(this.robot.position.x, 0, pos1.z), 'orientation': 0.0}
         yield {'command': 'navigate', 'position': new CANNON.Vec3(pos1.x, 0, pos1.z), 'orientation': Math.PI/2}
         // Hack to fix orientation
-        this.robot.orientation = Math.PI/2
+        this.robot.yaw = Math.PI/2
         yield {'command': 'magnetize'}
 
         // Attach Block
@@ -542,7 +543,7 @@ export default class Environment {
         yield {'command': 'navigate', 'position': new CANNON.Vec3(blockDesiredPos.x, 0, pos2.z), 'orientation': Math.PI/2}
         yield {'command': 'navigate', 'position': new CANNON.Vec3(blockDesiredPos.x, 0, blockDesiredPos.z + 4.4), 'orientation': null}
         // Hack to fix orientation
-        this.robot.orientation = Math.PI/2
+        this.robot.yaw = Math.PI/2
         yield {'command': 'arm', 'orientation': 0}
         yield {'command': 'demagnetize'}
         yield {'command': 'backup', 'time': 1}
@@ -564,7 +565,7 @@ export default class Environment {
         yield {'command': 'navigate', 'position': new CANNON.Vec3(this.robot.position.x, 0, pos1.z), 'orientation': 0.0}
         yield {'command': 'navigate', 'position': new CANNON.Vec3(pos1.x, 0, pos1.z), 'orientation': -Math.PI/2}
         // Hack to fix orientation
-        this.robot.orientation = -Math.PI/2
+        this.robot.yaw = -Math.PI/2
         yield {'command': 'magnetize'}
 
         // Attach Block
@@ -576,7 +577,7 @@ export default class Environment {
         yield {'command': 'navigate', 'position': new CANNON.Vec3(blockDesiredPos.x, 0, pos2.z), 'orientation': -Math.PI/2}
         yield {'command': 'navigate', 'position': new CANNON.Vec3(blockDesiredPos.x, 0, blockDesiredPos.z - 4.4), 'orientation': null}
         // Hack to fix orientation
-        this.robot.orientation = -Math.PI/2
+        this.robot.yaw = -Math.PI/2
         yield {'command': 'arm', 'orientation': 0}
         yield {'command': 'demagnetize'}
         yield {'command': 'backup', 'time': 1}
