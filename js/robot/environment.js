@@ -10,7 +10,8 @@ class Robot {
     }
 
     step(action, force) {
-        const maxForce = 10
+        const linearForce = 15
+        const rotationalForce = 50
         if (force) {
             this.vehicle.applyEngineForce(action[0], 0)
             this.vehicle.applyEngineForce(action[1], 1)
@@ -21,31 +22,31 @@ class Robot {
             switch (action) {
                 // Forward
                 case 0:
-                    this.vehicle.applyEngineForce(maxForce, 0)
-                    this.vehicle.applyEngineForce(maxForce, 1)
-                    this.vehicle.applyEngineForce(maxForce, 2)
-                    this.vehicle.applyEngineForce(maxForce, 3)
+                    this.vehicle.applyEngineForce(linearForce, 0)
+                    this.vehicle.applyEngineForce(linearForce, 1)
+                    this.vehicle.applyEngineForce(linearForce, 2)
+                    this.vehicle.applyEngineForce(linearForce, 3)
                     break
                 // Backward
                 case 1:
-                    this.vehicle.applyEngineForce(-maxForce, 0)
-                    this.vehicle.applyEngineForce(-maxForce, 1)
-                    this.vehicle.applyEngineForce(-maxForce, 2)
-                    this.vehicle.applyEngineForce(-maxForce, 3)
+                    this.vehicle.applyEngineForce(-linearForce, 0)
+                    this.vehicle.applyEngineForce(-linearForce, 1)
+                    this.vehicle.applyEngineForce(-linearForce, 2)
+                    this.vehicle.applyEngineForce(-linearForce, 3)
                     break
                 // Left
                 case 2:
-                    this.vehicle.applyEngineForce(maxForce * 5, 0)
-                    this.vehicle.applyEngineForce(-maxForce * 5, 1)
-                    this.vehicle.applyEngineForce(maxForce * 5, 2)
-                    this.vehicle.applyEngineForce(-maxForce * 5, 3)
+                    this.vehicle.applyEngineForce(rotationalForce, 0)
+                    this.vehicle.applyEngineForce(-rotationalForce, 1)
+                    this.vehicle.applyEngineForce(rotationalForce, 2)
+                    this.vehicle.applyEngineForce(-rotationalForce, 3)
                     break
                 // Right
                 case 3:
-                    this.vehicle.applyEngineForce(-maxForce * 5, 0)
-                    this.vehicle.applyEngineForce(maxForce * 5, 1)
-                    this.vehicle.applyEngineForce(-maxForce * 5, 2)
-                    this.vehicle.applyEngineForce(maxForce * 5, 3)
+                    this.vehicle.applyEngineForce(-rotationalForce, 0)
+                    this.vehicle.applyEngineForce(rotationalForce, 1)
+                    this.vehicle.applyEngineForce(-rotationalForce, 2)
+                    this.vehicle.applyEngineForce(rotationalForce, 3)
                     break
                 // Stop
                 case 4:
@@ -77,10 +78,10 @@ class Robot {
                     break
                 // Brake
                 case 9:
-                    this.vehicle.setBrake(50, 0)
-                    this.vehicle.setBrake(50, 1)
-                    this.vehicle.setBrake(50, 2)
-                    this.vehicle.setBrake(50, 3)
+                    this.vehicle.setBrake(10, 0)
+                    this.vehicle.setBrake(10, 1)
+                    this.vehicle.setBrake(10, 2)
+                    this.vehicle.setBrake(10, 3)
                     break
                 // Release Brake
                 case 10:
