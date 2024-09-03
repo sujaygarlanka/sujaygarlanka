@@ -485,14 +485,14 @@ export default class Environment {
                 case randomizeTop:
                     this.randomizedBlocks[0]['desiredPos'] = new CANNON.Vec3(x, 0, z)
                     x = Math.floor(this.randomRange(0, 7))
-                    z = Math.floor(this.randomRange(-8, -7))
-                    ori = 0
+                    z = Math.floor(this.randomRange(-8.3, -7.3))
+                    ori = this.randomRange(0, 1.0)
                     break
                 case randomizeBottom:
                     this.randomizedBlocks[1]['desiredPos'] = new CANNON.Vec3(x, 0, z)
                     x = Math.floor(this.randomRange(0, 7))
-                    z = Math.floor(this.randomRange(7, 8))
-                    ori = 0
+                    z = Math.floor(this.randomRange(7.3, 8.3))
+                    ori = this.randomRange(-1.0, 0)
                     break
             }
             boxBody.addShape(boxShape)
@@ -526,13 +526,15 @@ export default class Environment {
         let blockId = this.randomizedBlocks[1].index
         let blockDesiredPos = this.randomizedBlocks[1].desiredPos
         let block = this.objects[`Letter ${blockId + 1}`]
+        // let ori;
 
         // Navigate to Block
         let pos1 = block.pointToWorldFrame(new CANNON.Vec3(0, 0, 5.0))
         yield {'command': 'navigate', 'position': new CANNON.Vec3(this.robot.position.x, 0, pos1.z), 'orientation': 0.0}
-        yield {'command': 'navigate', 'position': new CANNON.Vec3(pos1.x, 0, pos1.z), 'orientation': Math.PI/2}
-        // Hack to fix orientation
-        this.robot.yaw = Math.PI/2
+        yield {'command': 'navigate', 'position': new CANNON.Vec3(pos1.x, 0, pos1.z), 'orientation': null}
+        // ori = new CANNON.Vec3(0, 0, 0)
+        // block.quaternion.toEuler(ori)
+        // ori = -ori.y
         yield {'command': 'magnetize'}
 
         // Attach Block
@@ -563,10 +565,8 @@ export default class Environment {
 
         // Navigate to Block
         pos1 = block.pointToWorldFrame(new CANNON.Vec3(0, 0, -5.0))
-        yield {'command': 'navigate', 'position': new CANNON.Vec3(this.robot.position.x, 0, pos1.z), 'orientation': 0.0}
-        yield {'command': 'navigate', 'position': new CANNON.Vec3(pos1.x, 0, pos1.z), 'orientation': -Math.PI/2}
-        // Hack to fix orientation
-        this.robot.yaw = -Math.PI/2
+        yield {'command': 'navigate', 'position': new CANNON.Vec3(this.robot.position.x, 0, pos1.z), 'orientation': null}
+        yield {'command': 'navigate', 'position': new CANNON.Vec3(pos1.x, 0, pos1.z), 'orientation': null}
         yield {'command': 'magnetize'}
 
         // Attach Block

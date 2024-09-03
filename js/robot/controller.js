@@ -13,6 +13,9 @@ export default class RobotController {
             case 'navigate':
                 yield *this.navigate(command.position, command.orientation)
                 break
+            case 'turn':
+                yield *this.turn(command.orientation, command.precision)
+                break
             case 'magnetize':
                 yield *this.magnetize()
                 break
@@ -65,11 +68,9 @@ export default class RobotController {
     }
     
     *turn(orientation, precision=0.01) {
-        // console.log(orientation) 
         while (Math.abs(this._angleRobotFrame(orientation)) >= precision) {
             if (this._angleRobotFrame(orientation) > 0) {
                 yield [2, false]
-                
             }
             else {
                 yield [3, false]
