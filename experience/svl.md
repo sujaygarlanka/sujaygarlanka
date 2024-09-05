@@ -2,6 +2,11 @@
 
 <img style="max-width: 500px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/grasping.gif"/> &nbsp;
 
+References:\
+[Cem Gokmen](https://www.cemgokmen.com/), Ph.D @ SVL, cgokmen@stanford.edu (Primary)\
+[Rouhan Zhang](https://cs.stanford.edu/people/zharu/), Postdoctoral Researcher @ SVL, zharu@stanford.edu (Secondary)
+
+
 I was a student researcher at SVL developing motion primitives for a robot in a simulation environment. These motion primitives are Python functionality that execute robotic actions to accomplish basic tasks. These tasks consist of grasping and placing an object, open and closing doors/drawers and navigating. The purpose of developing these primitives is to aid researchers in accomplishing the [BEHAVIOR-1K benchmark](https://openreview.net/pdf?id=_8DoIe8G3t) using the [OmniGibson](https://behavior.stanford.edu/omnigibson/) simulation environment built on NVIDIA Omniverse and Isaac Sim. 
 
 I, along with a few others, took two approaches to building out these primitives. Our first approach was using the full observability of the environment to develop algorithmic primitives. After completing our first approach, we were dissatisfied with its ability generalize to the significantly varied tasks in the BEHAVIOR-1K benchmark. So, we then used some of the fundamental functionality developed in our first approach to aid our second approach. This approach is using reinforcement learning to learn a selection of robotic actions.  
@@ -47,15 +52,15 @@ For manipulation, collision detection gets additionally complicated. This is bec
 
 ## Reinforcement Learning
 
-Our second approach is using reinforcement learning to develop the primitives. Since RL is sample inefficient, it requires high frames per second (FPS) from our simulation to collect enough data in a reasonable time. To get this high FPS, we engineered two solutions. The first is using GRPC to allow for running multiple environments in parallel on a distributed cluster and the second is running multiple scenes in a single environment on a single node.
+Our second approach is using reinforcement learning to develop the primitives. Since RL is sample inefficient, it requires high frames per second (FPS) from our simulation to collect enough data in a reasonable time. To get this high FPS, we engineered two solutions. The first is using gRPC to allow for running multiple environments in parallel on a distributed cluster and the second is running multiple scenes in a single environment on a single node.
 
-### GRPC Parallel Environments
+### gRPC Parallel Environments
 
 In RL, parallelizable environments are wrapped in a vector environment that allows an RL library step them simultaneously to speed up training. We created a custom environment wrapper that communicates via gRPC between the multiple environments we manually spin up (code). The overall architecture is that we have a learner script (code) that spins up a registration server and waits for workers to connect. We then run a worker script that spins up multiple RL environments that have an associated IP, accept an action to run and return an observation (code). The worker script sends the IPs to the registration server. Now the learner script can create our vectorized environment that can accept an array of actions, send them via a client-server connection to the environment workers and return an array of observations from the environment workers.
 
 ### OmniGibson Parallel Environments
 
-The GRPC set up can have some network delays and is cumbersome to work with, so we later implemented a native version of multiple environments in OmniGibson. Since OmniGibson is built on IsaacSim, it allows for the creation of multiple scenes in a single environment. We refactored OmniGibson to be vectorized to suppor this. The graphic below shows the result and the PR can be found [here](https://github.com/StanfordVL/OmniGibson/pull/699). The result is an 5-10x increase in FPS to around 250 FPS.
+The gRPC set up can have some network delays and is cumbersome to work with, so we later implemented a native version of multiple environments in OmniGibson. Since OmniGibson is built on IsaacSim, it allows for the creation of multiple scenes in a single environment. We refactored OmniGibson to be vectorized to suppor this. The graphic below shows the result and the PR can be found [here](https://github.com/StanfordVL/OmniGibson/pull/699). The result is an 5-10x increase in FPS to around 250 FPS.
 
 <img style="max-width: 500px" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/experience/media/multiple_environments.gif"/>
 
@@ -63,7 +68,7 @@ The GRPC set up can have some network delays and is cumbersome to work with, so 
 
 In addition to our engineering efforts, we setup a simple RL environment to learn grasping. Key aspects of this environment are the following:
 
-**Observations Space**
+**Observation Space**
 
 - Joint positions of the robot arm
 - Relative position of the center of the robot base the the centroid of the object to grasp
