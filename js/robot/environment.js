@@ -518,8 +518,6 @@ export default class Environment {
     
 
     *generateCommands() {
-        yield {'command': 'wait'}
-
         //////////////////////////
         // Bottom Block
         //////////////////////////
