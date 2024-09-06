@@ -8,7 +8,6 @@ import * as CANNON from 'cannon-es';
 
 // scene
 const scene = new THREE.Scene();
-console.log(scene)
 
 const objectVisuals = {};
 const showAxesBodies = [];
