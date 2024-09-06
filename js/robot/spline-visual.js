@@ -13,9 +13,6 @@ const sceneObjects = [ 'Letter 1', 'Letter 2', 'Letter 3', 'Letter 4', 'Letter 5
 // make sure you have a canvas in the body
 const canvas = document.getElementById('spline');
 const loader = document.getElementById('loader');
-loader.style.display = 'block';
-canvasHide()
-
 
 // start the application and load the scene
 const spline = new Application(canvas);
@@ -26,6 +23,7 @@ setTimeout(function() {
     spline.load(
         'https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode',
     ).then(() => {
+        console.log('Loaded scene');
         canvasHide()
         for (const name of sceneObjects) {
             objectVisuals[name] = spline.findObjectByName(name);
