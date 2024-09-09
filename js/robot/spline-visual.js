@@ -17,6 +17,7 @@ const loader = document.getElementById('loader');
 // start the application and load the scene
 const spline = new Application(canvas);
 // https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode
+// http://127.0.0.1:8080/js/robot/scene.splinecode
 
 setTimeout(function() {
     console.log('Loading scene');
