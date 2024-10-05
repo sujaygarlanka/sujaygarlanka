@@ -1,6 +1,6 @@
 # Quaduped Locomotion
 
-I worked on implementing locomotion for a quadruped in MATLAB. This proved to be far more involved than I first imagined. I ended up implementing a walking gait and used that for forward, backward and lateral movement. Below, I elaborate on the math and coding required for the walking gait, which sets the foundation for more complicated locomotion like running and jumping.
+I implemented locomotion for a quadruped in MATLAB. I specifically implemented a walking gait and used that for forward, backward and lateral movement. Below, I elaborate on the math and code required for the walking gait, which sets the foundation for more complicated locomotion like running and jumping.
 
 <img style="max-width: 400px; margin: 10px;" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/projects/media/walking_forward.gif"/>
 <img style="max-width: 400px; margin: 10px;" width="100%" src="https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/projects/media/walking_backward.gif"/>
