@@ -24,7 +24,7 @@ setTimeout(function() {
     spline.load(
         'https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode',
     ).then(() => {
-        console.log('Loading time: ', Date.now() - start);
+        console.log('Loading time: ', (Date.now() - start)/1000);
         canvasHide()
         for (const name of sceneObjects) {
             objectVisuals[name] = spline.findObjectByName(name);
@@ -34,7 +34,7 @@ setTimeout(function() {
         canvasShow()
         resize()
     });
-}, 500);
+}, 50);
 
 function canvasHide() {
     canvas.style.display = 'none';
