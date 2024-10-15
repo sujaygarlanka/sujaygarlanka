@@ -20,11 +20,11 @@ const spline = new Application(canvas);
 // http://127.0.0.1:8080/js/robot/scene.splinecode
 
 setTimeout(function() {
-    console.log('Loading scene');
+    const start = Date.now();
     spline.load(
         'https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode',
     ).then(() => {
-        console.log('Loaded scene');
+        console.log('Loading time: ', Date.now() - start);
         canvasHide()
         for (const name of sceneObjects) {
             objectVisuals[name] = spline.findObjectByName(name);
