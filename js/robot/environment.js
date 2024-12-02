@@ -174,7 +174,7 @@ class Robot {
             dampingRelaxation: 2.3,
             dampingCompression: 4.4,
             maxSuspensionForce: 100000,
-            rollInfluence: 0.01,
+            rollInfluence: 0.1,
             axleLocal: new CANNON.Vec3(0, 0, 1),
             chassisConnectionPointLocal: new CANNON.Vec3(-1, 0, 1),
             maxSuspensionTravel: 0.3,
@@ -229,9 +229,9 @@ class Robot {
             }
         })
 
-        const defaultMaterial = new CANNON.Material('default');
+        const groundMaterial = new CANNON.Material('groundMaterial');
         // Define interactions between wheels and ground
-        const wheelGround = new CANNON.ContactMaterial(wheelMaterial, defaultMaterial, {
+        const wheelGround = new CANNON.ContactMaterial(wheelMaterial, groundMaterial, {
             friction: 0.3,
             restitution: 0,
             contactEquationStiffness: 1000,
@@ -416,7 +416,8 @@ export default class Environment {
 
         // Create a plane
         const groundShape = new CANNON.Plane()
-        const groundBody = new CANNON.Body({ mass: 0 })
+        const groundMaterial = new CANNON.Material('groundMaterial');
+        const groundBody = new CANNON.Body({ mass: 0 , material: groundMaterial})
         groundBody.addShape(groundShape)
         groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2)
         world.addBody(groundBody)
