@@ -49,16 +49,17 @@
       <header class="mb-12">
         <h1 class="!my-0">{{ .Title }}</h1>
       </header>
-    <div id="adobe-dc-view" style="width: 100%;"></div>
+      <section>{{ .Content }}</section>
+    <div id="adobe-dc-view" style="width: 100%"></div>
     </main>
 
     {{ partial "footer.html" . }}
     <script src="https://acrobatservices.adobe.com/view-sdk/viewer.js"></script>
     <script type="text/javascript">
         document.addEventListener("adobe_dc_view_sdk.ready", function(){ 
-            var adobeDCView = new AdobeDC.View({clientId: "535fa30d53cc42bc9fd12fb4bcc8b287", divId: "adobe-dc-view"});
+            var adobeDCView = new AdobeDC.View({clientId: "ed141fba7f524b7b92c38fa4dd89a18e", divId: "adobe-dc-view"});
             adobeDCView.previewFile({
-                content:{location: {url: "https://sujaygarlanka.github.io/resume/Sujay%20Garlanka%20Resume.pdf"}},
+                content:{location: {url: "https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay%20Garlanka%20Resume.pdf"}},
                 metaData:{fileName: "Sujay Garlanka Resume.pdf"}
             }, {embedMode: "IN_LINE"});
         });
