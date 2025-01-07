@@ -13,3 +13,5 @@ developing APIs and building heavily
 used open source libraries for developers to interact with those APIs. On the side, I like tinkering
 with hardware and software to build
 interesting things.
+
+Feel free to email me at [sujay.garlanka@gmail.com](mailto:sujay.garlanka@gmail.com).

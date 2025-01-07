@@ -50,17 +50,6 @@
         }
     }
     </script>
-    <!-- <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const header = document.querySelector('header');
-        const footer = document.querySelector('footer');
-        const headerHeight = header.offsetHeight;
-        const footerHeight = footer.offsetHeight;
-        document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
-        document.documentElement.style.setProperty('--footer-height', `${footerHeight}px`);
-    });
-      
-    </script> -->
   {{ partial "head.html" . }}
     <style>
       
@@ -80,12 +69,9 @@
             margin: auto;
             width: 250px;
         }
-        /* main {
-            min-height: calc(100vh - var(--header-height) - var(--footer-height));
-        } */
     </style>
   <body>
-    <div style="display: flex; height: 100vh;">
+    <div style="display: flex; min-height: 100vh;">
       <!-- Custom Content Section -->
       <div id="canvas" style="flex: 1">
         <div id="loader">
