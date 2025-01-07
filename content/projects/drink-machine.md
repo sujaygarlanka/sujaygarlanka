@@ -1,7 +1,7 @@
 +++
 draft = false
 title = 'Drink Machine'
-summary = "A CAD designed and 3D-printed drink machine that mixes drinks with millileter accuracy. Recipes can be sent via an NFC enabled iPhone app."
+summary = "A CAD designed and 3D-printed drink machine that mixes drinks with milliliter accuracy. Recipes can be sent via an NFC enabled iPhone app."
 weight = -1
 [params]
   data = 'Hardware'

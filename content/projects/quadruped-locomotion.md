@@ -1,7 +1,7 @@
 +++
 draft = false
 title = 'Quadruped Locomotion'
-summary = "Implement an efficient neural network library and train an RL agent from scratch."
+summary = "Implement quadruped forward, backward and lateral walking using model predictive control (MPC) and quadratic programming in MATLAB and Simulink."
 weight = -5
 [params]
   data = 'Robotics • RL'
