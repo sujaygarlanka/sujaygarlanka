@@ -1,0 +1,23 @@
+pre {
+    max-height: 800px;
+}
+
+img {
+    border-radius: 10px;
+}
+
+.orange {
+    color: #f97316;
+}
+
+.blue {
+    color: #3E3CFF;
+}
+
+.pink {
+    color: #FC0092;
+}
+
+.cyan {
+    color: #00FDEB;
+}

@@ -1,0 +1,109 @@
+<!doctype html>
+{{ $.Scratch.Delete "bg_color" }}
+{{ $.Scratch.Delete "social_list" }}
+{{ $.Scratch.Delete "avatar_url" }}
+
+<!-- bg_color -->
+{{ $color_map := dict "linen" "#faf8f1" "wheat" "#f8f5d7" "gray" "#fbfbfb" "light" "#fff" }}
+{{ $.Scratch.Set "bg_color" (index $color_map (site.Params.color | default (print "linen"))) }}
+{{ $bg_color := $.Scratch.Get "bg_color" }}
+
+<!-- social_list -->
+{{ $social_params := slice "twitter" "github" "instagram" "linkedin" "mastodon" "threads" "bluesky" "rss" }}
+{{ range $social_params }}
+  {{ if isset site.Params . }}
+    {{ $.Scratch.Add "social_list" (slice .) }}
+  {{ end }}
+{{ end }}
+
+<!-- avatar_url -->
+{{ if site.Params.avatar }}
+  {{ if in site.Params.avatar "http" }}
+    {{ $.Scratch.Set "avatar_url" site.Params.avatar }}
+  {{ else }}
+    {{ $official_cdn := "https://www.gravatar.com/avatar/" }}
+    {{ $cdn := (site.Params.gravatarCdn | default $official_cdn) }}
+    {{ $md5 := (md5 site.Params.avatar) }}
+    {{ $avatar_url := print $cdn $md5 "?s=160&d=identicon" }}
+    {{ $.Scratch.Set "avatar_url" $avatar_url }}
+  {{ end }}
+{{ end }}
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: {{ $bg_color }}"
+  lang="{{ or site.LanguageCode site.Language.Lang }}"
+  dir="{{ if site.Params.direction }}{{ site.Params.direction }}{{ else }}ltr{{ end }}"
+>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@v0.149.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.149.0/examples/jsm/",
+            "three/": "https://unpkg.com/three@0.149.0/",
+            "cannon-es-debugger": "https://cdn.jsdelivr.net/npm/cannon-es-debugger@1.0.0/+esm",
+            "cannon-es": "https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.min.js",
+            "@splinetool/loader": "https://unpkg.com/@splinetool/loader@1.9.0/build/SplineLoader.js",
+            "@splinetool/runtime": "https://cdn.jsdelivr.net/npm/@splinetool/runtime@1.9.32/build/runtime.min.js",
+            "environment": "./js/robot/environment.js",
+            "controller": "./js/robot/controller.js"
+        }
+    }
+    </script>
+    <!-- <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const header = document.querySelector('header');
+        const footer = document.querySelector('footer');
+        const headerHeight = header.offsetHeight;
+        const footerHeight = footer.offsetHeight;
+        document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+        document.documentElement.style.setProperty('--footer-height', `${footerHeight}px`);
+    });
+      
+    </script> -->
+  {{ partial "head.html" . }}
+    <style>
+      
+        canvas {
+            display: 'none';
+            width: 0;
+            height: 0;
+        }
+        #canvas {
+            background-color: #CCD2D8 !important;
+            display: none !important;
+            @media (min-width: 1200px) {
+                display: flex !important;
+            }   
+        }
+        #loader {
+            margin: auto;
+            width: 250px;
+        }
+        /* main {
+            min-height: calc(100vh - var(--header-height) - var(--footer-height));
+        } */
+    </style>
+  <body>
+    <div style="display: flex; height: 100vh;">
+      <!-- Custom Content Section -->
+      <div id="canvas" style="flex: 1">
+        <div id="loader">
+            <img src="/img/etc/loading.gif" alt="loading">
+        </div>
+        <canvas id="spline" class="webgl"></canvas>
+      </div>
+      <!-- Hugo Content Section with Header and Footer -->
+      <div class="text-black duration-200 ease-out dark:text-white" style="flex: 1; overflow-y: auto; padding: 20px">
+        {{ partial "header.html" . }}
+        <main
+          class="prose prose-neutral relative mx-auto flex-grow max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+        >
+          {{ .Content }}
+        </main>
+        {{ partial "footer.html" . }}
+      </div>
+    </div>
+    <script type="module" src="js/robot/spline-visual.js"></script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+baseURL = ''
+languageCode = 'en-us'
+title = 'Sujay Garlanka'
+theme = "hugo-paper"
+
+[taxonomies]
+tags = "tags"
+categories = "categories"
+
+[outputs]
+taxonomy = []          # Disable rendering taxonomy term pages
+taxonomyTerm = []      # Disable rendering taxonomy list pages
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['$', '$']]  
+
+[params]
+  monoDarkIcon = true
+  math = true
+
+  github = 'sujaygarlanka'             
+  linkedin = 'sujay-garlanka'
+  email = 'sujay.garlanka@gmail.com'
+
+[menu]
+
+  [[menu.main]]
+    identifier = "resume"
+    name = "Resume"
+    url = "/resume/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "experience"
+    name = "Experience"
+    url = "/experience/"
+    weight = 2
+
+  [[menu.main]]
+    identifier = "projects"
+    name = "Projects"
+    url = "/projects/"
+    weight = 3

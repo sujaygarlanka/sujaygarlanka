@@ -1,2 +1,38 @@
+# Hugo build output directory
+/public/
+/resources/
+
+# Configuration backup files
+config.toml.bak
+config.yaml.bak
+config.json.bak
+
+# Temporary files
 .DS_Store
-node_modules
+Thumbs.db
+*.swp
+*.swo
+
+# Logs and caches
+hugo_stats.json
+.cache/
+
+# OS-specific files
+*.log
+*.lock
+*.bak
+*.tmp
+
+# Node.js dependencies (if using npm/yarn for theme or other builds)
+/node_modules/
+/package-lock.json
+/yarn.lock
+
+# Generated files by IDEs
+.idea/
+.vscode/
+*.iml
+
+# Git-specific files
+.git/
+.gitignore.bak

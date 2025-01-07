@@ -1,0 +1,8 @@
+<div class="text-xl" style="color: gray; padding-bottom: 1rem;">
+<!-- Parent Page -->
+{{ with .Parent }}
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+{{ end }} /
+<!-- Current Page -->
+{{ .Title }}
+</div>
