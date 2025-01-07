@@ -22,7 +22,7 @@ const spline = new Application(canvas);
 setTimeout(function() {
     const start = Date.now();
     spline.load(
-        'https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/js/robot/scene.splinecode',
+        'https://raw.githubusercontent.com/sujaygarlanka/sujaygarlanka/master/static/js/robot/scene.splinecode',
     ).then(() => {
         console.log('Loading time: ', (Date.now() - start)/1000);
         canvasHide()
