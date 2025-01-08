@@ -1,7 +1,7 @@
 +++
 draft = false
 title = 'Receipt Database'
-summary = "A tool that can scrape your email for e-receipts and can catalog and analyze them in a dashboard."
+summary = "A web application that can scrape your email for e-receipts and can catalog and analyze them in a dashboard."
 weight = -2
 [params]
   data = 'Software'

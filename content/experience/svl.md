@@ -1,7 +1,7 @@
 +++
 draft = false
 title = 'Stanford Vision Lab'
-summary = "I was a student researcher at SVL developing motion primitives for a robot in a simulation environment. These motion primitives are Python functionality that execute robotic actions to accomplish basic tasks. I, along with others, created these primitives usinng algorithmic approaches with full observability of the environment and deep reinforcment learning approaches using partial observability."
+summary = "Developed motion primitives for a robot in a simulation environment as a student researcher. These motion primitives are Python functionality that execute robotic actions to accomplish basic tasks. The primitives were created using algorithmic approaches with full observability of the environment and deep reinforcment learning approaches using partial observability."
 weight = -3
 [params]
   data = 'May 2023 - August 2024'

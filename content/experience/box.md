@@ -12,7 +12,7 @@ weight = -2
 
 ![Sujay's GitHub stats](https://github-readme-stats.vercel.app/api?username=sujaygarlanka&show_icons=false&count_private=true&custom_title=My%20Github%20Stats&hide=stars,issues&include_all_commits=true&hide_border=true&hide_title=true&hide_rank=true&bg_color=FBFBFD&text_color=3B3D36)
 
-Co‑lead the migration and rearchitecture of Box API data collection and report generation of 3.8 to 11.4 billion rows of data daily from cron jobs to Apache Spark jobs. This decreases compute time per cluster and increases system fault tolerance. Before that, I developed and maintained the open source [Box SDKs](https://github.com/box/sdks) in 6 languages on Github to allow people to integrate with Box's API. Every minute over **1.3 million** API calls are made through our SDKs. All the features I have implemented can be found in the Github repos above. Below is an example of my work at Box:
+I co‑lead the migration and rearchitecture of Box API data collection and report generation of 3.8 to 11.4 billion rows of data daily from cron jobs to Apache Spark jobs. This decreases compute time per cluster and increases system fault tolerance. Before that, I developed and maintained the open source [Box SDKs](https://github.com/box/sdks) in 6 languages on Github to allow people to integrate with Box's API. Every minute over **1.3 million** API calls are made through our SDKs. All the features I have implemented can be found in the Github repos above. Below is an example of my work at Box:
 
 **Rewrite of networking layer for iOS SDK**
 - Removes dependency on [Alamofire](https://github.com/Alamofire/Alamofire) by rewriting the networking layer with URLSession

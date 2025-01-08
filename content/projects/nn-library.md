@@ -2,7 +2,7 @@
 +++
 draft = false
 title = 'Neural Network Library'
-summary = "Implement an efficient neural network library and train an RL agent from scratch."
+summary = "An efficient neural network library implementation that was also used to train an RL agent from scratch."
 weight = -4
 [params]
   data = 'Robotics • RL'
