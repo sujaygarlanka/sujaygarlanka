@@ -37,7 +37,7 @@
 
   <!-- Post Nav -->
   {{ if not site.Params.disablePostNavigation }}<!---->
-  {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}<!---->
+  {{ $pages := where site.RegularPages "Type" .Type }}<!---->
   {{ if and (gt (len $pages) 1) (in $pages . ) }}
   <nav
     class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
