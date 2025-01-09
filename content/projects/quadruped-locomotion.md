@@ -17,7 +17,7 @@ I implemented locomotion for a quadruped in MATLAB. I specifically implemented a
 
 ## Background
 
-The walking gait is a coordinated movement between the legs of the robot that allow it move forward along the x-axis. The gait consists of two operating modes. The first is the **leg swing** where the robot moves two diagonally opposite front and rear legs forward in an arc. This is shown in the animation below. The second is **standing**, which is when other two diagonally opposite front and rear legs balance and push the body forward. Both operating modes exist at every timestep and each calculate the torques required for the legs differently. Below I outline some of the math involved to generate the motor torques in each mode.
+The walking gait is a coordinated movement between the legs of the robot that allow it to move forward along the x-axis. The gait consists of two operating modes. The first is the **leg swing** where the robot moves two diagonally opposite front and rear legs forward in an arc. This is shown in the animation below. The second is **standing**, which is when other two diagonally opposite front and rear legs balance and push the body forward. Both operating modes exist at every timestep and each calculate the torques required for the legs differently. Below I outline some of the math involved to generate the motor torques in each mode.
 
 - [Leg Swing](#leg-swing)
 - [Standing](#standing)
@@ -302,7 +302,7 @@ x[k+2] = A_{mpc}x[k+1] + B_{mpc}u[k+1] \\
 x[k+3] = A_{mpc}x[k+2] + B_{mpc}u[k+2] \\
 $$
 
-Turning the above into a matrix equation results in the equation below where $X$ is matrix of the states and the control inputs at each timestep.
+Turning the above into a matrix equation results in the equation below where $X$ is a matrix of the states and the control inputs at each timestep.
 
 $$
 X =

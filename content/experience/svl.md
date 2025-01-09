@@ -22,11 +22,13 @@ I, along with a few others, took two approaches to building out these primitives
 
 ## Algorithmic Primitives
 
-The algorithmic implementation for the motion primitives follow a common logical flow. The steps of flow are the following and are illustrated in the diagram below:
+The algorithmic implementation for the motion primitives follow a common logical flow. The steps are the following and are illustrated in the diagram below:
 1. Sample among valid end effector (EEF) poses generated
 2. Test whether the sampled pose is within the robot’s reach by checking whether IsaacSim's IK solver returns a valid arm configuration for that pose
 3. If it returns an invalid configuration, we then execute our navigation flow. Otherwise, execute the manipulation flow.
     - Navigation or Manipulation flow
+
+{{< figure src="/img/experience/svl/primitive_flow.png" width="500">}}
 
 ### Navigation Flow
 

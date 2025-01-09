@@ -44,7 +44,7 @@ For the computational graph an essential component is representing a computation
 
 To create the computational graph to represent a series of computations, I overwrote the basic operators in the Value class. The overwritten operators are addition, subtraction, multiplication, division, negation and exponentiation. I overwrote these operators, so when a Value is operated on with the operators listed above with another Value, the output is a new Value that points to these two parent Values. Repeatedly doing this will create a graph of Values where each Value is the child of the two parent Values that were involved in a computation.
 
-The code for all of the Value class is little over a 100 lines and is below and all the related code can be found [here](https://github.com/sujaygarlanka/567-final-project/tree/main/code/lib/computational_graph_approach).
+The code for all of the Value class is little over a 100 lines and is below. All the related code can be found [here](https://github.com/sujaygarlanka/567-final-project/tree/main/code/lib/computational_graph_approach).
 
 ```python
 import numpy as np
