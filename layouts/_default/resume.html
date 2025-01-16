@@ -39,25 +39,42 @@
   lang="{{ or site.LanguageCode site.Language.Lang }}"
   dir="{{ if site.Params.direction }}{{ site.Params.direction }}{{ else }}ltr{{ end }}"
 >
+<style>
+  #adobe-dc-view {
+    width: 85vw;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1000px;
+  }
+
+  main {
+    padding-bottom: 25px;
+  }
+  
+</style>
   {{ partial "head.html" . }}
   <body class="text-black duration-200 ease-out dark:text-white">
     {{ partial "header.html" . }}
 
     <main
-      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pt-14 dark:prose-invert"
     >
       <header class="mb-12">
         <h1 class="!my-0">{{ .Title }}</h1>
       </header>
       <section>{{ .Content }}</section>
-    <div id="adobe-dc-view" style="width: 100%"></div>
     </main>
+    <div id="adobe-dc-view"></div>
 
+    <!-- 
+    Localhost clientId: ed141fba7f524b7b92c38fa4dd89a18e
+    Public clientId: 535fa30d53cc42bc9fd12fb4bcc8b287
+    -->
     {{ partial "footer.html" . }}
     <script src="https://acrobatservices.adobe.com/view-sdk/viewer.js"></script>
     <script type="text/javascript">
         document.addEventListener("adobe_dc_view_sdk.ready", function(){ 
-            var adobeDCView = new AdobeDC.View({clientId: "535fa30d53cc42bc9fd12fb4bcc8b287", divId: "adobe-dc-view"});
+            var adobeDCView = new AdobeDC.View({clientId: "ed141fba7f524b7b92c38fa4dd89a18e", divId: "adobe-dc-view"});
             adobeDCView.previewFile({
                 content:{location: {url: "https://raw.githubusercontent.com/sujaygarlanka/resume/main/Sujay%20Garlanka%20Resume.pdf"}},
                 metaData:{fileName: "Sujay Garlanka Resume.pdf"}
