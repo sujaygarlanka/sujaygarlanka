@@ -52,7 +52,6 @@
     </script>
   {{ partial "head.html" . }}
     <style>
-      
         canvas {
             display: 'none';
             width: 0;
@@ -67,15 +66,30 @@
         }
         #loader {
             margin: auto;
-            width: 250px;
         }
+        #load-animation {
+          width: 50px;
+          aspect-ratio: 1;
+          --_c:no-repeat radial-gradient(farthest-side,rgba(250, 248, 241, 0.9) 92%, #0000);
+          background: 
+            var(--_c) top,
+            var(--_c) left,
+            var(--_c) right,
+            var(--_c) bottom;
+          background-size: 12px 12px;
+          animation: l7 1s infinite;
+          margin: auto;
+        }
+        @keyframes l7 {to{transform: rotate(.5turn)}}
     </style>
   <body>
     <div style="display: flex; min-height: 100vh;">
       <!-- Custom Content Section -->
       <div id="canvas" style="flex: 1">
         <div id="loader">
-            <img src="/img/etc/loading.gif" alt="loading">
+           <div id="load-animation"></div>
+            <br>
+            <p class="text-xl ...">Loading...</p>
         </div>
         <canvas id="spline" class="webgl"></canvas>
       </div>
@@ -90,5 +104,20 @@
       </div>
     </div>
     <script type="module" src="js/robot/spline-visual.js"></script>
+    <script>
+      let loadingWords = ['Loading Meshes...', 'Loading Textures...', 'Rendering...', 'Loading Physics...', 'Just a bit longer...']
+      let loadingIndex = 0
+      
+      function setLoadingMessage() {
+        document.querySelector('p').innerText = loadingWords[loadingIndex]
+        loadingIndex = (loadingIndex + 1) % loadingWords.length
+      }
+
+      setLoadingMessage()
+      setInterval(() => {
+        setLoadingMessage()
+      }, 2500)
+    
+    </script>
   </body>
 </html>
