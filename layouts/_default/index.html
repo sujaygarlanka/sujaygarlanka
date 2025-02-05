@@ -87,7 +87,7 @@
       <!-- Custom Content Section -->
       <div id="canvas" style="flex: 1">
         <div id="loader">
-           <div id="load-animation"></div>
+            <div id="load-animation"></div>
             <br>
             <p class="text-xl ...">Loading...</p>
         </div>
@@ -109,14 +109,14 @@
       let loadingIndex = 0
       
       function setLoadingMessage() {
-        document.querySelector('p').innerText = loadingWords[loadingIndex]
+        document.querySelector('#loader p').innerText = loadingWords[loadingIndex]
         loadingIndex = (loadingIndex + 1) % loadingWords.length
       }
 
       setLoadingMessage()
       setInterval(() => {
         setLoadingMessage()
-      }, 2500)
+      }, 2000)
     
     </script>
   </body>
