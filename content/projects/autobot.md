@@ -4,7 +4,7 @@ title = 'Autonomous Bot'
 summary = "A DIY autonomous robot that can drive itself."
 weight = 0
 [params]
-  data = 'Hardware'
+  data = 'Hardware (2022)'
   dataColor = 'pink'
 +++
 

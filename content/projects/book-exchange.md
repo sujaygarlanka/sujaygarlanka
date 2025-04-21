@@ -4,7 +4,7 @@ title = 'Book Exchange'
 summary = "A website for Duke students to more easily buy and sell books among each other. It served over 1300 students."
 weight = -3
 [params]
-  data = 'Software'
+  data = 'Software (2016)'
   dataColor = 'cyan'
 +++
 
