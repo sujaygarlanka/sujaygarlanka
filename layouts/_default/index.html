@@ -82,49 +82,13 @@
         }
         @keyframes l7 {to{transform: rotate(.5turn)}}
 
-      .left-arrow-container {
-        position: fixed;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 1000;
-      }
-      .left-arrow {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        font-size: 3em;
-        cursor: pointer;
-      }
-      .left-arrow::after {
-        content: attr(data-tooltip);
-        position: absolute;
-        left: 45px;
-        white-space: nowrap;
-        background: #333;
-        color: white;
-        padding: 6px 10px;
-        border-radius: 4px;
-        font-size: 14px;
-        opacity: 0;
-        transform: translateY(-50%);
-        top: 50%;
-        transition: opacity 0.2s ease;
-        pointer-events: none;
-      }
-      .left-arrow:hover::after {
-        opacity: 1;
+      #sim-message{
+        color: gray;
+        font-style: italic;
       }
     </style>
   <body>
     <div style="display: flex; min-height: 100vh;">
-      <div class="left-arrow-container">
-        <div class="left-arrow" data-tooltip="">
-          &lsaquo;
-        </div>
-      </div>
       <!-- Custom Content Section -->
       <div id="canvas" style="flex: 1">
         <div id="loader">
@@ -159,28 +123,47 @@
         setLoadingMessage()
       }, 2000)
 
-      function updateTooltipText() {
-        const arrow = document.querySelector('.left-arrow');
+      function updateSimMessage() {
+        const message = document.querySelectorAll("main p")[0];
+        message.id = "sim-message";
         const screenWidth = screen.width;
         const windowWidth = window.innerWidth;
 
         if (screenWidth < 1200) {
-          arrow.style.display = 'flex';
-          arrow.setAttribute('data-tooltip', 'View on desktop to see robotics simulation');
+          message.innerHTML = 'View on desktop to see a robotics simulation';
         } else if (windowWidth < 1200) {
-          arrow.style.display = 'flex';
-          arrow.setAttribute('data-tooltip', 'Expand window to see robotics simulation');
+          message.innerHTML = `Click <a id="fullscreen" href="">here</a> or expand the screen to the see a robotics simulation.`;
+          addFullscreenListener();
         } else {
-          arrow.setAttribute('data-tooltip', '');
-          arrow.style.display = 'none';
+          message.innerHTML = '';
         }
       }
 
-    // Run on page load
-    updateTooltipText();
+    function goFullscreen() {
+      const elem = document.documentElement; // Makes the whole page fullscreen
 
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { // Safari
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { // IE11
+        elem.msRequestFullscreen();
+      }
+    }
+
+    function addFullscreenListener() {
+      const link = document.getElementById("fullscreen");
+      link.addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent the default link navigation
+        goFullscreen();
+      });
+    }
+    
+    // Run on page load
+    updateSimMessage();
+    
     // Also run on window resize
-    window.addEventListener('resize', updateTooltipText);
+    window.addEventListener('resize', updateSimMessage);
     
     </script>
   </body>
