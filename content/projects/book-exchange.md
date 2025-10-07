@@ -21,4 +21,4 @@ A friend and I built a website for Duke students to more easily buy and sell boo
 - Duke login authentication to ensure only Duke students could access the platform
 - Comprehensive email notifications for buying and selling activities
 
-**Technologies**: PHP, HTML/CSS/Javascript
+**Technologies**: PHP, HTML, CSS, JavaScript (with jQuery for DOM & AJAX)
