@@ -253,7 +253,7 @@ In RL, parallelizable environments are wrapped in a vector environment that allo
 
 ### OmniGibson Parallel Environments
 
-The gRPC set up can have some network delays and is cumbersome to work with, so we later implemented a native version of multiple environments in OmniGibson. Since OmniGibson is built on IsaacSim, it allows for the creation of multiple scenes in a single environment. We refactored OmniGibson to be vectorized to suppor this. The graphic below shows the result and the PR can be found [here](https://github.com/StanfordVL/OmniGibson/pull/699). The result is an 5-10x increase in FPS to around 250 FPS.
+The gRPC set up can have some network delays and is cumbersome to work with, so we later implemented a native version of multiple environments in OmniGibson. Since OmniGibson is built on IsaacSim, it allows for the creation of multiple scenes in a single environment. We refactored OmniGibson to be vectorized to support this. The graphic below shows the result and the PR can be found [here](https://github.com/StanfordVL/OmniGibson/pull/699). The result is an 5-10x increase in FPS to around 250 FPS.
 
 {{< figure src="/img/experience/svl/multiple_environments.gif" width="500">}}
 
