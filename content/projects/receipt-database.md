@@ -2,7 +2,7 @@
 draft = false
 title = 'Receipt Database'
 summary = "A web application that can scrape your email for e-receipts and can catalog and analyze them in a dashboard."
-weight = -2
+weight = 0
 [params]
   data = 'Software (2016)'
   dataColor = 'cyan'
