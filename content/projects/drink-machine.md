@@ -2,7 +2,7 @@
 draft = false
 title = 'Drink Machine'
 summary = "A CAD designed and 3D-printed drink machine that mixes drinks with milliliter accuracy. Recipes can be sent via an NFC enabled iPhone app."
-weight = -1
+weight = -2
 [params]
   data = 'Hardware (2019)'
   dataColor = 'pink'
