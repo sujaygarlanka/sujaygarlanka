@@ -4,7 +4,7 @@ title = 'Sujay Garlanka'
 layout = 'index'
 url = '/'
 +++
-# Open To Work
+# Hello
 
 Placeholder for simulation message.
 
